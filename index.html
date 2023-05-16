@@ -8,41 +8,43 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <a href="#"><img class="header-cross" src="img/Cross.svg"></img></a>
-        <h1 class="header-playlist-name">Playlist n°1</h1>
-        <div class="songs-progress">
+    <div class="container">
+        <header class="header">
             <a href="#"><img class="header-cross" src="img/Cross.svg"></img></a>
-        </div>
-    </header>
-    <main class="container">
-        <section id="player"> 
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi ratione sed aut deserunt deleniti, beatae voluptate debitis corrupti iste fugiat consequatur voluptates, alias quod eveniet libero modi eligendi saepe enim.
-            <div class="player-progression">
-                <div class="progress-bar">
-                    <div class="progress-bar-value"></div>
+            <h1 class="header-playlist-name">Années 2000</h1>
+            <div class="songs-progress"><span id="">1</span>/10</div>
+        </header>
+        <main class="">
+            <section id="player"> 
+                <div class="player-progression">
+                    <div class="progress-bar">
+                        <div class="progress-bar-value"></div>
+                    </div>
+                    <p class="player-progress-timer"><span id="timer">30</span>"</p>
                 </div>
-                <!-- <progress class="player-progress-bar" value="70"></progress> -->
-                <p class="player-progress-time"><span id="timer">30</span>"</p>
-            </div>
-        </section>
-        <section>
-            <ul class="list">
-                <li class="list-itm">
-                    <button class="list-btn">Artiste - Chanson</button>
-                </li>
-                <li class="list-itm">
-                    <button class="list-btn">Artiste - Chanson</button>
-                </li>
-                <li class="list-itm">
-                    <button class="list-btn">Artiste - Chanson</button>
-                </li>
-                <li class="list-itm">
-                    <button class="list-btn">Artiste - Chanson</button>
-                </li>
-            </ul>
-        </section>
-    </main>
+                <p class="player-score">0<span id="score"></span><span>pt</span></p>
 
+                <!-- <div class="progress-circle">
+                    <div class="progress-mask"></div>
+                </div> -->
+            </section>
+            <section>
+                <ul class="list">
+                    <li class="list-itm">
+                        <button class="list-btn">Artiste 1 - Chanson</button>
+                    </li>
+                    <li class="list-itm">
+                        <button class="list-btn">Artiste 2 - Chanson</button>
+                    </li>
+                    <li class="list-itm">
+                        <button class="list-btn">Artiste 3 - Chanson</button>
+                    </li>
+                    <li class="list-itm">
+                        <button class="list-btn">Artiste 4 - Chanson</button>
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </div>
 </body>
 </html>

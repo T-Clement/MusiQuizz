@@ -1,12 +1,16 @@
 :root {
     font-size: 16px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --background-color:#3D3D3D;;
+    --background-color:#3D3D3D;
+    --green: #47E060;
     --text-color: #FFFFFF;
-    --bp-tab: 500px;
-    --bp-desktop: 900px;
+
 }
 
+
+* {
+    box-sizing: border-box;
+}
 
 /* RESET CSS */
 h1, h2, h3, h4, h5, h6, p, a, ul, li {
@@ -36,6 +40,7 @@ body {
 
 .header-cross {
     color: var(--text-color);
+    /* padding-left: 1.5rem; */
 }
 
 .header-playlist-name {
@@ -50,10 +55,10 @@ body {
     display: flex;
     flex-direction: column;
     /* gap: 5rem; */
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 480px) {
     .container {
         max-width: 480px;
         outline: 2px solid yellow;
@@ -64,8 +69,15 @@ body {
 
 
 #player {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin: 1rem;
     outline: 1px solid green;
+    height: 40vh;
+    margin-bottom: 4rem;
+    /* text-align: center; */
 }
 
 .player-progression {
@@ -73,20 +85,60 @@ body {
     width: min(60%, 280px);
     display: flex;
     flex-direction: column;
-    justify-items: center;
-    text-align: center;
-    
+    align-items: center;
 }
 
 .progress-bar {
-    background-color: rgba(255, 0, 0, 0.304);
     width: 100%;
     height: 1.2rem;
+    background-color: rgba(255, 0, 0, 0.304);
 }
 
 .progress-bar-value {
+    width: 1px;
+    height: 100%;
+    transition: width .5s ease;
     background-color: red;
 }
+
+
+
+.player-progress-timer {
+    font-size: 3rem;
+}
+
+
+
+.player-score {
+    position: absolute;
+    left: calc(50% - 2rem);
+    bottom: 15%;
+    font-size: 1.625rem;
+    padding: 0.625rem 1rem;
+    border-radius: 2.25rem;
+    background-color: var(--green);
+}
+
+/* TEST */
+
+/* .progress-circle {
+    position: relative;
+    box-sizing: border-box;
+    font-size: 6em;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    border: .15em solid #CDE;
+    background-color: #FFF;
+}
+
+.progress-mask {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background-color: aqua;
+} */
+
 
 
 
@@ -109,7 +161,9 @@ body {
     cursor: pointer;
 }
 
-@media screen and (min-width: 1000px) {
+
+
+@media screen and (min-width: 1024px) {
     .list-btn:hover {
         background-color: rgba(255, 255, 255, 0.6);
         transition: background-color 50ms ease-in;
