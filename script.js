@@ -9,37 +9,38 @@ const playlist = {
     ]
 }
 
+document.querySelector(".js-playlist-name").innerText = playlist.name;
 
 console.log(playlist);
-
-// function getUserChoice() {};
-
-// function checkResponse(correctResponse) {
-    //     if (event.target.innerText != correctResponse) {
-        //         event.target.style.backgroundColor = "red";
-        //     }
-        // }
+console.log(playlist.songs);
         
         
         
 //-----------------------------------------------
 // Define path in DOM
 
-const correctResponse = "Artiste 1 - Chanson";
 const extractResponses = document.querySelector(".list");
 const progressBarValue = document.querySelector(".js-progress-value");
+console.log(extractResponses);
 
 
+// ----------------------------
+// Put responses in buttons
 
-
+const buttons = document.querySelectorAll(".js-button-responses");
+console.log(buttons);
+buttons.forEach(function (button, index) {
+    // console.log(`bouton n°${index} : ${button}`)
+    button.innerText = `${playlist.songs[index].Artiste} - ${playlist.songs[index].Titre}`;
+});
 
 
 
 
 // ------------------------------------------------
-// 
+// Add color appropriate to user response
 
-console.log(extractResponses);
+const correctResponse = "Daft Punk - One More Time";
 
 extractResponses.addEventListener("click", function(event) {
     console.log(event, event.target);
@@ -55,10 +56,6 @@ extractResponses.addEventListener("click", function(event) {
     };
     console.log(event.target.innerText);
 });
-
-
-
-
 
 
 
