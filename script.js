@@ -22,17 +22,16 @@ console.log(playlist.songs);
 const extractResponses = document.querySelector(".list");
 const progressBarValue = document.querySelector(".js-progress-value");
 console.log(extractResponses);
-
+const scorePath = document.getElementById("score");
 
 // ----------------------------
 // Put responses in buttons
 
 const buttons = document.querySelectorAll(".js-button-responses");
-console.log(buttons);
-buttons.forEach(function (button, index) {
-    // console.log(`bouton n°${index} : ${button}`)
+buttons.forEach(function(button, index) {
     button.innerText = `${playlist.songs[index].Artiste} - ${playlist.songs[index].Titre}`;
 });
+
 
 
 
@@ -46,13 +45,14 @@ extractResponses.addEventListener("click", function(event) {
     console.log(event, event.target);
     // trigger color change only if button clicked
     if (event.target.tagName != "BUTTON") return;
-
-    // change color of 
+    
+    // change color of button
     if (event.target.innerText != correctResponse) {
         event.target.style.backgroundColor = "red";
     }
     else {
         event.target.style.backgroundColor = "green";
+        getScore();
     };
     console.log(event.target.innerText);
 });
@@ -68,8 +68,8 @@ progressBarValue.style.width = "100%";
 const timer = setInterval(() => {
     if (timerCounter > 0) {
         timerCounter--;
-        timerDOM.innerText = timerCounter;
         displayProgressBar();
+        timerDOM.innerText = timerCounter;
         console.log(timerCounter);
     }
     else {
@@ -77,14 +77,19 @@ const timer = setInterval(() => {
     } 
 }, 1000);
 
-
-
-
-
-
-// --- ProgressBar section
+// --- ProgressBar function
 
 function displayProgressBar () {
     progressBarValue.style.width = `${timerCounter * 10}%`;
-    console.log("Valeur :" + progressBarValue);
 }
+
+// -----------------------------------------
+// score calcul 
+
+function getScore () {
+    let responseScore = Math.round(1000 - ((Date.now() - now) / 10));
+    scorePath.textContent = responseScore;
+}
+// use Date.now()
+const now = Date.now();
+
