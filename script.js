@@ -1,3 +1,17 @@
+// playlist data
+const playlist = {
+    name: "Années 2000",
+    songs: [
+        {Artiste: "Daft Punk", Titre: "One More Time"},
+        {Artiste: "Pep's", Titre: "Liberta"},
+        {Artiste: "U2", Titre: "Beautiful Day"},
+        {Artiste: "OutKast", Titre: "Hey Ya!"}
+    ]
+}
+
+
+console.log(playlist);
+
 // function getUserChoice() {};
 
 // function checkResponse(correctResponse) {
@@ -6,8 +20,24 @@
         //     }
         // }
         
+        
+        
+//-----------------------------------------------
+// Define path in DOM
+
 const correctResponse = "Artiste 1 - Chanson";
 const extractResponses = document.querySelector(".list");
+const progressBarValue = document.querySelector(".js-progress-value");
+
+
+
+
+
+
+
+
+// ------------------------------------------------
+// 
 
 console.log(extractResponses);
 
@@ -31,17 +61,23 @@ extractResponses.addEventListener("click", function(event) {
 
 
 
+
 //------ Timer Section
 
 let timerCounter = 10;
 const timerDOM = document.getElementById("timer");
-
+// full the bar at he beginning
+progressBarValue.style.width = "100%";
 const timer = setInterval(() => {
     if (timerCounter > 0) {
         timerCounter--;
         timerDOM.innerText = timerCounter;
+        displayProgressBar();
         console.log(timerCounter);
     }
+    else {
+        clearInterval(timer);
+    } 
 }, 1000);
 
 
@@ -51,11 +87,7 @@ const timer = setInterval(() => {
 
 // --- ProgressBar section
 
-const progressBar = document.querySelector(".progress-bar");
-console.log(progressBar);
-
-
-const progressBarValue = document.querySelector(".progress-bar");
-console.log(progressBarValue);
-
-
+function displayProgressBar () {
+    progressBarValue.style.width = `${timerCounter * 10}%`;
+    console.log("Valeur :" + progressBarValue);
+}
