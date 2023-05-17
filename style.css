@@ -101,9 +101,10 @@ body {
 .progress-bar-value {
     width: 1px;
     height: 100%;
-    transition: width .5s ease;
+    transition: width 1s ease;
     background-color: red;
 }
+
 
 
 
