@@ -2,12 +2,64 @@
 const playlist = {
     name: "Années 2000",
     songs: [
-        {Artiste: "Daft Punk", Titre: "One More Time"},
-        {Artiste: "Pep's", Titre: "Liberta"},
-        {Artiste: "U2", Titre: "Beautiful Day"},
-        {Artiste: "OutKast", Titre: "Hey Ya!"}
+        { Artiste: "Daft Punk", Titre: "One More Time" },
+        { Artiste: "Pep's", Titre: "Liberta" },
+        { Artiste: "U2", Titre: "Beautiful Day" },
+        { Artiste: "OutKast", Titre: "Hey Ya!" },
+        { Artiste: "Eminem", Titre: "Lose Yourself" },
+        { Artiste: "Britney Spears", Titre: "Oops!... I Did It Again" },
+        { Artiste: "Coldplay", Titre: "Clocks" },
+        { Artiste: "Nelly", Titre: "Hot in Herre" },
+        { Artiste: "Avril Lavigne", Titre: "Complicated" },
+        { Artiste: "Justin Timberlake", Titre: "Cry Me a River" },
+        { Artiste: "The White Stripes", Titre: "Seven Nation Army" },
+        { Artiste: "Beyoncé", Titre: "Crazy in Love" },
+        { Artiste: "Linkin Park", Titre: "In the End" },
+        { Artiste: "Gorillaz", Titre: "Feel Good Inc." },
+        { Artiste: "Shakira", Titre: "Whenever, Wherever" },
+        { Artiste: "Kanye West", Titre: "Stronger" },
+        { Artiste: "Nelly Furtado", Titre: "Promiscuous" },
+        { Artiste: "Maroon 5", Titre: "This Love" },
+        { Artiste: "Rihanna", Titre: "Umbrella" },
+        { Artiste: "The Killers", Titre: "Mr. Brightside" },
+        { Artiste: "Green Day", Titre: "American Idiot" }
     ]
 }
+
+
+
+//-----------------------------------------------------------------------//
+
+
+
+// doit être en asynchrone pour obliger l'import avant de charger les autres scripts
+// import playlist from "./json";
+
+
+
+// async function importPlaylist() {
+//     try {
+//         const playlistJSON = await import('./json.js');
+//         const playlist = JSON.parse(playlistJSON.default);
+//         // document.querySelector(".js-playlist-name").innerText = playlist.name;
+//         return playlist
+//         // console.log(playlist);
+//     } catch (error) {
+//         console.error("Une erreur s'est produite lors du chargement: ", error);
+//     }
+// }
+
+// const playlist = importPlaylist();
+// console.log(playlist);
+
+
+
+
+//-------------------------------------------------------------------//
+
+
+
+
 
 document.querySelector(".js-playlist-name").innerText = playlist.name;
 
@@ -66,15 +118,16 @@ const timerDOM = document.getElementById("timer");
 // full the bar at he beginning
 progressBarValue.style.width = "100%";
 const timer = setInterval(() => {
-    if (timerCounter > 0) {
+    
         timerCounter--;
         displayProgressBar();
         timerDOM.innerText = timerCounter;
         console.log(timerCounter);
-    }
-    else {
+    
+    if (timerCounter === 0) {
         clearInterval(timer);
-    } 
+
+    }
 }, 1000);
 
 // --- ProgressBar function
