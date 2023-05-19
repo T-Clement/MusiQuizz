@@ -42,7 +42,7 @@ function getRandomIndex (min, max) {
 
 /**
  * This function use a random index to run through the playlist and select 4 randoms songs and push in a new array
- * @param {object} object -
+ * @param {object} object - full data of playlist
  */
 function pickSongsFromPlaylist (object) {
     for (let i = 0; i < 4; i++) {
@@ -145,7 +145,7 @@ extractResponses.addEventListener("click", function(event) {
     if (event.target.tagName != "BUTTON") return;
     
     // change color of button
-    if (event.target.innerText != correctResponse) {
+    if (event.target.innerText != correctResponseToString) {
         event.target.style.backgroundColor = "red";
     }
     else {
