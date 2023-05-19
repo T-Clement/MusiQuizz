@@ -70,7 +70,7 @@ body {
 }
 
 
-
+/* PLAYER SECTION */
 
 #player {
     position: relative;
@@ -171,6 +171,6 @@ body {
 @media screen and (min-width: 1024px) {
     .list-btn:hover {
         background-color: rgba(255, 255, 255, 0.6);
-        transition: background-color 50ms ease-in;
+        transition: background-color 150ms ease-in-out;
     }
 }

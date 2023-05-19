@@ -26,6 +26,38 @@ const playlist = {
     ]
 }
 
+/**
+ * This function generate a random number between 2 parameters. 
+ * The min and max are included as possible values.
+ * 
+ * @param {number} min 
+ * @param {number} max 
+ * 
+ * @return - return a random index between 0 and the length of the array
+ */
+function getRandomIndex (min, max) {
+    return  Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+/**
+ * This function use a random index to run through the playlist and select 4 randoms songs and push in a new array
+ * @param {object} object - the pl 
+ */
+function pickSongsFromPlaylist (object) {
+    for (let i = 0; i < 4; i++) {
+        let randomIndex = getRandomIndex(0, object.songs.length);
+        roundChoices.push(object.songs[randomIndex]);
+    }
+}
+
+// initialize an empty array
+const roundChoices = [];
+// put 4 songs in this array
+pickSongsFromPlaylist(playlist);
+console.log(roundChoices);
+
+
 
 
 //-----------------------------------------------------------------------//
@@ -63,8 +95,8 @@ const playlist = {
 
 document.querySelector(".js-playlist-name").innerText = playlist.name;
 
-console.log(playlist);
-console.log(playlist.songs);
+// console.log(playlist);
+// console.log(playlist.songs);
         
         
         
@@ -115,7 +147,7 @@ extractResponses.addEventListener("click", function(event) {
 
 let timerCounter = 10;
 const timerDOM = document.getElementById("timer");
-// full the bar at he beginning
+// fill the bar at the beginning
 progressBarValue.style.width = "100%";
 const timer = setInterval(() => {
     
