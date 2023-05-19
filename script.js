@@ -28,10 +28,10 @@ const playlist = {
 
 /**
  * This function generate a random number between 2 parameters. 
- * The min and max are included as possible values.
+ * The max value is not include as possible value.
  * 
- * @param {number} min 
- * @param {number} max 
+ * @param {number} min - value 0 to start at begining of index
+ * @param {number} max - length of array
  * 
  * @return - return a random index between 0 and the length of the array
  */
@@ -44,12 +44,33 @@ function getRandomIndex (min, max) {
  * This function use a random index to run through the playlist and select 4 randoms songs and push in a new array
  * @param {object} object - full data of playlist
  */
-function pickSongsFromPlaylist (object) {
+function pickSongsFromPlaylist (object, array) {
     for (let i = 0; i < 4; i++) {
+        // put random index in variable
         let randomIndex = getRandomIndex(0, object.songs.length);
-        roundChoices.push(object.songs[randomIndex]);
+        // select a random song in object
+        let randomSongFromObject = object.songs[randomIndex];
+
+
+        // check if randomSong is already in roundChoices
+            // see to write it in another way
+        if (array.includes(randomSongFromObject)) {
+            i--;
+        } else {
+            array.push(randomSongFromObject);
+        }
     }
 }
+
+// isInArray -> faire un return de i--, sinon push mais en dehors de la fonction, elle fait juste un true/false
+
+// function checkIfInArray(array, randomSong, counter) {
+//     if (array.includes(randomSong)) {
+//         counter--;
+//     } else {
+//         array.push(randomSong)
+//     }
+// }
 
 
 //-----------------------------------------------------------------------------------
@@ -57,12 +78,13 @@ function pickSongsFromPlaylist (object) {
 const roundChoices = [];
 
 // put 4 songs in this array                        // peut-être plutôt faire 1 song choisie random où j'importe tout et ensuite 3 autrse poour du remplissage, pour limiter le nombre de requêtes
-pickSongsFromPlaylist(playlist);
+pickSongsFromPlaylist(playlist, roundChoices);
 console.log(roundChoices);
 
 
 // choose randomResponse 
 let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length - 1)];
+        // use splice to remove response from playlist to not have it once again
 // convert object to string
 let correctResponseToString = JSON.stringify(correctResponse)
 
