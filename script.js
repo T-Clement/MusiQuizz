@@ -36,13 +36,13 @@ const playlist = {
  * @return - return a random index between 0 and the length of the array
  */
 function getRandomIndex (min, max) {
-    return  Math.floor(Math.random() * (max - min + 1)) + min;
+    return  Math.floor(Math.random() * (max - min)) + min;
 }
 
 
 /**
  * This function use a random index to run through the playlist and select 4 randoms songs and push in a new array
- * @param {object} object - the pl 
+ * @param {object} object -
  */
 function pickSongsFromPlaylist (object) {
     for (let i = 0; i < 4; i++) {
@@ -51,11 +51,22 @@ function pickSongsFromPlaylist (object) {
     }
 }
 
+
+//-----------------------------------------------------------------------------------
 // initialize an empty array
 const roundChoices = [];
-// put 4 songs in this array
+
+// put 4 songs in this array                        // peut-être plutôt faire 1 song choisie random où j'importe tout et ensuite 3 autrse poour du remplissage, pour limiter le nombre de requêtes
 pickSongsFromPlaylist(playlist);
 console.log(roundChoices);
+
+
+// choose randomResponse 
+let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length - 1)];
+// convert object to string
+let correctResponseToString = JSON.stringify(correctResponse)
+
+console.log("La réponse correcte est " + correctResponseToString);
 
 
 
@@ -113,7 +124,8 @@ const scorePath = document.getElementById("score");
 
 const buttons = document.querySelectorAll(".js-button-responses");
 buttons.forEach(function(button, index) {
-    button.innerText = `${playlist.songs[index].Artiste} - ${playlist.songs[index].Titre}`;
+    // button.innerText = `${playlist.songs[index].Artiste} - ${playlist.songs[index].Titre}`;
+    button.innerText = JSON.stringify(roundChoices[index]);
 });
 
 
@@ -123,7 +135,9 @@ buttons.forEach(function(button, index) {
 // ------------------------------------------------
 // Add color appropriate to user response
 
-const correctResponse = "Daft Punk - One More Time";
+
+// A REACTIVER
+// const correctResponse = "Daft Punk - One More Time";
 
 extractResponses.addEventListener("click", function(event) {
     console.log(event, event.target);
