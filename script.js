@@ -26,6 +26,55 @@ const playlist = {
     ]
 }
 
+
+
+// A TESTER
+
+const playlist2  = {
+    name: "Années 2000",
+    songs: [
+        { Artiste: "Daft Punk", Titre: "One More Time" },
+        { Artiste: "Pep's", Titre: "Liberta" },
+        { Artiste: "U2", Titre: "Beautiful Day" },
+        { Artiste: "OutKast", Titre: "Hey Ya!" },
+        { Artiste: "Eminem", Titre: "Lose Yourself" },
+        { Artiste: "Britney Spears", Titre: "Oops!... I Did It Again" },
+        { Artiste: "Coldplay", Titre: "Clocks" },
+        { Artiste: "Nelly", Titre: "Hot in Herre" },
+        { Artiste: "Avril Lavigne", Titre: "Complicated" },
+        { Artiste: "Justin Timberlake", Titre: "Cry Me a River" },
+        { Artiste: "The White Stripes", Titre: "Seven Nation Army" },
+        { Artiste: "Beyoncé", Titre: "Crazy in Love" },
+        { Artiste: "Linkin Park", Titre: "In the End" },
+        { Artiste: "Gorillaz", Titre: "Feel Good Inc." },
+        { Artiste: "Shakira", Titre: "Whenever, Wherever" },
+        { Artiste: "Kanye West", Titre: "Stronger" },
+        { Artiste: "Nelly Furtado", Titre: "Promiscuous" },
+        { Artiste: "Maroon 5", Titre: "This Love" },
+        { Artiste: "Rihanna", Titre: "Umbrella" },
+        { Artiste: "The Killers", Titre: "Mr. Brightside" },
+        { Artiste: "Green Day", Titre: "American Idiot" }
+    ]
+}
+
+
+//TEST si JSON
+
+const playlistJSON = JSON.stringify(playlist2);
+console.log((playlistJSON));
+const playlistDATA = JSON.parse(playlistJSON);
+console.log(`${playlistDATA.songs[0]["Artiste"]} - ${playlistDATA.songs[0]["Titre"]}`);
+// const playlistDATA = JSON.parse(JSON.stringify(playlist2));
+// const playlistDATASongs = playlistDATA.songs;
+// console.log("TEST : " + playlistDATASongs);
+
+
+
+
+
+
+//----------------------------------------------------------------------------------
+
 /**
  * This function generate a random number between 2 parameters. 
  * The max value is not include as possible value.
@@ -57,6 +106,8 @@ function pickSongsFromPlaylist (object, array) {
         if (array.includes(randomSongFromObject)) {
             i--;
         } else {
+            // to avoid the [ Object Object ]
+            // array.push(`${randomSongFromObject.Artiste} - ${randomSongFromObject.Titre}`);
             array.push(randomSongFromObject);
         }
     }
@@ -86,7 +137,18 @@ console.log(roundChoices);
 let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length - 1)];
         // use splice to remove response from playlist to not have it once again
 // convert object to string
-let correctResponseToString = JSON.stringify(correctResponse)
+let correctResponseToString = JSON.stringify(correctResponse);
+
+
+
+// UTILSER JSON.parse pour récupérer les valeurs, mais il faut que ce soit un JSON mais pas un objet JS
+
+
+
+correctResponseToString = correctResponseToString.split(/[:,]]/gm);
+console.log(correctResponseToString);
+// correctResponseToString = correctResponseToString.replace(/[\W]/gm);
+// correctResponseToString = `${correctResponseToString[1]} - ${correctResponseToString[2]}`;
 
 console.log("La réponse correcte est " + correctResponseToString);
 
@@ -169,10 +231,12 @@ extractResponses.addEventListener("click", function(event) {
     // change color of button
     if (event.target.innerText != correctResponseToString) {
         event.target.style.backgroundColor = "red";
+        console.log("TEST faux: " + document.querySelectorAll(".js-button-responses"));
     }
     else {
         event.target.style.backgroundColor = "green";
         getScore();
+        console.log("TEST vrai: " + document.querySelectorAll(".js-button-responses"));
     };
     console.log(event.target.innerText);
 });
