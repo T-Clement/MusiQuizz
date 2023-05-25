@@ -30,40 +30,40 @@ const playlist = {
 
 // A TESTER
 
-const playlist2  = {
-    name: "Années 2000",
-    songs: [
-        { Artiste: "Daft Punk", Titre: "One More Time" },
-        { Artiste: "Pep's", Titre: "Liberta" },
-        { Artiste: "U2", Titre: "Beautiful Day" },
-        { Artiste: "OutKast", Titre: "Hey Ya!" },
-        { Artiste: "Eminem", Titre: "Lose Yourself" },
-        { Artiste: "Britney Spears", Titre: "Oops!... I Did It Again" },
-        { Artiste: "Coldplay", Titre: "Clocks" },
-        { Artiste: "Nelly", Titre: "Hot in Herre" },
-        { Artiste: "Avril Lavigne", Titre: "Complicated" },
-        { Artiste: "Justin Timberlake", Titre: "Cry Me a River" },
-        { Artiste: "The White Stripes", Titre: "Seven Nation Army" },
-        { Artiste: "Beyoncé", Titre: "Crazy in Love" },
-        { Artiste: "Linkin Park", Titre: "In the End" },
-        { Artiste: "Gorillaz", Titre: "Feel Good Inc." },
-        { Artiste: "Shakira", Titre: "Whenever, Wherever" },
-        { Artiste: "Kanye West", Titre: "Stronger" },
-        { Artiste: "Nelly Furtado", Titre: "Promiscuous" },
-        { Artiste: "Maroon 5", Titre: "This Love" },
-        { Artiste: "Rihanna", Titre: "Umbrella" },
-        { Artiste: "The Killers", Titre: "Mr. Brightside" },
-        { Artiste: "Green Day", Titre: "American Idiot" }
-    ]
-}
+// const playlist2  = {
+//     name: "Années 2000",
+//     songs: [
+//         { Artiste: "Daft Punk", Titre: "One More Time" },
+//         { Artiste: "Pep's", Titre: "Liberta" },
+//         { Artiste: "U2", Titre: "Beautiful Day" },
+//         { Artiste: "OutKast", Titre: "Hey Ya!" },
+//         { Artiste: "Eminem", Titre: "Lose Yourself" },
+//         { Artiste: "Britney Spears", Titre: "Oops!... I Did It Again" },
+//         { Artiste: "Coldplay", Titre: "Clocks" },
+//         { Artiste: "Nelly", Titre: "Hot in Herre" },
+//         { Artiste: "Avril Lavigne", Titre: "Complicated" },
+//         { Artiste: "Justin Timberlake", Titre: "Cry Me a River" },
+//         { Artiste: "The White Stripes", Titre: "Seven Nation Army" },
+//         { Artiste: "Beyoncé", Titre: "Crazy in Love" },
+//         { Artiste: "Linkin Park", Titre: "In the End" },
+//         { Artiste: "Gorillaz", Titre: "Feel Good Inc." },
+//         { Artiste: "Shakira", Titre: "Whenever, Wherever" },
+//         { Artiste: "Kanye West", Titre: "Stronger" },
+//         { Artiste: "Nelly Furtado", Titre: "Promiscuous" },
+//         { Artiste: "Maroon 5", Titre: "This Love" },
+//         { Artiste: "Rihanna", Titre: "Umbrella" },
+//         { Artiste: "The Killers", Titre: "Mr. Brightside" },
+//         { Artiste: "Green Day", Titre: "American Idiot" }
+//     ]
+// }
 
 
 //TEST si JSON
 
-const playlistJSON = JSON.stringify(playlist2);
-console.log((playlistJSON));
-const playlistDATA = JSON.parse(playlistJSON);
-console.log(`${playlistDATA.songs[0]["Artiste"]} - ${playlistDATA.songs[0]["Titre"]}`);
+// const playlistJSON = JSON.stringify(playlist2);
+// console.log((playlistJSON));
+// const playlistDATA = JSON.parse(playlistJSON);
+// console.log(`${playlistDATA.songs[0]["Artiste"]} - ${playlistDATA.songs[0]["Titre"]}`);
 // const playlistDATA = JSON.parse(JSON.stringify(playlist2));
 // const playlistDATASongs = playlistDATA.songs;
 // console.log("TEST : " + playlistDATASongs);
@@ -187,6 +187,7 @@ document.querySelector(".js-playlist-name").innerText = playlist.name;
 const extractResponses = document.querySelector(".list");
 const progressBarValue = document.querySelector(".js-progress-value");
 console.log(extractResponses);
+console.log(document.querySelectorAll(".js-button-responses"));
 const scorePath = document.getElementById("score");
 
 // ----------------------------
@@ -207,8 +208,6 @@ buttons.forEach(function(button, index) {
 // Add color appropriate to user response
 
 
-// A REACTIVER
-// const correctResponse = "Daft Punk - One More Time";
 
 extractResponses.addEventListener("click", function(event) {
     console.log(event, event.target);
@@ -226,6 +225,9 @@ extractResponses.addEventListener("click", function(event) {
         console.log("TEST vrai: " + document.querySelectorAll(".js-button-responses"));
     };
     console.log(event.target.innerText);
+    buttons.forEach(function (button) {
+        button.setAttribute("disabled", true);
+    })
 });
 
 
