@@ -113,6 +113,10 @@ function pickSongsFromPlaylist (object, array) {
     }
 }
 
+
+
+
+
 // isInArray -> faire un return de i--, sinon push mais en dehors de la fonction, elle fait juste un true/false
 
 // function checkIfInArray(array, randomSong, counter) {
@@ -225,6 +229,7 @@ extractResponses.addEventListener("click", function(event) {
         console.log("TEST vrai: " + document.querySelectorAll(".js-button-responses"));
     };
     console.log(event.target.innerText);
+    // disable buttons after click
     buttons.forEach(function (button) {
         button.setAttribute("disabled", true);
     })
@@ -247,7 +252,10 @@ const timer = setInterval(() => {
     
     if (timerCounter === 0) {
         clearInterval(timer);
-
+        // set disabled on buttons to avoid clicking it again
+        buttons.forEach(function (button) {
+            button.setAttribute("disabled", true);
+        })
     }
 }, 1000);
 
