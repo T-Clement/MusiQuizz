@@ -135,22 +135,8 @@ console.log(roundChoices);
 
 // choose randomResponse 
 let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length - 1)];
-        // use splice to remove response from playlist to not have it once again
-// convert object to string
-let correctResponseToString = JSON.stringify(correctResponse);
-
-
-
-// UTILSER JSON.parse pour récupérer les valeurs, mais il faut que ce soit un JSON mais pas un objet JS
-
-
-
-correctResponseToString = correctResponseToString.split(/[:,]]/gm);
-console.log(correctResponseToString);
-// correctResponseToString = correctResponseToString.replace(/[\W]/gm);
-// correctResponseToString = `${correctResponseToString[1]} - ${correctResponseToString[2]}`;
-
-console.log("La réponse correcte est " + correctResponseToString);
+correctResponse = Object.values(correctResponse).join(' - ');
+console.log("La réponse correcte est : " + correctResponse);
 
 
 
@@ -209,7 +195,8 @@ const scorePath = document.getElementById("score");
 const buttons = document.querySelectorAll(".js-button-responses");
 buttons.forEach(function(button, index) {
     // button.innerText = `${playlist.songs[index].Artiste} - ${playlist.songs[index].Titre}`;
-    button.innerText = JSON.stringify(roundChoices[index]);
+    // button.innerText = JSON.stringify(roundChoices[index]);
+    button.innerText = Object.values(roundChoices[index]).join(' - ');
 });
 
 
@@ -229,7 +216,7 @@ extractResponses.addEventListener("click", function(event) {
     if (event.target.tagName != "BUTTON") return;
     
     // change color of button
-    if (event.target.innerText != correctResponseToString) {
+    if (event.target.innerText != correctResponse) {
         event.target.style.backgroundColor = "red";
         console.log("TEST faux: " + document.querySelectorAll(".js-button-responses"));
     }
