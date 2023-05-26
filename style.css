@@ -53,8 +53,9 @@ body {
 
 
 .container {
-    height: 100vh;
+    /* height: 100vh; */
     margin: 0 auto;
+    padding-bottom: 2.5rem;
     outline: 2px solid red;
     display: flex;
     flex-direction: column;
@@ -116,7 +117,9 @@ body {
 
 .player-score {
     position: absolute;
-    left: calc(50% - 2rem);
+    display: flex;
+    align-self: center;
+    /* left: calc(50% - 2rem); */
     bottom: 15%;
     font-size: 1.625rem;
     padding: 0.625rem 1rem;
@@ -156,7 +159,7 @@ body {
 }
 
 .list-btn {
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 1.5rem;
     width: min(80%, 320px);
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
