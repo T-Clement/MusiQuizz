@@ -111,7 +111,7 @@ function pickSongsFromPlaylist (object, array) {
             array.push(randomSongFromObject);
         }
     }
-}
+};
 
 
 
