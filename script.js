@@ -255,7 +255,9 @@ const timer = setInterval(() => {
         displayProgressBar();
         timerDOM.innerText = timerCounter;
         console.log(timerCounter);
-    
+        // if cliqué, clearInterval
+
+        
     if (timerCounter === 0) {
         clearInterval(timer);
         // set disabled on buttons to avoid clicking it again
@@ -281,3 +283,4 @@ function getScore () {
 // use Date.now()
 const now = Date.now();
 
+// booléen si cliqué, timer passe à false    -> une sorte de switch
