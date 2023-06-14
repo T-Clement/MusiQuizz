@@ -131,7 +131,7 @@ function pickSongsFromPlaylist (object, array) {
 //-----------------------------------------------------------------------------------
 // initialize an empty array
 const roundChoices = [];
-
+const userChoice = [];
 // put 4 songs in this array                        // peut-être plutôt faire 1 song choisie random où j'importe tout et ensuite 3 autrse poour du remplissage, pour limiter le nombre de requêtes
 pickSongsFromPlaylist(playlist, roundChoices);
 console.log(roundChoices);
@@ -215,6 +215,12 @@ buttons.forEach(function(button, index) {
 
 extractResponses.addEventListener("click", function(event) {
     console.log(event, event.target);
+    
+    // put button innerText in userChoice
+    userChoice.push(event.target.innerText);
+    console.log("Le choix de l'utilisateur est : " + userChoice);
+    
+    
     // trigger color change only if button clicked
     if (event.target.tagName != "BUTTON") return;
     
