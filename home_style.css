@@ -38,6 +38,7 @@
 
 
 :root {
+    /*colors*/
     color: #FFFFFF;
     --background-color: #101728;
     --blue: rgba(55, 62, 230, 0.58);
@@ -52,6 +53,7 @@ h1, h2, h3, h4, h5, h6, ul, li, a, p {
     text-decoration: none;
     margin: 0;
     padding: 0;
+    color: inherit;
 }
 
 
@@ -63,6 +65,7 @@ body {
     background-color: var(--background-color);
     font-family: "Nunito";
     margin: 0;
+    /* overflow: hidden; */
 }
 
 
@@ -72,6 +75,7 @@ body {
     max-width: min(80%,300px);  
     outline: 1px solid red;
     margin: 0 auto;
+    /* overflow: hidden; */
 }
 
 /*for tablets*/
@@ -122,7 +126,7 @@ body {
     font-size: 1.4rem;
 }
 
-.header__nav {
+.header__nav__list {
     display: flex;
     gap: 1rem;
     font-size: 1rem;
@@ -165,9 +169,7 @@ body {
     margin-bottom: 1rem;
 }
 
-/* .block__section__list__itm_label {
 
-} */
 
 
 .tile {
@@ -177,14 +179,12 @@ body {
     background-color: var(--blue);
     border-radius: .75rem;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    /* align-items: center; */
+    /* justify-content: space-around; */
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
 }
 
-/* .tile:nth-child(2) {
-    background-color: var(--magenta-pink);
-} */
+/*color of tiles*/
 
 .block__section__list__itm:nth-of-type(2) .tile {
     background-color: var(--magenta-pink);
@@ -195,24 +195,36 @@ body {
 }
 
 
-.tile__right {
-    /* width: 50%; */
-    /* height: 100%; */
+/*Content of tiles*/
+
+.tile__left {
+    width: 50%;
+    height: 100%;
     display: flex;
-    gap: 0.4rem;
-    /* background: rgba(0, 0, 0, 0.2); */
+    justify-content: center;
+    align-items: center;
 }
 
-/* .tile__right--layer::after {
-    content: '';
-    background: rgba(0, 0, 0, 0.2);
+
+.tile__right {
+    width: 50%;
     height: 100%;
-} */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.tile__right__img {
+    width: 25px;
+    aspect-ratio: 1/1;
+}
+
 .tile__right__content {
     display: flex;
     flex-direction: column;
     font-size: .75rem; 
-    /* justify-content: s; */
 }
 
 
@@ -220,7 +232,6 @@ body {
     font-size: 1.5rem;
     font-family: "Lato"; /*à vérifier*/
     text-align: center;
-    /* margin: .5rem; */
 }
 
 
