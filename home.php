@@ -19,9 +19,13 @@
         </ul>
     </header>
 
-    <!-- array of most popular rooms -->
+    <!-- array of most popular rooms wit all details comming from database-->
     <?php
-    $popularRooms = ["Années 80", "Rock", "Rap"];
+    $popularRooms = [
+        ["nameRoom" => "Années 80", "nameBestUser" => "User_1425", "scoreBestUser" => 1000],
+        ["nameRoom" => "Rock", "nameBestUser" => "User_89", "scoreBestUser" => 7812],
+        ["nameRoom" => "Rap", "nameBestUser" => "User_5", "scoreBestUser" => 8875] 
+    ];
     ?>
 
     <main class="main container">
@@ -41,13 +45,19 @@
                                 </div>
                                 <img src="img/cup.svg" alt="">
                                 <div class="tile__right__content">
-                                    <p>User_1425</p>
-                                    <p>1000pts</p>
+                                    <?php
+                                        echo "<p>".$popularRooms[0]["nameBestUser"]."</p>"
+                                    ?>
+                                    <!-- <p>User_1425</p> -->
+                                    <?php
+                                        echo "<p>".$popularRooms[0]["scoreBestUser"]." pts"."</php>"
+                                    ?>
+                                    <!-- <p>1000pts</p> -->
                                 </div>
                             </div>
                         </div>
                     </article>
-                    <?php echo "<p class='tile__label'>$popularRooms[0]</p>"?>
+                    <?php echo "<p class='tile__label'>".$popularRooms[0]["nameRoom"]."</p>"?>
                 </li>
 
                 <li class="block__section__list__itm">
@@ -69,7 +79,7 @@
                             </div>
                         </div>
                     </article>
-                    <?php echo "<p class='tile__label'>$popularRooms[1]</p>"?>
+                    <?php echo "<p class='tile__label'>".$popularRooms[1]["nameRoom"]."</p>"?>
 
                 </li>
                 <li class="block__section__list__itm">
@@ -91,7 +101,7 @@
                             </div>
                         </div>
                     </article>
-                    <?php echo "<p class='tile__label'>$popularRooms[2]</p>"?>
+                    <?php echo "<p class='tile__label'>".$popularRooms[2]["nameRoom"]."</p>"?>
 
                 </li>
                 <li class="block__section__list__itm">
