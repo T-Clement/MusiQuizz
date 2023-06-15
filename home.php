@@ -51,7 +51,7 @@
                             ."<h4 class='block__section__list__itm__title'>$numberRoom</h4>"
                             ."<div class='tile'>
                                 <a href='#' class='tile__left'>
-                                    <img class='tile__img' src='img/Icone Player.svg' alt=''>
+                                    <img class='tile__left__img' src='img/Icone Player.svg' alt=''>
                                 </a>
                                 <div class='tile__right'>
                                     <img class='tile__right__img' src='img/cup.svg' alt=''>"
@@ -94,7 +94,7 @@
 
 
                 <!--model to test css-->
-                <li class="block__section__list__itm">
+                <!-- <li class="block__section__list__itm">
                     <article class="block__section__list__itm--wrapper">
                         <h4 class="block__section__list__itm__title">3</h4>
                         <div class="tile">
@@ -111,9 +111,14 @@
                         </div>
                     </article>
                     <p class="tile__label">Années 80</p>
+                </li> -->
 
-                </li>
             </ul>
+        </section>
+
+        <section>
+            <h3>Genre Musical</h3>
+
         </section>
     </main>
 </body>
