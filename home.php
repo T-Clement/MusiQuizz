@@ -19,6 +19,11 @@
         </ul>
     </header>
 
+    <!-- array of most popular rooms -->
+    <?php
+    $popularRooms = ["Années 80", "Rock", "Rap"];
+    ?>
+
     <main class="main container">
         <section id="popular-rooms" class="block__section">
             <h2 class="block__section__title">Top 3</h2>
@@ -42,9 +47,9 @@
                             </div>
                         </div>
                     </article>
-                    <p class="tile__label">Années 80</p>
-
+                    <?php echo "<p class='tile__label'>$popularRooms[0]</p>"?>
                 </li>
+
                 <li class="block__section__list__itm">
                     <!--article ?-->
                     <article class="block__section__list__itm--wrapper">
@@ -64,7 +69,7 @@
                             </div>
                         </div>
                     </article>
-                    <p class="tile__label">Années 80</p>
+                    <?php echo "<p class='tile__label'>$popularRooms[1]</p>"?>
 
                 </li>
                 <li class="block__section__list__itm">
@@ -86,7 +91,7 @@
                             </div>
                         </div>
                     </article>
-                    <p class="tile__label">Années 80</p>
+                    <?php echo "<p class='tile__label'>$popularRooms[2]</p>"?>
 
                 </li>
                 <li class="block__section__list__itm">
