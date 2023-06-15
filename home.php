@@ -131,6 +131,7 @@
                         <div class="swiper-slide">Rock</div>
                         <div class="swiper-slide">Pop</div>
                         <div class="swiper-slide">Rap</div>
+                        <div class="swiper-slide">Variété</div>
                     </div>
                     <!-- If we need navigation buttons -->
                     <div class="swiper-button-prev"></div>
