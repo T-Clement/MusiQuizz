@@ -33,7 +33,7 @@
             <h2 class="block__section__title">Top 3</h2>
             <ul class="block__section__list">
 
-
+                <!--add list items for each room in popularRooms-->
                 <?php
                 foreach ($popularRooms as $index => $room) {
                     $numberRoom = $index +1;
@@ -49,7 +49,7 @@
                                     <div class='tile__right--layer'>    
                                     </div>
                                     <img src='img/cup.svg' alt=''>"
-                                    ."<div class='tile__right'>"
+                                    ."<div class='tile__right__content'>"
                                         ."<p>".$room["nameBestUser"]."</p>"
                                         ."<p>".$room["scoreBestUser"]." pts"."</p>"
                                     ."</div>"
