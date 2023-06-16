@@ -13,25 +13,28 @@
 </head>
 <body>
     <header class="header">
-        <div class="header__brand">
-            <img class='header__brand__img' src="img/logo-l.png" alt="">
-            <h1 class="header__brand__title">Musiquiz</h1>
-        </div>
+        <div class="header__wrapper">
+            <div class="header__brand">
+                <img class='header__brand__img' src="img/logo-l.png" alt="">
+                <h1 class="header__brand__title">Musiquiz</h1>
+            </div>
+        
         <!--mettre <nav>-->
         
         <!-- <ul class="header__nav">
             <li class="header__nav__itm"><a href ="#">Toutes les rooms</a></li>
             <li class="header__nav__itm"><a href="#">Mon Compte</a></li>
         </ul> -->
-        <nav class="header__nav">
-            <ul class="header__nav__list">
-                <li class="header__nav__itm"><a href ="#">Toutes les rooms</a></li>
-                <li class="header__nav__itm"><a href="#">Mon Compte</a></li>
-            </ul>
-        </nav>
+            <nav class="header__nav">
+                <ul class="header__nav__list">
+                    <li class="header__nav__itm"><a href ="#">Toutes les rooms</a></li>
+                    <li class="header__nav__itm"><a href="#">Mon Compte</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- array of most popular rooms wit all details comming from database-->
+    <!-- array of most popular rooms wit all details comming from database--> <!--need to take link / id of the room-->
     <?php
     $popularRooms = [
         ["nameRoom" => "Années 80", "nameBestUser" => "User_1425", "scoreBestUser" => 10000],
@@ -41,11 +44,12 @@
     ?>
 
     <main class="main container">
-        <section id="popular-rooms" class="block__section">
+        <section id="popular-rooms" class="block__section"> 
             <h2 class="block__section__title">Top 3</h2>
             <ul class="block__section__list">
 
                 <!--add list items for each room in popularRooms-->
+                <!--retirer le section, mettre un truc qui a du sens en fonction de ce que c'est-->
                 <?php
                 foreach ($popularRooms as $index => $room) {
                     $numberRoom = $index +1;
@@ -128,10 +132,24 @@
                     <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
                         <!-- Slides -->
-                        <div class="swiper-slide">Rock</div>
-                        <div class="swiper-slide">Pop</div>
-                        <div class="swiper-slide">Rap</div>
-                        <div class="swiper-slide">Variété</div>
+                        <?php
+                        // add color
+                        $listOfGenre = [
+                            ["genre" => "Rock", "link" => "link/rock"],
+                            ["genre" => "Pop", "link" => "link/pop"],
+                            ["genre" => "Rap", "link" => "link/rap"],
+                            ["genre" => "Variété", "link" => "link/variete"]
+                        ];
+                        
+                        for($i = 0; $i < count($listOfGenre); $i++) {
+                            echo "<div class='swiper-slide'><a class='swiper-theme-link' href=#'{$listOfGenre[$i]['link']}'>{$listOfGenre[$i]['genre']}</a></div>";
+                        };
+                            
+                        ?>
+                        <!-- <div class="swiper-slide"><a class="swiper-theme-link" href="#">Rock</a></div>
+                        <div class="swiper-slide"><a class="swiper-theme-link" href="#">Pop</a></div>
+                        <div class="swiper-slide"><a class="swiper-theme-link" href="#">Rap</a></div>
+                        <div class="swiper-slide"><a class="swiper-theme-link" href="#">Variété</a></div> -->
                     </div>
                     <!-- If we need navigation buttons -->
                     <div class="swiper-button-prev"></div>
