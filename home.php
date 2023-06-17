@@ -124,7 +124,7 @@
             </ul>
         </section>
 
-        <section>
+        <section id="music-style">
             <h3>Genre Musical</h3>
             
             <!-- Slider main container -->
@@ -133,16 +133,16 @@
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         <?php
-                        // add color
-                        $listOfGenre = [
-                            ["genre" => "Rock", "link" => "link/rock"],
-                            ["genre" => "Pop", "link" => "link/pop"],
-                            ["genre" => "Rap", "link" => "link/rap"],
-                            ["genre" => "Variété", "link" => "link/variete"]
+                        // add color ?
+                        $listOfStyle = [
+                            ["style" => "Rock", "link" => "link/rock"],
+                            ["style" => "Pop", "link" => "link/pop"],
+                            ["style" => "Rap", "link" => "link/rap"],
+                            ["style" => "Variété", "link" => "link/variete"]
                         ];
                         
-                        for($i = 0; $i < count($listOfGenre); $i++) {
-                            echo "<div class='swiper-slide'><a class='swiper-theme-link' href=#'{$listOfGenre[$i]['link']}'>{$listOfGenre[$i]['genre']}</a></div>";
+                        for($i = 0; $i < count($listOfStyle); $i++) {
+                            echo "<div class='swiper-slide'><a class='swiper-theme-link' href=#'{$listOfStyle[$i]['link']}'>{$listOfStyle[$i]['style']}</a></div>";
                         };
                             
                         ?>
@@ -157,6 +157,11 @@
 
                 </div>
         </section>
+
+
+        <section>
+
+        <section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="swiper.js"></script>
