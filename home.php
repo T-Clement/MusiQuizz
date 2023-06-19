@@ -37,14 +37,15 @@
     <!-- array of most popular rooms wit all details comming from database--> <!--need to take link / id of the room-->
     <?php
     $popularRooms = [
-        ["nameRoom" => "Années 80", "nameBestUser" => "User_1425", "scoreBestUser" => 10000],
-        ["nameRoom" => "Rock", "nameBestUser" => "User_89", "scoreBestUser" => 7812],
-        ["nameRoom" => "Rap", "nameBestUser" => "User_5", "scoreBestUser" => 8875] 
+        ["idRoom" => '1243', "style" => "Années", "nameRoom" => "Années 80", "nameBestUser" => "User_1425", "scoreBestUser" => 10000],
+        ["idRoom" => '2548', "style" => "Rock", "nameRoom" => "Légendes du Rock", "nameBestUser" => "User_89", "scoreBestUser" => 7812],
+        ["idRoom" => '9845', "style" => "Rap", "nameRoom" => "Classiques du Rap US", "nameBestUser" => "User_5", "scoreBestUser" => 8875] 
     ];
     ?>
 
     <main class="main container">
         <section id="popular-rooms" class="block__section"> 
+            <div class="elipse"></div>
             <h2 class="block__section__title">Top 3</h2>
             <ul class="block__section__list">
 
@@ -57,6 +58,7 @@
                     "<li class='block__section__list__itm'>"
                         ."<article class='block__section__list__itm--wrapper'>"
                             ."<h4 class='block__section__list__itm__title'>$numberRoom</h4>"
+                            ."<div>"
                             ."<div class='tile'>
                                 <a href='#' class='tile__left'>
                                     <img class='tile__left__img' src='img/Icone Player.svg' alt=''>
@@ -69,8 +71,9 @@
                                     ."</div>"
                                 ."</div>"
                             ."</div>"
+                            ."<p class='tile__label'>".$room['nameRoom']."</p>"
+                            ."</div>"
                         ."</article>"
-                        ."<p class='tile__label'>".$room['nameRoom']."</p>"
                     ."</li>";};                
                 ?>
 
@@ -120,13 +123,33 @@
                     </article>
                     <p class="tile__label">Années 80</p>
                 </li> -->
+                <!-- <li class="block__section__list__itm">
+                    <article class="block__section__list__itm--wrapper">
+                        <h4 class="block__section__list__itm__title">3</h4>
+                        <div>
+                            <div class="tile">
+                                <a href='#' class="tile__left">
+                                    <img class="tile__left__img" src="img/Icone Player.svg" alt="">
+                                </a>
+                                <div class="tile__right">
+                                    <img class="tile__right__img" src="img/cup.svg" alt="">
+                                    <div class="tile__right__content">
+                                        <p>User_1425</p>
+                                        <p>10000pts</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="tile__label-dev">Années 80</p>
+                        </div>
+                    </article>
+                </li> -->
 
             </ul>
         </section>
 
         <section id="music-style">
             <h3>Genre Musical</h3>
-            
+            <div class="elipse-2"></div>
             <!-- Slider main container -->
                 <div class="swiper">
                     <!-- Additional required wrapper -->
@@ -142,7 +165,7 @@
                         ];
                         
                         for($i = 0; $i < count($listOfStyle); $i++) {
-                            echo "<div class='swiper-slide'><a class='swiper-theme-link' href=#'{$listOfStyle[$i]['link']}'>{$listOfStyle[$i]['style']}</a></div>";
+                            echo "<div class='swiper-slide'><a class='swiper-theme-link' href='#{$listOfStyle[$i]['link']}'>{$listOfStyle[$i]['style']}</a></div>";
                         };
                             
                         ?>
