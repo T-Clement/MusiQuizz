@@ -42,7 +42,8 @@
     color: #FFFFFF;
     font-size : 16px;
     --background-color: #101728;
-    --blue: rgba(55, 62, 230, 0.58);
+    --blue: rgba(56, 62, 230, 0.58);
+    --dark-blue:rgba(31, 37, 120, 1); 
     --magenta-pink: rgba(207, 62, 166, 1);
     --yellow-amber: rgba(255, 190, 11, 1);
 
@@ -73,7 +74,7 @@ body {
 /*   Utilities  */
 
 .container {
-    max-width: min(80%,320px);  
+    max-width: min(80%,300px);  
     outline: 1px solid red;
     margin: 0 auto;
     z-index: 10;
@@ -189,6 +190,7 @@ body {
 
 .block__section__title {
     text-transform: uppercase;
+    position: relative;
 }
 
 .block__section__list__itm--wrapper {
@@ -283,7 +285,7 @@ body {
 
 
 .tile__label {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-family: "Lato"; /*à vérifier*/
     text-align: center;
     text-align: left;
@@ -294,7 +296,6 @@ body {
 
 @media screen and (min-width: 729px) {
     .tile__left__img:hover {
-        /* scale: 1.025; */
         transition: transform 0.3s ease-in;
         transform: scale(1.5);
     }
@@ -313,7 +314,7 @@ body {
     width: 100%;
     max-width: 1100px;
     /* height: 100px; */
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
     margin-top: 1rem;
     /* overflow: visible; */
     /* overflow-y: inherit; */
@@ -326,6 +327,7 @@ body {
 }
 
 .swiper-slide {
+    height: 100px;
     text-align: center;
     display: flex;
     /* gap:  */
@@ -362,9 +364,10 @@ body {
     .swiper-slide:hover {
         /* transition: transform 0.3s ease-in; */
         /* transform: translate3d(0, -5px, 0); */
-        background-color: radial-gradient(circle,  rgba(4,1,69,1) 1%, var(--blue) 50%); 
+        /* background-color: radial-gradient(circle,  rgba(4,1,69,1) 1%, var(--blue) 50%);  */
+        background-color: var(--dark-blue); 
         /* font-size: 2rem; */
-        transition: background-color 1s ease-out 100ms;
+        transition: background-color .5s ease-out 100ms;
     }    
        
 }
@@ -375,32 +378,28 @@ body {
 
 
 
-
 @media screen and (width <= 720px) {
     .elipse {
         position: absolute;
         width: 298px;
         height: 292px;
         left: -77px;
-        /* left: -25px; */
-        top: 59px;
         z-index: -5;
         background: radial-gradient(50% 50% at 50% 50%, #260E69 0%, #FF3C5F 0%, #1F41BB 66.4%, rgba(38, 14, 105, 0.79) 90.79%);
         filter: blur(41.5px);
     
     }
 
-    .elipse-2 {
+    /* .elipse-2 {
         position: absolute;
         width: 298px;
         height: 292px;
         left: -77px;
-        /* left: -25px; */
         top: 638px;
         z-index: -5;
         background: radial-gradient(50% 50% at 50% 50%, #260E69 0%, #FF3C5F 0%, #1F41BB 66.4%, rgba(38, 14, 105, 0.79) 90.79%);
         filter: blur(41.5px);
-    }
+    }*/
 }
 /*color elipsies*/
 /* .elipse {

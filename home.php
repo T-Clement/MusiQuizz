@@ -37,16 +37,18 @@
     <!-- array of most popular rooms wit all details comming from database--> <!--need to take link / id of the room-->
     <?php
     $popularRooms = [
-        ["idRoom" => '1243', "style" => "Années", "nameRoom" => "Années 80", "nameBestUser" => "User_1425", "scoreBestUser" => 10000],
-        ["idRoom" => '2548', "style" => "Rock", "nameRoom" => "Légendes du Rock", "nameBestUser" => "User_89", "scoreBestUser" => 7812],
-        ["idRoom" => '9845', "style" => "Rap", "nameRoom" => "Classiques du Rap US", "nameBestUser" => "User_5", "scoreBestUser" => 8875] 
+        ["idRoom" => '1243', "style" => "Années", "nameRoom" => "Années 80", "nameBestUser" => "User_1425", "scoreBestUser" => 10000, "numberOfParties" => 82],
+        ["idRoom" => '2548', "style" => "Rock", "nameRoom" => "Légendes du Rock", "nameBestUser" => "User_89", "scoreBestUser" => 7812, "numberOfParties" => 67],
+        ["idRoom" => '9845', "style" => "Rap", "nameRoom" => "Classiques du Rap US", "nameBestUser" => "User_5", "scoreBestUser" => 8875,  "numberOfParties" => 43] 
     ];
     ?>
 
     <main class="main container">
         <section id="popular-rooms" class="block__section"> 
-            <div class="elipse"></div>
-            <h2 class="block__section__title">Top 3</h2>
+            <h2 class="block__section__title">Top 3
+                <div class="elipse"></div>
+            </h2>
+            
             <ul class="block__section__list">
 
                 <!--add list items for each room in popularRooms-->
@@ -74,7 +76,7 @@
                             ."<p class='tile__label'>".$room['nameRoom']."</p>"
                             ."</div>"
                         ."</article>"
-                    ."</li>";};                
+                    ."</li>";}                
                 ?>
 
                 <!--model with php-->
@@ -148,8 +150,9 @@
         </section>
 
         <section id="music-style">
-            <h3>Genre Musical</h3>
-            <div class="elipse-2"></div>
+            <h3 class="block__section__title">Genre Musical
+                <div class="elipse"></div>
+            </h3>
             <!-- Slider main container -->
                 <div class="swiper">
                     <!-- Additional required wrapper -->
@@ -165,7 +168,9 @@
                         ];
                         
                         for($i = 0; $i < count($listOfStyle); $i++) {
-                            echo "<div class='swiper-slide'><a class='swiper-theme-link' href='#{$listOfStyle[$i]['link']}'>{$listOfStyle[$i]['style']}</a></div>";
+                            echo "<div class='swiper-slide'>
+                                <a class='swiper-theme-link' href='#{$listOfStyle[$i]['link']}'>{$listOfStyle[$i]['style']}</a>
+                                </div>";
                         };
                             
                         ?>
