@@ -63,7 +63,7 @@
                             ."<div>"
                             ."<div class='tile'>
                                 <a href='#' class='tile__left'>
-                                    <img class='tile__left__img' src='img/Icone Player.svg' alt=''>
+                                    <img class='tile__left__img' src='img/player-icon.svg' alt=''>
                                 </a>
                                 <div class='tile__right'>
                                     <img class='tile__right__img' src='img/cup.svg' alt=''>"
@@ -85,7 +85,7 @@
                         <h4 class="block__section__list__itm__title">1</h4>
                         <div class="tile">
                             <a href='#' class="tile__left">
-                                <img class="tile__img" src="img/Icone Player.svg" alt="">
+                                <img class="tile__img" src="img/player-icon.svg" alt="">
                             </a>
                             <div class="tile__right">
                                 <img src="img/cup.svg" alt="">
@@ -112,7 +112,7 @@
                         <h4 class="block__section__list__itm__title">3</h4>
                         <div class="tile">
                             <a href='#' class="tile__left">
-                                <img class="tile__left__img" src="img/Icone Player.svg" alt="">
+                                <img class="tile__left__img" src="img/player-icon.svg" alt="">
                             </a>
                             <div class="tile__right">
                                 <img class="tile__right__img" src="img/cup.svg" alt="">
@@ -131,7 +131,7 @@
                         <div>
                             <div class="tile">
                                 <a href='#' class="tile__left">
-                                    <img class="tile__left__img" src="img/Icone Player.svg" alt="">
+                                    <img class="tile__left__img" src="img/player-icon.svg" alt="">
                                 </a>
                                 <div class="tile__right">
                                     <img class="tile__right__img" src="img/cup.svg" alt="">
@@ -159,7 +159,7 @@
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         <?php
-                        // add color ?
+                        // add color ?, link to the page with all playlist link to style
                         $listOfStyle = [
                             ["style" => "Rock", "link" => "link/rock"],
                             ["style" => "Pop", "link" => "link/pop"],
@@ -188,8 +188,8 @@
 
 
         <section>
-
-        <section>
+            
+        </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="swiper.js"></script>

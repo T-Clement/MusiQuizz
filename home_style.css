@@ -67,6 +67,7 @@ body {
     background-color: var(--background-color);
     font-family: "Nunito";
     margin: 0;
+    /*for elipses not overflowing*/
     /* overflow: hidden; */
 }
 
@@ -78,7 +79,6 @@ body {
     outline: 1px solid red;
     margin: 0 auto;
     z-index: 10;
-    /* overflow: hidden; */
 }
 
 /*for tablets*/
@@ -94,6 +94,8 @@ body {
         /* width: min(80%,1280px); */
         max-width: 1280px;
         outline: 2px solid green;
+        overflow: hidden;
+
     }
 }
 
@@ -378,28 +380,39 @@ body {
 
 
 
-@media screen and (width <= 720px) {
+.elipse {
+    position: absolute;
+    width: 298px;
+    height: 292px;
+    top: -10px;
+    left: -77px;
+    z-index: -5;
+    background: radial-gradient(50% 50% at 50% 50%, #260E69 0%, #FF3C5F 0%, #1F41BB 66.4%, rgba(38, 14, 105, 0.79) 90.79%);
+    filter: blur(41.5px);
+}
+
+
+@media screen and (min-width: 720px) {
     .elipse {
-        position: absolute;
-        width: 298px;
-        height: 292px;
+        /* height: 500px; */
+        /* width: 100%; */
+        /* top: -50px;
         left: -77px;
+        z-index: -5; */
+
         z-index: -5;
+        position: absolute;
+        overflow: hidden;
+        width: 2855px;
+        height: 2797px;
+        left: 154px;
+        top: -450px;
+
         background: radial-gradient(50% 50% at 50% 50%, #260E69 0%, #FF3C5F 0%, #1F41BB 66.4%, rgba(38, 14, 105, 0.79) 90.79%);
-        filter: blur(41.5px);
-    
+        filter: blur(75px);
     }
 
-    /* .elipse-2 {
-        position: absolute;
-        width: 298px;
-        height: 292px;
-        left: -77px;
-        top: 638px;
-        z-index: -5;
-        background: radial-gradient(50% 50% at 50% 50%, #260E69 0%, #FF3C5F 0%, #1F41BB 66.4%, rgba(38, 14, 105, 0.79) 90.79%);
-        filter: blur(41.5px);
-    }*/
+    
 }
 /*color elipsies*/
 /* .elipse {
