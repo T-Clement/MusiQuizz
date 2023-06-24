@@ -1,3 +1,12 @@
+const rounds = 10; // nombre de rounds d'une partie
+const roundDuration = 10;   // durée d'un round
+const WaitBetweenRound = 5; // temps d'attente entre les rounds
+
+
+
+
+
+
 // playlist data
 const playlist = {
     name: "Années 2000",
@@ -28,6 +37,7 @@ const playlist = {
 // to get the reset after each round
 
 let arrayOfSongs = [];
+let currentRound = 1;
 let partyScore = 0;
 
 // A TESTER
@@ -273,16 +283,20 @@ extractResponses.addEventListener("click", function(event) {
 
 let barWidth = 100;
 let roundCountDown = 10;
+let userResponseTime;
 
 const timerDOM = document.getElementById("timer");
 // fill the bar at the beginning
 progressBarValue.style.width = "100%";
 console.log("Valeur de la progressBar : " + progressBarValue);
+
+
 const timer = setInterval(() => {
     
         roundCountDown--;
-        displayProgressBar();
-        // displayProgressBar(progressBarValue);
+        barWidth = updateProgressBarValue(barWidth);
+        progressBarValue.style.width = `${barWidth}%`;
+        console.log("Log de la valeur de barwidth : "  + barWidth);
         timerDOM.innerText = roundCountDown;
         console.log(roundCountDown);
         // if cliqué, clearInterval
@@ -293,6 +307,9 @@ const timer = setInterval(() => {
         // set disabled on buttons to avoid clicking it again
         buttons.forEach(function (button) {
             button.setAttribute("disabled", true);
+            if(button.textContent == correctResponse) {
+                button.style.backgroundColor = "green";
+            }
         })
     }
 }, 1000);
@@ -301,11 +318,17 @@ const timer = setInterval(() => {
 /**
  * add inline css to display progression of counter
  */
-function displayProgressBar () {
-    progressBarValue.style.width = `${barWidth - 10}%`;
+function updateProgressBarValue (barWidth) {
+    barWidth = barWidth - 10;
+    console.log("Dans la fonction : " + barWidth);
+    return barWidth
+    // progressBarValue.style.width = `${barWidth}%`;
 }
 
 // -----------------------------------------
+//---------------------------------------------
+
+
 // score calcul 
 /**
  * function who update the score of the user if correct response choosen
@@ -349,12 +372,12 @@ audioElement = document.getElementById("musicplayer");
 //   }
   
 
-audioElement.play();
-setTimeout(function(){
-    audioElement.pause();
-    alert("Audio Stop Successfully");
-},
-10000);
+// audioElement.play();
+// setTimeout(function(){
+//     audioElement.pause();
+//     alert("Audio Stop Successfully");
+// },
+// 10000);
 
 
 // var audio = document.createElement("audio");
