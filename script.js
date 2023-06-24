@@ -1,6 +1,6 @@
 const rounds = 10; // nombre de rounds d'une partie
 const roundDuration = 10;   // durée d'un round
-const WaitBetweenRound = 5; // temps d'attente entre les rounds
+const waitBetweenRound = 5; // temps d'attente entre les rounds
 
 
 
@@ -42,32 +42,6 @@ let partyScore = 0;
 
 // A TESTER
 
-// const playlist2  = {
-//     name: "Années 2000",
-//     songs: [
-//         { Artiste: "Daft Punk", Titre: "One More Time" },
-//         { Artiste: "Pep's", Titre: "Liberta" },
-//         { Artiste: "U2", Titre: "Beautiful Day" },
-//         { Artiste: "OutKast", Titre: "Hey Ya!" },
-//         { Artiste: "Eminem", Titre: "Lose Yourself" },
-//         { Artiste: "Britney Spears", Titre: "Oops!... I Did It Again" },
-//         { Artiste: "Coldplay", Titre: "Clocks" },
-//         { Artiste: "Nelly", Titre: "Hot in Herre" },
-//         { Artiste: "Avril Lavigne", Titre: "Complicated" },
-//         { Artiste: "Justin Timberlake", Titre: "Cry Me a River" },
-//         { Artiste: "The White Stripes", Titre: "Seven Nation Army" },
-//         { Artiste: "Beyoncé", Titre: "Crazy in Love" },
-//         { Artiste: "Linkin Park", Titre: "In the End" },
-//         { Artiste: "Gorillaz", Titre: "Feel Good Inc." },
-//         { Artiste: "Shakira", Titre: "Whenever, Wherever" },
-//         { Artiste: "Kanye West", Titre: "Stronger" },
-//         { Artiste: "Nelly Furtado", Titre: "Promiscuous" },
-//         { Artiste: "Maroon 5", Titre: "This Love" },
-//         { Artiste: "Rihanna", Titre: "Umbrella" },
-//         { Artiste: "The Killers", Titre: "Mr. Brightside" },
-//         { Artiste: "Green Day", Titre: "American Idiot" }
-//     ]
-// }
 
 
 //TEST si JSON
@@ -150,6 +124,9 @@ function pickSongsFromPlaylist (object) {
 }
 
 
+// BOUCLER A PARTIR D'ICI
+
+
 
 
 
@@ -181,7 +158,7 @@ correctResponse = Object.values(correctResponse).join(' - ');
 console.log("La réponse correcte est : " + correctResponse);
 
 
-
+let beginingOfRound = Date.now();
 
 //-----------------------------------------------------------------------//
 
@@ -235,6 +212,15 @@ const scorePath = document.getElementById("score");
 
 // ----------------------------
 
+
+
+
+
+
+
+
+
+
 // Put values in round hint section / span
 currentRoundDOM.innerText = currentRound;
 totalRoundDOM.innerText = rounds;
@@ -272,7 +258,8 @@ extractResponses.addEventListener("click", function(event) {
     }
     else {
         event.target.style.backgroundColor = "green";
-        scorePath.textContent = updateScore(partyScore);
+        let now = Date.now();
+        scorePath.textContent = updateScore(partyScore, beginingOfRound, now);
         console.log("TEST vrai: " + document.querySelectorAll(".js-button-responses"));
     };
     console.log(event.target.innerText);
@@ -288,6 +275,7 @@ extractResponses.addEventListener("click", function(event) {
 
 let barWidth = 100;
 let roundCountDown = 10;
+
 let userResponseTime;
 
 const timerDOM = document.getElementById("timer");
@@ -297,7 +285,7 @@ console.log("Valeur de la progressBar : " + progressBarValue);
 
 
 const timer = setInterval(() => {
-    
+        
         roundCountDown--;
         barWidth = updateProgressBarValue(barWidth);
         progressBarValue.style.width = `${barWidth}%`;
@@ -341,8 +329,8 @@ function updateProgressBarValue (barWidth) {
  * @param {int} partyScore current score of the player
  * @returns score updated with the points earned in the round
  */
-function updateScore (partyScore) {
-    let responseScore = Math.round(1000 - ((Date.now() - now) / 10));
+function updateScore (partyScore, beginingOfRound, now) {
+    let responseScore = Math.round(1000 - ((now - beginingOfRound) / 10));
     partyScore += responseScore;
     return partyScore
 }
@@ -351,7 +339,7 @@ function updateScore (partyScore) {
 
 
 // use Date.now()
-const now = Date.now();
+// const now = Date.now();
 
 // booléen si cliqué, timer passe à false    -> une sorte de switch
 

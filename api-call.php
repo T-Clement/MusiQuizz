@@ -9,6 +9,7 @@ try {
     $playlistJSON = json_decode($callApi, true);
 } catch (Exception $e) {
     echo 'Something went wrong : '. $e;
+    // see why exception never trigger
 }
 // var_dump($playlistJSON);
 
