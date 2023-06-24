@@ -9,7 +9,7 @@
   href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
 />
     <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="home_style.css">
+    <link rel="stylesheet" href="css/home_style.css">
 </head>
 <body>
     <header class="header">

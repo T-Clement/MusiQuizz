@@ -2,7 +2,7 @@
 const playlist = {
     name: "Années 2000",
     songs: [
-        { Artiste: "Daft Punk", Titre: "One More Time" },
+        { Artiste: "Daft Punk", Titre: "One More Time", id: 3135553},
         { Artiste: "Pep's", Titre: "Liberta" },
         { Artiste: "U2", Titre: "Beautiful Day" },
         { Artiste: "OutKast", Titre: "Hey Ya!" },
@@ -25,8 +25,10 @@ const playlist = {
         { Artiste: "Green Day", Titre: "American Idiot" }
     ]
 }
+// to get the reset after each round
 
-
+let arrayOfSongs = [];
+let partyScore = 0;
 
 // A TESTER
 
@@ -93,25 +95,49 @@ function getRandomIndex (min, max) {
  * This function use a random index to run through the playlist and select 4 randoms songs and push in a new array
  * @param {object} object - full data of playlist
  */
-function pickSongsFromPlaylist (object, array) {
+// function pickSongsFromPlaylist (object, array) {
+//     for (let i = 0; i < 4; i++) {
+//         // put random index in variable
+//         let randomIndex = getRandomIndex(0, object.songs.length);
+//         // select a random song in object
+//         let randomSongFromObject = object.songs[randomIndex];
+
+
+//         // check if randomSong is already in roundChoices
+//             // see to write it in another way
+//         if (array.includes(randomSongFromObject)) {
+//             i--;
+//         } else {
+//             // to avoid the [ Object Object ]
+//             // array.push(`${randomSongFromObject.Artiste} - ${randomSongFromObject.Titre}`);
+//             array.push(randomSongFromObject);
+//         }
+//     }
+// };
+
+
+/**
+ * This function use a random index to run through the playlist and select 4 randoms songs and push in a new array
+ * @param {object} object - full data of playlist
+ * @return {array} - return array with 4 picked songs 
+ */
+function pickSongsFromPlaylist (object) {
+    // let arrayOfSongs = [];
     for (let i = 0; i < 4; i++) {
         // put random index in variable
         let randomIndex = getRandomIndex(0, object.songs.length);
         // select a random song in object
         let randomSongFromObject = object.songs[randomIndex];
-
-
-        // check if randomSong is already in roundChoices
-            // see to write it in another way
-        if (array.includes(randomSongFromObject)) {
+        // check if randomSong is already in array
+        if(arrayOfSongs.includes(randomSongFromObject)) {
             i--;
         } else {
             // to avoid the [ Object Object ]
-            // array.push(`${randomSongFromObject.Artiste} - ${randomSongFromObject.Titre}`);
-            array.push(randomSongFromObject);
+            arrayOfSongs.push(randomSongFromObject);
         }
     }
-};
+    return arrayOfSongs;
+}
 
 
 
@@ -130,10 +156,12 @@ function pickSongsFromPlaylist (object, array) {
 
 //-----------------------------------------------------------------------------------
 // initialize an empty array
-const roundChoices = [];
+// const roundChoices = [];
 const userChoice = [];
-// put 4 songs in this array                        // peut-être plutôt faire 1 song choisie random où j'importe tout et ensuite 3 autrse poour du remplissage, pour limiter le nombre de requêtes
-pickSongsFromPlaylist(playlist, roundChoices);
+// put 4 songs in this array
+                        // peut-être plutôt faire 1 song choisie random où j'importe tout et ensuite 3 autrse poour du remplissage, pour limiter le nombre de requêtes
+const roundChoices = pickSongsFromPlaylist(playlist);                        
+// pickSongsFromPlaylist(playlist, roundChoices);
 console.log(roundChoices);
 
 
@@ -211,8 +239,6 @@ buttons.forEach(function(button, index) {
 // ------------------------------------------------
 // Add color appropriate to user response
 
-
-
 extractResponses.addEventListener("click", function(event) {
     console.log(event, event.target);
     
@@ -231,7 +257,7 @@ extractResponses.addEventListener("click", function(event) {
     }
     else {
         event.target.style.backgroundColor = "green";
-        getScore();
+        scorePath.textContent = updateScore(partyScore);
         console.log("TEST vrai: " + document.querySelectorAll(".js-button-responses"));
     };
     console.log(event.target.innerText);
@@ -245,20 +271,24 @@ extractResponses.addEventListener("click", function(event) {
 
 //------ Timer Section
 
-let timerCounter = 10;
+let barWidth = 100;
+let roundCountDown = 10;
+
 const timerDOM = document.getElementById("timer");
 // fill the bar at the beginning
 progressBarValue.style.width = "100%";
+console.log("Valeur de la progressBar : " + progressBarValue);
 const timer = setInterval(() => {
     
-        timerCounter--;
+        roundCountDown--;
         displayProgressBar();
-        timerDOM.innerText = timerCounter;
-        console.log(timerCounter);
+        // displayProgressBar(progressBarValue);
+        timerDOM.innerText = roundCountDown;
+        console.log(roundCountDown);
         // if cliqué, clearInterval
 
         
-    if (timerCounter === 0) {
+    if (roundCountDown === 0) {
         clearInterval(timer);
         // set disabled on buttons to avoid clicking it again
         buttons.forEach(function (button) {
@@ -268,19 +298,88 @@ const timer = setInterval(() => {
 }, 1000);
 
 // --- ProgressBar function
-
+/**
+ * add inline css to display progression of counter
+ */
 function displayProgressBar () {
-    progressBarValue.style.width = `${timerCounter * 10}%`;
+    progressBarValue.style.width = `${barWidth - 10}%`;
 }
 
 // -----------------------------------------
 // score calcul 
-
-function getScore () {
+/**
+ * function who update the score of the user if correct response choosen
+ * @param {int} partyScore current score of the player
+ * @returns score updated with the points earned in the round
+ */
+function updateScore (partyScore) {
     let responseScore = Math.round(1000 - ((Date.now() - now) / 10));
-    scorePath.textContent = responseScore;
+    partyScore += responseScore;
+    return partyScore
 }
+
+
+
+
 // use Date.now()
 const now = Date.now();
 
 // booléen si cliqué, timer passe à false    -> une sorte de switch
+
+
+
+
+
+//---------------------------------------------------------------------------------
+// Audio Part
+
+audioElement = document.getElementById("musicplayer");
+
+// const test = new Audio("https://cdns-preview-e.dzcdn.net/stream/c-e77d23e0c8ed7567a507a6d1b6a9ca1b-11.mp3");
+// test.play();
+
+
+// check autoplay policy
+// https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getAutoplayPolicy
+// console.log("autoplay : " + navigator.getAutoplayPolicy);
+// if (!navigator.getAutoplayPolicy) {
+//     console.log("navigator.getAutoplayPolicy() not supported.");
+//   } else {
+//     console.log( "navigator.getAutoplayPolicy() is supported.");
+//   }
+  
+
+audioElement.play();
+setTimeout(function(){
+    audioElement.pause();
+    alert("Audio Stop Successfully");
+},
+10000);
+
+
+// var audio = document.createElement("audio");
+// audio.src = "sound.mp3";
+
+// audioElement.addEventListener("canplaythrough", function () {
+//         setTimeout(function(){
+//             audioElement.pause();
+//             alert("Audio Stop Successfully");
+//         },
+//         10000);
+// }, false); 
+
+
+
+// Allow auto-play on website
+
+
+
+
+// navigator.mediaDevices
+//   .getUserMedia(constraints)
+//   .then((stream) => {
+//     /* use the stream */
+//   })
+//   .catch((err) => {
+//     /* handle the error */
+//   });
