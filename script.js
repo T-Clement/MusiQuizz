@@ -11,7 +11,7 @@ const waitBetweenRound = 5; // temps d'attente entre les rounds
 const playlist = {
     name: "Années 2000",
     songs: [
-        { Artiste: "Daft Punk", Titre: "One More Time", id: 3135553},
+        { Artiste: "Daft Punk", Titre: "One More Time" },
         { Artiste: "Pep's", Titre: "Liberta" },
         { Artiste: "U2", Titre: "Beautiful Day" },
         { Artiste: "OutKast", Titre: "Hey Ya!" },
@@ -153,7 +153,7 @@ console.log(roundChoices);
 
 
 // choose randomResponse 
-let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length - 1)];
+let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
 correctResponse = Object.values(correctResponse).join(' - ');
 console.log("La réponse correcte est : " + correctResponse);
 
