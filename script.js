@@ -225,7 +225,8 @@ document.querySelector(".js-playlist-name").innerText = playlist.name;
         
 //-----------------------------------------------
 // Define path in DOM
-
+const currentRoundDOM = document.querySelector(".current-round");
+const totalRoundDOM = document.querySelector(".total-round");
 const extractResponses = document.querySelector(".list");
 const progressBarValue = document.querySelector(".js-progress-value");
 console.log(extractResponses);
@@ -233,6 +234,12 @@ console.log(document.querySelectorAll(".js-button-responses"));
 const scorePath = document.getElementById("score");
 
 // ----------------------------
+
+// Put values in round hint section / span
+currentRoundDOM.innerText = currentRound;
+totalRoundDOM.innerText = rounds;
+
+
 // Put responses in buttons
 
 const buttons = document.querySelectorAll(".js-button-responses");
@@ -241,8 +248,6 @@ buttons.forEach(function(button, index) {
     // button.innerText = JSON.stringify(roundChoices[index]);
     button.innerText = Object.values(roundChoices[index]).join(' - ');
 });
-
-
 
 
 
@@ -301,12 +306,13 @@ const timer = setInterval(() => {
         console.log(roundCountDown);
         // if cliqué, clearInterval
 
-        
+    // if countDown is over    
     if (roundCountDown === 0) {
         clearInterval(timer);
         // set disabled on buttons to avoid clicking it again
         buttons.forEach(function (button) {
             button.setAttribute("disabled", true);
+            // add green color as hint of correct response to show user
             if(button.textContent == correctResponse) {
                 button.style.backgroundColor = "green";
             }
