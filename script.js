@@ -1,8 +1,8 @@
+
+// to use for the game loop and transitions
 const rounds = 10; // nombre de rounds d'une partie
 const roundDuration = 10;   // durée d'un round
 const waitBetweenRound = 5; // temps d'attente entre les rounds
-
-
 
 
 
@@ -400,3 +400,20 @@ audioElement = document.getElementById("musicplayer");
 //   .catch((err) => {
 //     /* handle the error */
 //   });
+
+
+
+//-----------------------------------------------------
+
+// faire l'équivalent d'un clic mais sur une touche avec numéro
+document.addEventListener("keydown", function(event) {
+    console.log(event.key);
+    // switch (event.key) {
+    //     case '1':
+                // valeur de l'arrayResponses[0]
+    //         break;
+            // case "2":
+                // .....
+    // }
+})
+
