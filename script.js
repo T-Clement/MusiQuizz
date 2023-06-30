@@ -1,4 +1,8 @@
 
+
+
+
+
 // to use for the game loop and transitions
 const rounds = 10; // nombre de rounds d'une partie
 const roundDuration = 10;   // durée d'un round
@@ -53,6 +57,12 @@ let partyScore = 0;
 // const playlistDATA = JSON.parse(JSON.stringify(playlist2));
 // const playlistDATASongs = playlistDATA.songs;
 // console.log("TEST : " + playlistDATASongs);
+
+
+/*get locaStorage Json and clear localStorage */
+let getData = localStorage.getItem("playlistDATAJSON");
+localStorage.removeItem("playlistDATAJSON");
+console.table(JSON.parse(getData));
 
 
 
@@ -406,8 +416,8 @@ audioElement = document.getElementById("musicplayer");
 //-----------------------------------------------------
 
 // faire l'équivalent d'un clic mais sur une touche avec numéro
-document.addEventListener("keydown", function(event) {
-    console.log(event.key);
+// document.addEventListener("keydown", function(event) {
+//     console.log(event.key);
     // switch (event.key) {
     //     case '1':
                 // valeur de l'arrayResponses[0]
@@ -415,5 +425,5 @@ document.addEventListener("keydown", function(event) {
             // case "2":
                 // .....
     // }
-})
+// })
 

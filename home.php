@@ -1,3 +1,20 @@
+<?php
+require 'includes/_database.php';
+
+// request to database to get the current list of tasks sort by priority
+$query = $dbCo->prepare("SELECT * FROM rooms");
+$query->execute();
+$rooms = $query->fetchAll();
+
+// var_dump($rooms);
+
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

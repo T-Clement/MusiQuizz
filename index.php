@@ -108,7 +108,8 @@ function checkIfTrackHasPreview(array $array) :array{
                 </ul>
             </section>
         </main>
-    </div>
+    </div><script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
+    <!-- <script src="https://e-cdn-files.dzcdn.net/js/min/dz.js"></script> -->
     <!-- <script src="api-call.js"></script> -->
     <script src="script.js"></script>
 

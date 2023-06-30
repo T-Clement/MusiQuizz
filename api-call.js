@@ -14,10 +14,12 @@ async function waitingForResponse() {
 }
 
 
+// authentification à l'API nécessaire
+
+
+
 waitingForResponse();
 // ne marche pas parce que la requête est faite dans le navigateur, côté serveur avec PHP c'est OK
-
-
 
 
 
