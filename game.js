@@ -96,3 +96,103 @@ buttons.forEach(function(button, index) {
     // button.innerText = JSON.stringify(roundChoices[index]);
     button.innerText = `${roundChoices[index][0]["artist"]} - ${roundChoices[index][1]["track"]}`;
 });
+
+
+// ------------------------------------------------
+// Add color appropriate to user response
+
+extractResponses.addEventListener("click", function(event) {
+    console.log(event, event.target);
+    
+    // put button innerText in userChoice
+    userChoice.push(event.target.innerText);
+    console.log("Le choix de l'utilisateur est : " + userChoice);
+    
+    
+    // trigger color change only if button clicked
+    if (event.target.tagName != "BUTTON") return;
+    
+    // change color of button
+    if (event.target.innerText != correctResponseInString) {
+        event.target.style.backgroundColor = "red";
+        console.log("TEST faux: " + document.querySelectorAll(".js-button-responses"));
+    }
+    else {
+        event.target.style.backgroundColor = "green";
+        let now = Date.now();
+        scorePath.textContent = updateScore(partyScore, beginingOfRound, now);
+        console.log("TEST vrai: " + document.querySelectorAll(".js-button-responses"));
+    };
+    console.log(event.target.innerText);
+    // disable buttons after click
+    buttons.forEach(function (button) {
+        button.setAttribute("disabled", true);
+    })
+});
+
+
+//---------------------------------- Timer Section
+
+let barWidth = 100;
+let roundCountDown = 10;
+
+let userResponseTime;
+
+const timerDOM = document.getElementById("timer");
+// fill the bar at the beginning
+progressBarValue.style.width = "100%";
+console.log("Valeur de la progressBar : " + progressBarValue);
+
+
+const timer = setInterval(() => {
+        
+        roundCountDown--;
+        barWidth = updateProgressBarValue(barWidth);
+        progressBarValue.style.width = `${barWidth}%`;
+        console.log("Log de la valeur de barwidth : "  + barWidth);
+        timerDOM.innerText = roundCountDown;
+        console.log(roundCountDown);
+        // if cliqué, clearInterval
+
+    // if countDown is over    
+    if (roundCountDown === 0) {
+        clearInterval(timer);
+        // set disabled on buttons to avoid clicking it again
+        buttons.forEach(function (button) {
+            button.setAttribute("disabled", true);
+            // add green color as hint of correct response to show user
+            if(button.textContent == correctResponse) {
+                button.style.backgroundColor = "green";
+            }
+        })
+    }
+}, 1000);
+
+
+
+// --- ProgressBar function
+/**
+ * add inline css to display progression of counter
+ */
+function updateProgressBarValue (barWidth) {
+    barWidth = barWidth - 10;
+    console.log("Dans la fonction : " + barWidth);
+    return barWidth
+    // progressBarValue.style.width = `${barWidth}%`;
+}
+
+// -----------------------------------------
+//---------------------------------------------
+
+
+// score calcul 
+/**
+ * function who update the score of the user if correct response choosen
+ * @param {int} partyScore current score of the player
+ * @returns score updated with the points earned in the round
+ */
+function updateScore (partyScore, beginingOfRound, now) {
+    let responseScore = Math.round(1000 - ((now - beginingOfRound) / 10));
+    partyScore += responseScore;
+    return partyScore
+}
