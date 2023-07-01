@@ -1,9 +1,51 @@
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-BoldItalic.ttf") format("truetype");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
 :root {
-    font-size: 16px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --background-color:#3D3D3D;
-    --green: #47E060;
-    --text-color: #FFFFFF;
+    color: #FFFFFF;
+    font-size : 16px;
+    --background-color: #101728;
+    --blue: rgba(56, 62, 230, 0.58);
+    --dark-blue:rgba(31, 37, 120, 1); 
+    --magenta-pink: rgba(207, 62, 166, 1);
+    --yellow-amber: rgba(255, 190, 11, 1);
 
 }
 
@@ -27,7 +69,7 @@ li {
 
 body {
     background-color: var(--background-color);
-    color: var(--text-color);
+    font-family: "Nunito";
 }
 
 .header {
@@ -53,8 +95,9 @@ body {
 
 
 .container {
-    height: 100vh;
+    /* height: 100vh; */
     margin: 0 auto;
+    padding-bottom: 2.5rem;
     outline: 2px solid red;
     display: flex;
     flex-direction: column;
@@ -70,9 +113,9 @@ body {
 }
 
 
+/* PLAYER SECTION */
 
-
-#player {
+.section-player {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -116,7 +159,9 @@ body {
 
 .player-score {
     position: absolute;
-    left: calc(50% - 2rem);
+    display: flex;
+    align-self: center;
+    /* left: calc(50% - 2rem); */
     bottom: 15%;
     font-size: 1.625rem;
     padding: 0.625rem 1rem;
@@ -156,7 +201,7 @@ body {
 }
 
 .list-btn {
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 1.5rem;
     width: min(80%, 320px);
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -168,9 +213,18 @@ body {
 
 
 
+.list-btn[disabled] {
+    opacity: 0.5;
+}
+
 @media screen and (min-width: 1024px) {
     .list-btn:hover {
         background-color: rgba(255, 255, 255, 0.6);
-        transition: background-color 50ms ease-in;
+        transition: background-color 150ms ease-in-out;
+    }
+
+    .list-btn[disabled]:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        cursor: not-allowed;
     }
 }
