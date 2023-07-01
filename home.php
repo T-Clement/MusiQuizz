@@ -2,7 +2,13 @@
 require 'includes/_database.php';
 
 // request to database to get the current list of tasks sort by priority
-$query = $dbCo->prepare("SELECT * FROM rooms");
+// $query = $dbCo->prepare("SELECT * FROM rooms JOIN theme USING (id_theme)");
+// $query = $dbCo->prepare("SELECT id_room, name_room, name_theme, api_id_playlist, description_room, current_bestscore_room
+// FROM rooms
+// 	JOIN theme USING (id_theme);");
+$query = $dbCo->prepare("SELECT id_room, name_room, name_theme, api_id_playlist, description_room, current_bestscore_room
+FROM rooms
+	JOIN theme USING (id_theme) LIMIT 3;");
 $query->execute();
 $rooms = $query->fetchAll();
 
@@ -71,7 +77,32 @@ $rooms = $query->fetchAll();
                 <!--add list items for each room in popularRooms-->
                 <!--retirer le section, mettre un truc qui a du sens en fonction de ce que c'est-->
                 <?php
-                foreach ($popularRooms as $index => $room) {
+                // foreach ($popularRooms as $index => $room) {
+                //     $numberRoom = $index +1;
+                //     echo 
+                //     "<li class='block__section__list__itm'>"
+                //         ."<article class='block__section__list__itm--wrapper'>"
+                //             ."<h4 class='block__section__list__itm__title'>$numberRoom</h4>"
+                //             ."<div>"
+                //             ."<div class='tile'>
+                //                 <a href='play.php?room=" . $room["idRoom"] ."' class='tile__left'>
+                //                     <img class='tile__left__img' src='img/player-icon.svg' alt=''>
+                //                 </a>
+                //                 <div class='tile__right'>
+                //                     <img class='tile__right__img' src='img/cup.svg' alt=''>"
+                //                     ."<div class='tile__right__content'>"
+                //                         ."<p>".$room["nameBestUser"]."</p>"
+                //                         ."<p>".$room["scoreBestUser"]." pts"."</p>"
+                //                     ."</div>"
+                //                 ."</div>"
+                //             ."</div>"
+                //             ."<p class='tile__label'>".$room['nameRoom']."</p>"
+                //             ."</div>"
+                //         ."</article>"
+                //     ."</li>";}                
+                ?>
+                <?php
+                foreach ($rooms as $index => $room) {
                     $numberRoom = $index +1;
                     echo 
                     "<li class='block__section__list__itm'>"
@@ -79,18 +110,18 @@ $rooms = $query->fetchAll();
                             ."<h4 class='block__section__list__itm__title'>$numberRoom</h4>"
                             ."<div>"
                             ."<div class='tile'>
-                                <a href='#' class='tile__left'>
+                                <a href='game-data.php?room=" . $room["id_room"] ."' class='tile__left'>
                                     <img class='tile__left__img' src='img/player-icon.svg' alt=''>
                                 </a>
                                 <div class='tile__right'>
                                     <img class='tile__right__img' src='img/cup.svg' alt=''>"
                                     ."<div class='tile__right__content'>"
-                                        ."<p>".$room["nameBestUser"]."</p>"
-                                        ."<p>".$room["scoreBestUser"]." pts"."</p>"
+                                        // ."<p>".$room["nameBestUser"]."</p>"
+                                        ."<p>".$room["current_bestscore_room"]." pts"."</p>"
                                     ."</div>"
                                 ."</div>"
                             ."</div>"
-                            ."<p class='tile__label'>".$room['nameRoom']."</p>"
+                            ."<p class='tile__label'>".$room['name_room']."</p>"
                             ."</div>"
                         ."</article>"
                     ."</li>";}                
