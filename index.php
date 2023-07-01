@@ -1,21 +1,21 @@
 <?php
 // make API call and put it in locale storage to use it in JS
 
-$playlist_id = "1306931615";
-$api_url = "https://api.deezer.com/playlist/".$playlist_id;
+// $playlist_id = "1306931615";
+// $api_url = "https://api.deezer.com/playlist/".$playlist_id;
 
 // require 'api-call.js';
 
 // makeAPICall($api_url);
 
 
-try {
-    $callApi = file_get_contents($api_url);
-    $playlistJSON = json_decode($callApi, true);
-} catch (Exception $e) {
-    echo 'Something went wrong : '. $e;
-    // see why exception never trigger
-}
+// try {
+//     $callApi = file_get_contents($api_url);
+//     $playlistJSON = json_decode($callApi, true);
+// } catch (Exception $e) {
+//     echo 'Something went wrong : '. $e;
+//     // see why exception never trigger
+// }
 // var_dump($playlistJSON);
 
 // check if playlist 
@@ -108,10 +108,12 @@ function checkIfTrackHasPreview(array $array) :array{
                 </ul>
             </section>
         </main>
-    </div><script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
+    </div>
+    <!-- <script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script> -->
     <!-- <script src="https://e-cdn-files.dzcdn.net/js/min/dz.js"></script> -->
     <!-- <script src="api-call.js"></script> -->
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script src="game.js"></script>
 
 </body>
 </html>

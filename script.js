@@ -1,3 +1,5 @@
+// const urlParams = new URLSearchParams(window.location.search);
+// console.log(urlParams);
 
 
 
@@ -63,6 +65,7 @@ let partyScore = 0;
 let getData = localStorage.getItem("playlistDATAJSON");
 localStorage.removeItem("playlistDATAJSON");
 console.table(JSON.parse(getData));
+
 
 
 
@@ -156,7 +159,7 @@ function pickSongsFromPlaylist (object) {
 // const roundChoices = [];
 const userChoice = [];
 // put 4 songs in this array
-                        // peut-être plutôt faire 1 song choisie random où j'importe tout et ensuite 3 autrse poour du remplissage, pour limiter le nombre de requêtes
+    // peut-être plutôt faire 1 song choisie random où j'importe tout et ensuite 3 autrse poour du remplissage, pour limiter le nombre de requêtes
 const roundChoices = pickSongsFromPlaylist(playlist);                        
 // pickSongsFromPlaylist(playlist, roundChoices);
 console.log(roundChoices);

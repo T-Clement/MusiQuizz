@@ -67,21 +67,31 @@ $JSON ["tracks"] = $tracks;
 // var_dump($JSON);
 $JSON = json_encode($JSON);
 
-echo "<p>Ceci est une séparation</p>";
-echo "<script>localStorage.setItem('playlistDATAJSON_" . $idRoom . "', JSON.stringify($JSON));</script>";
-echo "<script>
-    let playlistJSON = localStorage.getItem('playlistDATAJSON');
-    console.log(playlistJSON);
-   // log [object object]
+// echo "<script>localStorage.setItem('playlistDATAJSON_" . $idRoom . "', JSON.stringify($JSON));</script>";
+// echo "<script>
+//     let playlistJSON = localStorage.getItem('playlistDATAJSON');
+//     console.log(playlistJSON);
+//    // log [object object]
 
-   let playlistDATA = JSON.parse(playlistJSON);
+//    let playlistDATA = JSON.parse(playlistJSON);
 
-   console.table(playlistDATA);
+//    console.table(playlistDATA);
    
+//     </script>";
+
+
+
+
+// localStorage.setItem('playlistDATAJSON_" . $idRoom . "', JSON.stringify($JSON));
+
+// echo "<script>
+//         localStorage.setItem('playlistDATAJSON', JSON.stringify($JSON));
+//         window.location.href = 'index.php?room=" . $idRoom . "';
+//     </script>";
+echo "<script>
+        localStorage.setItem('playlistDATAJSON', JSON.stringify($JSON));
+        window.location.href = 'index.php?room=" . $idRoom . "';
     </script>";
-
-
-
 
 
 function checkIfTrackHasPreview(array $array) :array{
@@ -92,8 +102,11 @@ function checkIfTrackHasPreview(array $array) :array{
         }
     }
     return $newArray;
-}
+};
 
-// }
+
+// doesn't work because there is a echo before
+// header('Location: index.php?room=' .$idRoom);
+// exit
 
 ?>
