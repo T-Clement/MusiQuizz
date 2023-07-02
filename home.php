@@ -14,7 +14,11 @@ $rooms = $query->fetchAll();
 
 // var_dump($rooms);
 
+$query = $dbCo->prepare("SELECT id_theme, name_theme FROM theme;");
+$query->execute();
+$themes = $query->fetchAll();
 
+// var_dump($themes);
 
 ?>
 
@@ -37,10 +41,10 @@ $rooms = $query->fetchAll();
 <body>
     <header class="header">
         <div class="header__wrapper">
-            <div class="header__brand">
+            <a class="header__brand" href="home.php">
                 <img class='header__brand__img' src="img/logo-l.png" alt="">
                 <h1 class="header__brand__title">Musiquiz</h1>
-            </div>
+            </a>
         
         <!--mettre <nav>-->
         
@@ -59,11 +63,11 @@ $rooms = $query->fetchAll();
 
     <!-- array of most popular rooms wit all details comming from database--> <!--need to take link / id of the room-->
     <?php
-    $popularRooms = [
-        ["idRoom" => '1243', "style" => "Années", "nameRoom" => "Années 80", "nameBestUser" => "User_1425", "scoreBestUser" => 10000, "numberOfParties" => 82],
-        ["idRoom" => '2548', "style" => "Rock", "nameRoom" => "Légendes du Rock", "nameBestUser" => "User_89", "scoreBestUser" => 7812, "numberOfParties" => 67],
-        ["idRoom" => '9845', "style" => "Rap", "nameRoom" => "Classiques du Rap US", "nameBestUser" => "User_5", "scoreBestUser" => 8875,  "numberOfParties" => 43] 
-    ];
+    // $popularRooms = [
+    //     ["idRoom" => '1243', "style" => "Années", "nameRoom" => "Années 80", "nameBestUser" => "User_1425", "scoreBestUser" => 10000, "numberOfParties" => 82],
+    //     ["idRoom" => '2548', "style" => "Rock", "nameRoom" => "Légendes du Rock", "nameBestUser" => "User_89", "scoreBestUser" => 7812, "numberOfParties" => 67],
+    //     ["idRoom" => '9845', "style" => "Rap", "nameRoom" => "Classiques du Rap US", "nameBestUser" => "User_5", "scoreBestUser" => 8875,  "numberOfParties" => 43] 
+    // ];
     ?>
 
     <main class="main container">
@@ -208,16 +212,21 @@ $rooms = $query->fetchAll();
                         <!-- Slides -->
                         <?php
                         // add color ?, link to the page with all playlist link to style
-                        $listOfStyle = [
-                            ["style" => "Rock", "link" => "link/rock"],
-                            ["style" => "Pop", "link" => "link/pop"],
-                            ["style" => "Rap", "link" => "link/rap"],
-                            ["style" => "Variété", "link" => "link/variete"]
-                        ];
+                        // $listOfStyle = [
+                        //     ["style" => "Rock", "link" => "link/rock"],
+                        //     ["style" => "Pop", "link" => "link/pop"],
+                        //     ["style" => "Rap", "link" => "link/rap"],
+                        //     ["style" => "Variété", "link" => "link/variete"]
+                        // ];
                         
-                        for($i = 0; $i < count($listOfStyle); $i++) {
+                        // for($i = 0; $i < count($listOfStyle); $i++) {
+                        //     echo "<div class='swiper-slide'>
+                        //         <a class='swiper-theme-link' href='#{$listOfStyle[$i]['link']}'>{$listOfStyle[$i]['style']}</a>
+                        //         </div>";
+                        // };
+                        foreach($themes as $index => $theme) {
                             echo "<div class='swiper-slide'>
-                                <a class='swiper-theme-link' href='#{$listOfStyle[$i]['link']}'>{$listOfStyle[$i]['style']}</a>
+                                <a class='swiper-theme-link' href='somewhere.php?theme={$themes[$index]['id_theme']}'>{$themes[$index]['name_theme']}</a>
                                 </div>";
                         };
                             
