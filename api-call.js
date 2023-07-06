@@ -1,30 +1,47 @@
-// mutualiser ID room et ID playlist ? Ou pas car si ID playlist bouge / supprime, tout est cassé.
-const playlistID = "1306931615";
-const urlAPI = "https://api.deezer.com/playlist/" + playlistID;
+ 
 
+//get the room id value in url
+url = new URL(window.location.href);
+const roomId = url.searchParams.get("room");
+// console.log(roomId);
 
-async function waitingForResponse() {
+if (url.searchParams.has("room")) {
+    getDATAS(roomId).then((apiResponse) => {
+        if (!apiResponse.result) {
+            console.error("Problème rencontré, le json renvoit false");
+            return;
+        }
+
+        console.log(apiResponse);
+        return apiResponse;
+        // localStorage.setItem("playlistDATAJSON", JSON.stringify(apiResponse));
+    });
+}
+
+function getDATAS(idRoom) {
+    const data = {
+        action: "select",
+        idRoom: idRoom,
+    };
+    // why GET is not working ?
+    // alternative -> the infos in the api.php url such as for example :
+    // let url = "api.php?action=select&idRoom=" + encodeURIComponent(data.idRoom);
+    // and fetch this url with no body because it's a GET method
+    return callAPI("POST", data);
+}
+
+async function callAPI(method, data) {
     try {
-    const response = await fetch(urlAPI);
-    const playlistDATA = await response.json();
-    console.table(playlistDATA);
-    } catch(error) {
-    console.error("Unable to load playlist data from API : " + error);
+        const response = await fetch("api.php", {
+            method: method,
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    } catch (error) {
+        console.error("Unable to load datas from the server : " + error);
     }
 }
 
-
-// authentification à l'API nécessaire
-
-
-
-waitingForResponse();
-// ne marche pas parce que la requête est faite dans le navigateur, côté serveur avec PHP c'est OK
-
-
-
-// For example, URLSearchParams.get() will return the first value associated with the given search parameter:
-
-// const product = urlParams.get('product')
-// console.log(product);
-// // shirt

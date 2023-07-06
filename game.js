@@ -1,4 +1,59 @@
-/*get locaStorage Json and clear localStorage */
+// let playlistDATA; 
+
+// //get the room id value in url
+// url = new URL(window.location.href);
+// const roomId = url.searchParams.get("room");
+// console.log(roomId);
+
+// if (url.searchParams.has("room")) {
+//     getDATAS(roomId).then((apiResponse) => {
+//         if (!apiResponse.result) {
+//             console.error("Problème rencontré, le json renvoit false");
+//             return;
+//         }
+
+//         console.log(apiResponse);
+//         playlistDATA = apiResponse;
+//         // localStorage.setItem("playlistDATAJSON", JSON.stringify(apiResponse));
+//     });
+// }
+
+// function getDATAS(idRoom) {
+//     const data = {
+//         action: "select",
+//         idRoom: idRoom,
+//     };
+//     // why GET is not working ?
+//     // alternative -> the infos in the api.php url such as for example :
+//     // let url = "api.php?action=select&idRoom=" + encodeURIComponent(data.idRoom);
+//     // and fetch this url with no body because it's a GET method
+//     return callAPI("POST", data);
+// }
+
+// async function callAPI(method, data) {
+//     try {
+//         const response = await fetch("api.php", {
+//             method: method,
+//             headers: {
+//                 "Content-type": "application/json",
+//             },
+//             body: JSON.stringify(data),
+//         });
+//         return response.json();
+//     } catch (error) {
+//         console.error("Unable to load datas from the server : " + error);
+//     }
+// }
+
+    
+
+
+
+
+
+// get url params to target specific id
+
+// get locaStorage Json and clear localStorage
 let getData = localStorage.getItem("playlistDATAJSON");
 // localStorage.removeItem("playlistDATAJSON");
 const playlistDATA = JSON.parse(getData);
@@ -57,21 +112,21 @@ function pickSongsFromPlaylist (object) {
 const userChoice = [];
 // put 4 songs in this array
     // peut-être plutôt faire 1 song choisie random où j'importe tout et ensuite 3 autrse poour du remplissage, pour limiter le nombre de requêtes
-let roundChoices = pickSongsFromPlaylist(playlistDATA);                        
+let roundChoices = pickSongsFromPlaylist(playlistDATA.datas);                        
 console.log(roundChoices);
 // console.log(roundChoices[0][0].artist + " - " + roundChoices[0][1].track);
 
 
 // choose randomResponse 
 let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
-console.log("La réponse correcte est : " + correctResponse[0].artist + " - " + correctResponse[1].track);
+console.log("La réponse correcte est : " + correctResponse.artist + " - " + correctResponse.track);
 // put response in string to compare it
-let correctResponseInString = correctResponse[0].artist + " - " + correctResponse[1].track;
+let correctResponseInString = correctResponse.artist + " - " + correctResponse.track;
 console.log(correctResponseInString);
 
 let beginingOfRound = Date.now();
 
-document.querySelector(".js-playlist-name").innerText = playlistDATA.playlistName;
+document.querySelector(".js-playlist-name").innerText = playlistDATA.datas.playlistName;
 
 
 //-----------------------------------------------
@@ -92,9 +147,7 @@ totalRoundDOM.innerText = rounds;
 
 const buttons = document.querySelectorAll(".js-button-responses");
 buttons.forEach(function(button, index) {
-    // button.innerText = `${playlist.songs[index].Artiste} - ${playlist.songs[index].Titre}`;
-    // button.innerText = JSON.stringify(roundChoices[index]);
-    button.innerText = `${roundChoices[index][0]["artist"]} - ${roundChoices[index][1]["track"]}`;
+    button.innerText = `${roundChoices[index]["artist"]} - ${roundChoices[index]["track"]}`;
 });
 
 
@@ -161,7 +214,8 @@ const timer = setInterval(() => {
         buttons.forEach(function (button) {
             button.setAttribute("disabled", true);
             // add green color as hint of correct response to show user
-            if(button.textContent == correctResponse) {
+            console.log("dans le foreach des boutons")
+            if(button.textContent == correctResponseInString) {
                 button.style.backgroundColor = "green";
             }
         })

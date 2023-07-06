@@ -1,22 +1,33 @@
 <?php
+
 require 'includes/_database.php';
 
 
+
+header('Content-Type:application/json');
+
+
+// data send by async js function callAPI
+$data = json_decode(file_get_contents('php://input'), true);
+$isOk = false;
+
 // à terme sera remplacé par l'id présent dans l'url qui sera en lien avec la base de donnée
-$idRoom = $_GET["room"];
+// $idRoom = $_GET["room"];
+
+// get the id send by the async function 
+$id =  $data["idRoom"];
 
 $query = $dbCo-> prepare("SELECT * FROM rooms WHERE id_room = :id;");
 $query->execute([
-    "id" => $idRoom
+    "id" => $id
 ]);
 
 $dataRoom = $query->fetch();
-// var_dump($dataRoom);
 
+// store the api playlist id
 $playlist_id = $dataRoom["api_id_playlist"];
 
-// var_dump($playlist_id);
-
+// url wich will ba calling to API
 $api_url = "https://api.deezer.com/playlist/".$playlist_id;
 
 
@@ -28,67 +39,53 @@ try {
     $callApi = file_get_contents($api_url);
     $playlistJSON = json_decode($callApi, true);
 } catch (Exception $e) {
-    echo 'Something went wrong : '. $e;
+    // echo 'Something went wrong : '. $e;
     // see why exception never trigger
 }
-// var_dump($playlistJSON);
 
 // check if call to API is made
 if(isset($playlistJSON["tracks"])) {
     $playlistTitle = $dataRoom["name_room"];
     $JSON ["playlistName"] = $playlistTitle;
     $listOfTracks = $playlistJSON["tracks"]["data"];
+
     // check if playlist is > 40
-    // var_dump($listOfTracks);
     $listOfTracksWithPreview = checkIfTrackHasPreview($listOfTracks);
-    // var_dump($listOfTracksWithPreview);
     if(count($listOfTracksWithPreview) >= 40) {
+        // set $isOk to true because whith this datas we can play
+        $isOk = true;
         foreach($listOfTracksWithPreview as $track) {
             $tracks [] = [
-                ["artist" =>  $track["artist"]["name"]],
-                ["track" => $track['title_short']],
-                ["preview" => $track["preview"]]
+                "artist" =>  $track["artist"]["name"],
+                "track" => $track['title_short'],
+                "preview" => $track["preview"]
             ];
         }
     } else {
-        echo "Pas assez de tracks dans cette playlist";
+        echo json_encode([
+            'result' => $isOk,
+            'msg' => "Pas assez de tracks dans cette playlist"
+            ]);
         exit;
     } 
 } else {
-    echo "Pas de playlist à cet ID";
+    echo json_encode([
+        'result' => $isOk,
+        'msg' => "Pas de playlist à cet ID"
+        ]);
+    exit;
 }
-
-
-
 
 
 // faire une structure de JSON pour mettre dans le localStorage et que ce soit récupérer par mon script de jeu JS
 
 $JSON ["tracks"] = $tracks;
 // var_dump($JSON);
-$JSON = json_encode($JSON);
+echo json_encode([
+    "result" => $isOk,
+    "datas" => $JSON
+]);
 
-// echo "<script>
-//     let playlistJSON = localStorage.getItem('playlistDATAJSON');
-//     console.log(playlistJSON);
-//    // log [object object]
-
-//    let playlistDATA = JSON.parse(playlistJSON);
-
-//    console.table(playlistDATA);
-
-//     </script>";
-
-
-
-
-
-// echo "<script>localStorage.setItem('playlistDATAJSON', JSON.stringify($JSON));</script>";
-// echo "<script>localStorage.setItem('playlistDATAJSON_" . $idRoom . "', JSON.stringify($JSON));</script>";
-// echo "<script>
-//         localStorage.setItem('playlistDATAJSON', JSON.stringify($JSON))
-//          window.location.href = 'index.php?room=" . $idRoom . "';
-//     </script>";
 
 
 function checkIfTrackHasPreview(array $array) :array{
@@ -101,9 +98,6 @@ function checkIfTrackHasPreview(array $array) :array{
     return $newArray;
 };
 
-
-// doesn't work because there is a echo before
-// header('Location: index.php?room=' .$idRoom);
-// exit
-
 ?>
+
+
