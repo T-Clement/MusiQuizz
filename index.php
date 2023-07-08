@@ -57,7 +57,7 @@
     <!-- <script src='test.js'></script> -->
     <!-- <script src="game_data.js"></script> -->
     
-    <script src="api-call.js"></script>
+    <!-- <script src="api-call.js"></script> -->
     <script src="game.js"></script>
 
 </body>

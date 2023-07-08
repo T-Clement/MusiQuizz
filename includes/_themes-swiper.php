@@ -4,7 +4,7 @@ $query = $dbCo->prepare("SELECT id_theme, name_theme FROM theme;");
 $query->execute();
 $themes = $query->fetchAll();
 
-// var_dump($themes);
+var_dump($themes);
 ?>
 
 
@@ -21,7 +21,7 @@ $themes = $query->fetchAll();
                         
                         foreach($themes as $index => $theme) {
                             echo "<div class='swiper-slide'>
-                                <a class='swiper-theme-link' href='somewhere.php?theme={$themes[$index]['id_theme']}'>{$themes[$index]['name_theme']}</a>
+                                <a class='swiper-theme-link' href='home.php?theme={$themes[$index]['id_theme']}'>{$themes[$index]['name_theme']}</a>
                                 </div>";
                         };
                             

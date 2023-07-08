@@ -1,62 +1,65 @@
-// let playlistDATA; 
+let playlistDATA; 
 
-// //get the room id value in url
-// url = new URL(window.location.href);
-// const roomId = url.searchParams.get("room");
-// console.log(roomId);
+//get the room id value in url
+url = new URL(window.location.href);
+const roomId = url.searchParams.get("room");
+console.log(roomId);
 
-// if (url.searchParams.has("room")) {
-//     getDATAS(roomId).then((apiResponse) => {
-//         if (!apiResponse.result) {
-//             console.error("Problème rencontré, le json renvoit false");
-//             return;
-//         }
+if (url.searchParams.has("room")) {
+    getDATAS(roomId).then((apiResponse) => {
+        if (!apiResponse.result) {
+            console.error("Problème rencontré, le json renvoit false");
+            return;
+        }
 
-//         console.log(apiResponse);
-//         playlistDATA = apiResponse;
-//         // localStorage.setItem("playlistDATAJSON", JSON.stringify(apiResponse));
-//     });
-// }
+        console.log(apiResponse);
+        playlistDATA = apiResponse;
+        // localStorage.setItem("playlistDATAJSON", JSON.stringify(apiResponse));
 
-// function getDATAS(idRoom) {
-//     const data = {
-//         action: "select",
-//         idRoom: idRoom,
-//     };
-//     // why GET is not working ?
-//     // alternative -> the infos in the api.php url such as for example :
-//     // let url = "api.php?action=select&idRoom=" + encodeURIComponent(data.idRoom);
-//     // and fetch this url with no body because it's a GET method
-//     return callAPI("POST", data);
-// }
+        continueExecution();
+    });
+}
 
-// async function callAPI(method, data) {
-//     try {
-//         const response = await fetch("api.php", {
-//             method: method,
-//             headers: {
-//                 "Content-type": "application/json",
-//             },
-//             body: JSON.stringify(data),
-//         });
-//         return response.json();
-//     } catch (error) {
-//         console.error("Unable to load datas from the server : " + error);
-//     }
-// }
+function getDATAS(idRoom) {
+    const data = {
+        action: "select",
+        idRoom: idRoom,
+    };
+    // why GET is not working ?
+    // alternative -> the infos in the api.php url such as for example :
+    // let url = "api.php?action=select&idRoom=" + encodeURIComponent(data.idRoom);
+    // and fetch this url with no body because it's a GET method
+    return callAPI("POST", data);
+}
+
+async function callAPI(method, data) {
+    try {
+        const response = await fetch("api.php", {
+            method: method,
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    } catch (error) {
+        console.error("Unable to load datas from the server : " + error);
+    }
+}
 
     
 
 
 
+function continueExecution() {
 
 
 // get url params to target specific id
 
 // get locaStorage Json and clear localStorage
-let getData = localStorage.getItem("playlistDATAJSON");
+// let getData = localStorage.getItem("playlistDATAJSON");
 // localStorage.removeItem("playlistDATAJSON");
-const playlistDATA = JSON.parse(getData);
+// const playlistDATA = JSON.parse(getData);
 console.log(playlistDATA);
 
 // to use for the game loop and transitions
@@ -249,4 +252,5 @@ function updateScore (partyScore, beginingOfRound, now) {
     let responseScore = Math.round(1000 - ((now - beginingOfRound) / 10));
     partyScore += responseScore;
     return partyScore
+}
 }

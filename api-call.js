@@ -13,8 +13,8 @@ if (url.searchParams.has("room")) {
         }
 
         console.log(apiResponse);
-        return apiResponse;
-        // localStorage.setItem("playlistDATAJSON", JSON.stringify(apiResponse));
+        // return apiResponse;
+        localStorage.setItem("playlistDATAJSON", JSON.stringify(apiResponse));
     });
 }
 
@@ -44,4 +44,3 @@ async function callAPI(method, data) {
         console.error("Unable to load datas from the server : " + error);
     }
 }
-

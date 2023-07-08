@@ -44,7 +44,7 @@ $rooms = $query->fetchAll();
                     . "<h4 class='block__section__list__itm__title'>$numberRoom</h4>"
                     . "<div>"
                         . "<div class='tile'>
-                            <a href='game-data.php?room=" . $room["id_room"] ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
+                            <a href='index.php?room=" . $room["id_room"] ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
                                 <img class='tile__left__img js-img' src='img/player-icon.svg' alt=''>
                             </a>
                             <div class='tile__right'>
