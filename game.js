@@ -1,4 +1,5 @@
 let playlistDATA; 
+let partyScore = 0;
 
 //get the room id value in url
 url = new URL(window.location.href);
@@ -59,8 +60,7 @@ function continueExecution() {
     const rounds = 3; // nombre de rounds d'une partie
     const roundDuration = 10;   // durée d'un round
     const waitBetweenRound = 5; // temps d'attente entre les rounds
-    let partyScore = 0;
-    let arrayOfSongs = [];
+    // let arrayOfSongs = [];
     let currentRound = 1;
 
 
@@ -72,7 +72,7 @@ function continueExecution() {
     function runRound() {
 
         if(currentRound <= rounds) {
-            
+
             let roundChoices = pickSongsFromPlaylist(playlistDATA.datas);                        
             console.log(roundChoices);
             // choose randomResponse 
@@ -112,6 +112,7 @@ function continueExecution() {
 
             // waiting time before next round
             setTimeout(() => {
+                resetRound();
                 currentRound++;
                 runRound(); 
             }, waitBetweenRound * 1000);
@@ -124,7 +125,16 @@ function continueExecution() {
 }
 
 
-
+    function resetRound() {
+        console.log("entrée dans le reset");
+        roundChoices = [];
+        console.log(roundChoices);
+        const buttons = document.querySelectorAll(".js-button-responses");
+        buttons.forEach(function (button) {
+            button.style.backgroundColor = ""; // Réinitialiser la couleur du bouton
+            button.removeAttribute("disabled"); // Réactiver les boutons
+        });
+    }
 
 
 
@@ -153,7 +163,7 @@ function continueExecution() {
      * @return {array} - return array with 4 picked songs 
      */
     function pickSongsFromPlaylist (object) {
-        // let arrayOfSongs = [];
+        let arrayOfSongs = [];
         for (let i = 0; i < 4; i++) {
             // put random index in variable
             let randomIndex = getRandomIndex(0, object.tracks.length);
@@ -216,7 +226,9 @@ function continueExecution() {
         else {
             event.target.style.backgroundColor = "green";
             let now = Date.now();
-            scorePath.textContent = updateScore(partyScore, beginingOfRound, now);
+            // scorePath.textContent = updateScore(partyScore, beginingOfRound, now);
+            partyScore = updateScore(partyScore, beginingOfRound, now);
+            scorePath.textContent = partyScore;
             console.log("TEST vrai: " + document.querySelectorAll(".js-button-responses"));
         };
         console.log(event.target.innerText);
@@ -264,8 +276,11 @@ function continueExecution() {
      * @returns score updated with the points earned in the round
      */
     function updateScore (partyScore, beginingOfRound, now) {
+        console.log(partyScore + "avant l'addition")
         let responseScore = Math.round(1000 - ((now - beginingOfRound) / 10));
         partyScore += responseScore;
+        console.log(partyScore + "après l'addition")
         return partyScore
     }
+
 }
