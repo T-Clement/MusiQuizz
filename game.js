@@ -56,7 +56,7 @@ async function callAPI(method, data) {
 function continueExecution() {
 
     // to use for the game loop and transitions
-    const rounds = 10; // nombre de rounds d'une partie
+    const rounds = 3; // nombre de rounds d'une partie
     const roundDuration = 10;   // durée d'un round
     const waitBetweenRound = 5; // temps d'attente entre les rounds
     let partyScore = 0;
@@ -65,26 +65,34 @@ function continueExecution() {
 
 
     loadPlaylistTitleInPage();
-    let roundChoices = pickSongsFromPlaylist(playlistDATA.datas);                        
-    console.log(roundChoices);
-    // choose randomResponse 
-    let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
-    console.log("La réponse correcte est : " + correctResponse.artist + " - " + correctResponse.track);
-    // put response in string to compare it
-    let correctResponseInString = correctResponse.artist + " - " + correctResponse.track;
-    console.log(correctResponseInString);
 
-    displayRoundInfo(currentRound, rounds);
-    displayRoundChoices(roundChoices);
-    addUserResponseColor(correctResponseInString);
+    runRound();
 
-    let beginingOfRound = Date.now();
-    let barWidth = 100;
-    let roundCountDown = roundDuration;
-    const progressBarValue = document.querySelector(".js-progress-value");
-    progressBarValue.style.width = "100%";
-    const timerDOM = document.getElementById("timer");
-    const buttons = document.querySelectorAll(".js-button-responses");
+
+    function runRound() {
+
+        if(currentRound <= rounds) {
+            
+            let roundChoices = pickSongsFromPlaylist(playlistDATA.datas);                        
+            console.log(roundChoices);
+            // choose randomResponse 
+            let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
+            console.log("La réponse correcte est : " + correctResponse.artist + " - " + correctResponse.track);
+            // put response in string to compare it
+            let correctResponseInString = correctResponse.artist + " - " + correctResponse.track;
+            console.log(correctResponseInString);
+
+            displayRoundInfo(currentRound, rounds);
+            displayRoundChoices(roundChoices);
+            let beginingOfRound = Date.now();
+            addUserResponseColor(correctResponseInString, beginingOfRound);
+
+            let roundCountDown = roundDuration;
+            const progressBarValue = document.querySelector(".js-progress-value");
+            let barWidth = 100;
+            progressBarValue.style.width = `${barWidth}%`;
+            const timerDOM = document.getElementById("timer");
+            const buttons = document.querySelectorAll(".js-button-responses");
 
     const timer = setInterval(() => {
         roundCountDown--;
@@ -93,17 +101,27 @@ function continueExecution() {
         // console.log("Log de la valeur de barwidth : "  + barWidth);
         timerDOM.innerText = roundCountDown;
         // console.log(roundCountDown);
-        // if cliqué, clearInterval
+        
 
-    // if countDown is over    
-    if (roundCountDown === 0) {
-        clearInterval(timer);
-        // set disabled on buttons to avoid clicking it again
-        disableButtons(buttons);
-        showCorrectResponse(buttons, correctResponseInString);
-        }
-    }, 1000);
+        // if countDown is over, set buttons disable state and display correctResponse   
+        if (roundCountDown === 0) {
+            clearInterval(timer);
+            // set disabled on buttons to avoid clicking it again
+            disableButtons(buttons);
+            showCorrectResponse(buttons, correctResponseInString);
 
+            // waiting time before next round
+            setTimeout(() => {
+                currentRound++;
+                runRound(); 
+            }, waitBetweenRound * 1000);
+            }
+        }, 1000);
+
+    } else {
+        alert("Partie Terminée");
+    }
+}
 
 
 
@@ -173,7 +191,7 @@ function continueExecution() {
     }
 
 
-    function addUserResponseColor(correctResponseInString) {
+    function addUserResponseColor(correctResponseInString, beginingOfRound) {
         const buttons = document.querySelectorAll(".js-button-responses");
         const extractResponses = document.querySelector(".list");
         const userChoice = [];
@@ -233,7 +251,7 @@ function continueExecution() {
      */
     function updateProgressBarValue (barWidth) {
         barWidth = barWidth - 10;
-        console.log("Dans la fonction : " + barWidth);
+        console.log("UpdateProgress bar fonction : " + barWidth);
         return barWidth
         // progressBarValue.style.width = `${barWidth}%`;
     }
