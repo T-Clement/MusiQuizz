@@ -22,9 +22,10 @@
                     </div>
                     <p class="player-progress-timer"><span id="timer">10</span>"</p>
                 </div>
-                <!-- <audio id="musicplayer">
-                    <source src="https://cdns-preview-e.dzcdn.net/stream/c-e77d23e0c8ed7567a507a6d1b6a9ca1b-11.mp3" />
-                </audio> -->
+                <audio id="musicplayer" class="js-musicplayer">
+                    <!-- <source src="https://cdns-preview-e.dzcdn.net/stream/c-e77d23e0c8ed7567a507a6d1b6a9ca1b-11.mp3" /> -->
+                    <source src="" />
+                </audio>
                   
 
                 <p class="player-score"><span id="score">0</span><span>pt</span></p>

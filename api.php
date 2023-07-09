@@ -120,6 +120,7 @@ echo json_encode([
     "result" => $isOk,
     "datas" => $JSON
 ]);
+exit;
 
 
 

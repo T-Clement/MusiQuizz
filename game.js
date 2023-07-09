@@ -1,6 +1,7 @@
 let playlistDATA; 
 let partyScore = 0;
-
+const musicPlayer = document.querySelector(".js-musicplayer");
+console.log(musicPlayer);
 //get the room id value in url
 url = new URL(window.location.href);
 const roomId = url.searchParams.get("room");
@@ -77,6 +78,12 @@ function continueExecution() {
             console.log(roundChoices);
             // choose randomResponse 
             let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
+            
+            // put in audio src the preview link
+            musicPlayer.src = correctResponse.preview;
+            musicPlayer.play();
+
+            console.log(correctResponse.preview);
             console.log("La réponse correcte est : " + correctResponse.artist + " - " + correctResponse.track);
             // put response in string to compare it
             let correctResponseInString = correctResponse.artist + " - " + correctResponse.track;

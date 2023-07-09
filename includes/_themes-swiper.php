@@ -4,7 +4,7 @@ $query = $dbCo->prepare("SELECT id_theme, name_theme FROM theme;");
 $query->execute();
 $themes = $query->fetchAll();
 
-var_dump($themes);
+// var_dump($themes);
 ?>
 
 

@@ -71,7 +71,7 @@
 
 
 
-            var_dump($selectedTheme);
+            // var_dump($selectedTheme);
             echo "<h2>" . $selectedTheme[0]["name_theme"] . "</h2>";
             foreach ($selectedTheme as $index => $room) {
                 $numberRoom = $index +1;
