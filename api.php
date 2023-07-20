@@ -43,39 +43,7 @@ try {
     // see why exception never trigger
 }
 
-// // check if call to API is made
-// if(isset($playlistJSON["tracks"])) {
-//     $playlistTitle = $dataRoom["name_room"];
-//     $JSON ["playlistName"] = $playlistTitle;
-//     $listOfTracks = $playlistJSON["tracks"]["data"];
 
-//     // check if playlist is > 40
-//     $listOfTracksWithPreview = checkIfTrackHasPreview($listOfTracks);
-//     if(count($listOfTracksWithPreview) >= 40) {
-//         // set $isOk to true because whith this datas we can play
-//         $isOk = true;
-//         foreach($listOfTracksWithPreview as $track) {
-//             $tracks [] = [
-//                 "artist" =>  $track["artist"]["name"],
-//                 "track" => $track['title_short'],
-//                 "preview" => $track["preview"]
-//             ];
-//         }
-//     } else {
-//         echo json_encode([
-//             'result' => $isOk,
-//             'msg' => "Pas assez de tracks dans cette playlist",
-//             'playlistLength' => count($listOfTracksWithPreview)
-//             ]);
-//         exit;
-//     } 
-// } else {
-//     echo json_encode([
-//         'result' => $isOk,
-//         'msg' => "Pas de playlist à cet ID"
-//         ]);
-//     exit;
-// }
 
 
 

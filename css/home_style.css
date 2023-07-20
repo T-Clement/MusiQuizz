@@ -86,6 +86,8 @@ body {
     .container {
         max-width: 480px;
         outline: 2px solid yellow;
+        overflow: hidden;
+
     }
 }
 /*for desktop screens, max midth for large screen*/
@@ -155,7 +157,7 @@ body {
 }
 
 
-/*   */
+/*  block section */
 
 
 .block__section {
@@ -266,7 +268,6 @@ body {
     align-items: center;
 }
 
-
 .tile__right {
     width: 50%;
     height: 100%;
@@ -288,7 +289,6 @@ body {
     font-size: .75rem; 
 }
 
-
 .tile__label {
     font-size: 1.2rem;
     font-family: "Lato"; /*à vérifier*/
@@ -296,8 +296,6 @@ body {
     text-align: left;
     padding-top: .5rem;
 }
-
-
 
 @media screen and (min-width: 729px) {
     .tile__left__img:hover {

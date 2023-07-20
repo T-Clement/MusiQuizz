@@ -58,8 +58,8 @@ async function callAPI(method, data) {
 function continueExecution() {
 
     // to use for the game loop and transitions
-    const rounds = 3; // nombre de rounds d'une partie
-    const roundDuration = 10;   // durée d'un round
+    const rounds = 5; // nombre de rounds d'une partie
+    const roundDuration = 15;   // durée d'un round
     const waitBetweenRound = 5; // temps d'attente entre les rounds
     // let arrayOfSongs = [];
     let currentRound = 1;
@@ -120,22 +120,25 @@ function continueExecution() {
             // waiting time before next round
             setTimeout(() => {
                 resetRound();
+                // console.log("test screen transition");
+                // document.querySelector('body').style.backgroundColor = "black";
                 currentRound++;
                 runRound(); 
             }, waitBetweenRound * 1000);
-            }
-        }, 1000);
+        }
+    }, 1000);
 
-    } else {
+} else {
         alert("Partie Terminée");
     }
 }
 
 
-    function resetRound() {
-        console.log("entrée dans le reset");
-        roundChoices = [];
-        console.log(roundChoices);
+function resetRound() {
+    console.log("entrée dans le reset");
+    roundChoices = [];
+    console.log(roundChoices);
+    // document.querySelector('body').style.backgroundColor = "black";
         const buttons = document.querySelectorAll(".js-button-responses");
         buttons.forEach(function (button) {
             button.style.backgroundColor = ""; // Réinitialiser la couleur du bouton
@@ -284,7 +287,7 @@ function continueExecution() {
      */
     function updateScore (partyScore, beginingOfRound, now) {
         console.log(partyScore + "avant l'addition")
-        let responseScore = Math.round(1000 - ((now - beginingOfRound) / 10));
+        let responseScore = Math.round(1500 - ((now - beginingOfRound) / roundDuration));
         partyScore += responseScore;
         console.log(partyScore + "après l'addition")
         return partyScore

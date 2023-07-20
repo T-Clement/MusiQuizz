@@ -1,0 +1,286 @@
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-BoldItalic.ttf") format("truetype");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Nunito";
+    src: url("/fonts/static/Nunito-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+:root {
+    /*colors*/
+    color: #FFFFFF;
+    font-size : 16px;
+    --background-color: #101728;
+    --blue: rgba(56, 62, 230, 0.58);
+    --dark-blue:rgba(31, 37, 120, 1); 
+    --magenta-pink: rgba(207, 62, 166, 1);
+    --yellow-amber: rgba(255, 190, 11, 1);
+
+}
+
+/* RESET CSS */
+h1, h2, h3, h4, h5, h6, ul, li, a, p {
+    list-style-type: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: "Nunito";
+    margin: 0;
+    
+    /*for elipses not overflowing*/
+    overflow-x: hidden;
+}
+
+
+/* Header */
+.header {
+    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.12) 100%);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0; 
+    z-index: 1000;
+    width: 100vw;
+}
+
+.header__wrapper {
+    padding: 0.75rem 0.5rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1420px;
+    
+    /* z-index: 1000; */
+}
+
+.header__brand {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+}
+.header__brand__img {
+    width: 60px;
+}
+
+.header__brand__title {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 1.4rem;
+}
+
+.banner {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.banner__img {
+    width: 50%;
+}
+
+.banner__txt {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.banner__title {
+    color: #FFF;
+    /* text-align: center; */
+    font-family: Lato;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.banner__title--gradient {
+    background: var(--gradient-txt, linear-gradient(90deg, #9340FF 0%, #FF4090 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.banner__sub {
+
+}
+
+
+
+/* switch section */
+
+/* .up-in-toggle {
+    padding: 5%;
+}
+
+.up-in-toggle input {
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      width: 1px;
+      border: 0;
+      overflow: hidden;
+}
+
+input:checked + label {
+    background: rgb(62, 193, 182);
+    background: linear-gradient(
+        0deg,
+        rgba(62, 193, 182, 1) 0%,
+        rgba(98, 227, 204, 1) 100%
+    );
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.09), 0 6px 6px rgba(0, 0, 0, 0.13);
+}
+
+label {
+    display: inline-block;
+    width: 60px;
+    background-color: rgb(73, 90, 111);
+    color: rgb(165, 173, 183);
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 0.8rem;
+    padding: 6px 6px;
+    float: left;
+    transition: all 0.1s ease-in-out;
+}
+label:hover {
+    cursor: pointer;
+}
+  
+  .up-in-toggle label:first-of-type {
+    border-radius: 15.5px 0 0 15.5px;
+  }
+  
+  .up-in-toggle label:last-of-type {
+    border-radius: 0 15.5px 15.5px 0;
+  } */
+
+
+/* .form-btn, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+} */
+
+/* .form-btn {
+    background-color: #262D3C;
+    padding: 0.6rem 1.2rem;
+} */
+
+/* .forms {
+    padding: 0;
+    margin: 0;
+} */
+
+
+.form-btn {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    background-color: #262D3C;
+    padding: 0.6rem 1.2rem;
+}
+
+
+.form-btn:first-of-type {
+    border-radius: 1rem 0 0 1rem;
+}
+.form-btn:last-of-type {
+    border-radius: 0 1rem 1rem 0;
+}
+
+.form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.form-active {
+    display: flex;
+}
+
+.form-field {
+    padding: .5rem;
+    border-radius: .75rem;
+    border-color: rgba(147, 64, 255, 1);
+    color: white;
+    background: var(--background-color);
+}
+
+
+.form-submit {
+    background-color: rgba(147, 64, 255, 1);
+    border: none;
+    padding: 0.5rem .75rem;
+    border-radius: 0.5rem;
+    color: white;
+    width: 80%;
+}
+
+.form.active {
+    display: flex;
+}
+
+.btn-clicked {
+    background-color: #9340FF;
+}
+

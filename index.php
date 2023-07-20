@@ -1,65 +1,110 @@
+<?php
+
+require 'includes/_database.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Musiquiz</title>
+    <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
-    <div class="container">
-        <header class="header">
-            <a href="home.php"><img class="header-cross" src="img/Cross.svg"></img></a>
-            <h1 class="header-playlist-name js-playlist-name">Nom de playlist</h1>
-            <div class="songs-progress"><span class="current-round">1</span>/<span class = "total-round">10</span></div>
-        </header>
-        <main class="">
-            <section id="player" class = "section-player"> 
-                <div class="player-progression">
-                    <div class="progress-bar">
-                        <div data-progress="10" class="progress-bar-value js-progress-value"></div>
+    <header class="header">
+        <div class="header__wrapper">
+            <a class="header__brand" href="home.php">
+                <img class='header__brand__img' src="img/logo-l.png" alt="">
+                <h1 class="header__brand__title">Musiquiz</h1>
+            </a>
+        </div>
+    </header>
+    <main>
+        <div class = "banner">
+            <img class="banner__img" src="img/albums-covers.png" alt="">
+            <div class="banner__txt">
+                <h2 class="banner__title">Le site parfait pour tester<br>sa <span class="banner__title--gradient">culture musicale</span></h2>
+                <p class="banner__sub">Venez jouer entres amis et comparez vos scores</p>
+            </div>
+
+            <!--switch toggle section-->
+
+            <!-- <div class="container">
+                <div class="columns">
+                    <div class="column is-12">
+                        <div class="up-in-toggle">
+                            <input type="radio" id="switch_left" name="switch_2" value="yes" checked/>
+                            <label for="switch_left">Inscription</label>
+                            <input type="radio" id="switch_right" name="switch_2" value="no"/>
+                            <label for="switch_right">Connexion</label>
+                        </div>
                     </div>
-                    <p class="player-progress-timer"><span id="timer">10</span>"</p>
                 </div>
-                <audio id="musicplayer" class="js-musicplayer">
-                    <!-- <source src="https://cdns-preview-e.dzcdn.net/stream/c-e77d23e0c8ed7567a507a6d1b6a9ca1b-11.mp3" /> -->
-                    <source src="" />
-                </audio>
-                  
+            </div> -->
 
-                <p class="player-score"><span id="score">0</span><span>pt</span></p>
+            <div class="form-triggers">
+                <button class="form-btn" type="button" data-btn="log-in">Connexion</button>
+                <button class="form-btn" type="button" data-btn="sign-in">Inscription</button>
+            </div>
 
-                <!-- <div class="progress-circle">
-                    <div class="progress-mask"></div>
-                </div> -->
-            </section>
-            <section>
-                <ul class="list">
-                    <li class="list-itm">
-                        <button data-meta="" class="list-btn js-button-responses">Artiste 1 - Chanson</button>
-                    </li>
-                    <li class="list-itm">
-                        <button class="list-btn js-button-responses">Artiste 2 - Chanson</button>
-                    </li>
-                    <li class="list-itm">
-                        <button class="list-btn js-button-responses">Artiste 3 - Chanson</button>
-                    </li>
-                    <li class="list-itm">
-                        <button class="list-btn js-button-responses">Artiste 4 - Chanson</button>
-                    </li>
-                </ul>
-            </section>
-        </main>
-    </div>
-    <!-- <script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>  -->
-    <!-- <script src="https://e-cdn-files.dzcdn.net/js/min/dz.js"></script> -->
-    <!-- <script src="script.js"></script> -->
-    <!-- <script src='test.js'></script> -->
-    <!-- <script src="game_data.js"></script> -->
-    
-    <!-- <script src="api-call.js"></script> -->
-    <script src="game.js"></script>
+            <div class="forms">
+                <!-- log in form -->
+                <form class="form js-form" action="" method="post" data-form="log-in">
+                    <h3>Connexion</h3>
+                    <input class="form-field" type="text" name="pseudo" placeholder="Pseudo" required>
+                    <input class="form-field js-password" type="password" name="password" placeholder="Mot de passe">
+                    <button type="button" class="js-password-visibility">Rendre visible</button>
+                    <!-- <input type="submit" value="Se connecter"> -->
+                    <input class="form-submit" type="submit" value="Se connecter">
+                </form>
 
+
+
+                <!-- sign in form -->
+                <form class="form js-form" action="" method="post" data-form="sign-in">
+                    <h3>S'inscrire</h3>
+                    <input class="form-field" type="text" name="pseudo" placeholder="Pseudo" required>
+                    <input class="form-field" type="text" name="mail" placeholder="Email">
+                    <input class="form-field js-password" type="password" name="password" placeholder="Mot de passe">
+                    <input class="form-field js-password" type="password" name="password_confirmation" placeholder="Confirmez votre mot de passe">
+
+                    <!-- <input type="submit" value="Se connecter"> -->
+                    <input class="form-submit" type="submit" value="Se connecter">
+                </form>
+
+                <!-- <form action="" method="get" class="form-example">
+                    <div class="form-example">
+                        <label for="name">Enter your name: </label>
+                        <input type="text" name="name" id="name" required>
+                    </div>
+                    <div class="form-example">
+                        <label for="email">Enter your email: </label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    <div class="form-example">
+                        <input type="submit" value="Subscribe!">
+                    </div>
+                </form> -->
+
+
+
+
+
+
+                <form class="form js-form-signup" action="" method></form>
+            </div>
+
+
+
+
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
 </body>
+
 </html>

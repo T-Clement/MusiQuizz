@@ -27,4 +27,4 @@ const swiper = new Swiper('.swiper', {
   });
 
 
-  swiper.navigation.update()
+  swiper.navigation.update();
