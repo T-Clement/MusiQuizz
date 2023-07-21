@@ -27,12 +27,12 @@ $popularRooms = $query->fetchAll();
 
 ?>
 
-<section id="popular-rooms" class="block__section"> 
-            <h2 class="block__section__title">Top 3
+<section id="popular-rooms" class="block"> 
+            <h2 class="block__title">Top 3
                 <div class="elipse"></div>
             </h2>
             
-            <ul class="block__section__list">
+            <ul class="block__list">
 
                 <!--add list items for each room in popularRooms-->
                 <!--retirer le section, mettre un truc qui a du sens en fonction de ce que c'est-->
@@ -41,22 +41,22 @@ $popularRooms = $query->fetchAll();
                 foreach ($popularRooms as $index => $room) {
                     $numberRoom = $index +1;
                     echo 
-                    "<li class='block__section__list__itm'>"
-                        ."<article class='block__section__list__itm--wrapper'>"
-                            ."<h4 class='block__section__list__itm__title'>$numberRoom</h4>"
+                    "<li class='block__item'>"
+                        ."<article class='block__content'>"
+                            ."<h4 class='block__item--title'>$numberRoom</h4>"
                             ."<div>"
-                            ."<div class='tile'>
-                                <a href='game.php?room=" . $room["id_room"] ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
-                                    <img class='tile__left__img js-img' src='img/player-icon.svg' alt=''>
-                                </a>
-                                <div class='tile__right'>
-                                    <img class='tile__right__img' src='img/cup.svg' alt=''>"
-                                    ."<div class='tile__right__content'>"
-                                        ."<p>".$room["pseudo_user"]."</p>"
-                                        ."<p>".$room["current_bestscore"]." pts"."</p>"
+                                ."<div class='tile'>
+                                    <a href='game.php?room=" . $room["id_room"] ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
+                                        <img class='tile__left__img js-img' src='img/player-icon.svg' alt=''>
+                                    </a>
+                                    <div class='tile__right'>
+                                        <img class='tile__right__img' src='img/cup.svg' alt=''>"
+                                        ."<div class='tile__right__content'>"
+                                            ."<p>".$room["pseudo_user"]."</p>"
+                                            ."<p>".$room["current_bestscore"]." pts"."</p>"
+                                        ."</div>"
                                     ."</div>"
                                 ."</div>"
-                            ."</div>"
                             ."<p class='tile__label'>".$room['name_room']."</p>"
                             ."</div>"
                         ."</article>"
@@ -109,27 +109,34 @@ $popularRooms = $query->fetchAll();
                     </article>
                     <p class="tile__label">Années 80</p>
                 </li> -->
+
                 
-                <!-- <li class="block__section__list__itm">
-                    <article class="block__section__list__itm--wrapper">
-                        <h4 class="block__section__list__itm__title">3</h4>
-                        <div>
-                            <div class="tile">
-                                <a href='#' class="tile__left">
-                                    <img class="tile__left__img" src="img/player-icon.svg" alt="">
-                                </a>
-                                <div class="tile__right">
-                                    <img class="tile__right__img" src="img/cup.svg" alt="">
-                                    <div class="tile__right__content">
-                                        <p>User_1425</p>
-                                        <p>10000pts</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="tile__label-dev">Années 80</p>
+<!--rewriting css classes-->
+<!-- <section id="popular-rooms" class="block">
+    <h2 class="block__title">
+        Popular Rooms<span class="block__subtitle">Top 3</span>
+    </h2>
+    <ul class="block__list">
+        <li class="block__item">
+            <article class="block__content">
+                <h4 class="block__item-title">1</h4>
+                <div class="tile">
+                    <a href='#' class="tile__link">
+                        <img class="tile__icon" src="img/player-icon.svg" alt="Player Icon">
+                    </a>
+                    <div class="tile__details">
+                        <img class="tile__icon" src="img/cup.svg" alt="Cup Icon">
+                        <div class="tile__content">
+                            <span class="tile__username">User_1425</span>
+                            <span class="tile__points">10000pts</span>
                         </div>
-                    </article>
-                </li> -->
+                    </div>
+                </div>
+            </article>
+            <p class="block__label">Années 80</p>
+        </li>
+    </ul>
+</section> -->
 
             </ul>
         </section>

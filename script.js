@@ -6,17 +6,18 @@ console.log(forms);
 
 formButtons.forEach(function(button) {
     button.addEventListener("click", function() {
+        console.log(this);
         const form =  document.querySelector("[data-form=" + this.dataset.btn + "]");
         button.classList.toggle("btn-clicked");
-        // form.classList.toggle("form-active");
+        form.classList.toggle("form-active");
         // fonction de détection
         // contain classList
         // if contain -> toggle
-        if(form.classList.contains(".form-active")) {
-            // form.classList.toggl
-        } else {
+        // if(form.classList.contains(".form-active")) {
+        //     // form.classList.toggl
+        // } else {
             
-        }
+        // }
        
     })
 });
