@@ -15,6 +15,7 @@
                 <ul class="header__nav__list">
                     <li class="header__nav__itm"><a href ="home.php?search=all">Toutes les rooms</a></li>
                     <li class="header__nav__itm"><a href="#">Mon Compte</a></li>
+                    <li class="header__nav__itm"><a href="index.php">Se déconnecter</a></li>
                 </ul>
             </nav>
         </div>

@@ -3,6 +3,9 @@ session_start();
 var_dump($_SESSION);
 if(isset($_SESSION['user'])) {
     var_dump($_SESSION['user']);
+} else {
+    session_destroy();
+    header("Location: index.php");
 }
 
 ?>

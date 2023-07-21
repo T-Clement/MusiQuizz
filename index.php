@@ -1,4 +1,10 @@
 <?php
+
+if(isset($_SESSION["user"])) {
+    session_destroy();
+}
+
+
 session_start();
 require 'includes/_database.php';
 // Inscription
