@@ -46,7 +46,7 @@ $popularRooms = $query->fetchAll();
                             ."<h4 class='block__item--title'>$numberRoom</h4>"
                             ."<div>"
                                 ."<div class='tile'>
-                                    <a href='game.php?room=" . $room["id_room"] ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
+                                    <a href='game.php?room=" . $room["id_room"] ."&token=" . $token . "' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
                                         <img class='tile__left__img js-img' src='img/player-icon.svg' alt=''>
                                     </a>
                                     <div class='tile__right'>

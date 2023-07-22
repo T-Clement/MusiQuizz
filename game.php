@@ -1,16 +1,25 @@
 <?php
 // require "includes/_functions.php";
 session_start();
+var_dump($_SESSION);
+// exit;
 if(empty($_SESSION['user'])) {
     header("Location: index.php");
+    exit;
 }
-
+if($_SESSION["token"] != $_REQUEST["token"]) {
+    header("Location: home.php?csrf-error");
+    exit;
+}
 
 ?>
 
 
-
-<!DOCTYPE html>
+<?php 
+$styleSheetCSS = "css/style.css";
+require "includes/_head.php";
+?>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -18,12 +27,13 @@ if(empty($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeu</title>
     <link rel="stylesheet" href="css/style.css">
-</head>
+</head> -->
 <body>
     <div class="container">
         <header class="header">
             <a href="home.php"><img class="header-cross" src="img/Cross.svg"></img></a>
-            <h1 class="header-playlist-name js-playlist-name">Nom de playlist</h1>
+            <h1 class="header-playlist-name js-playlist-name js-game-data" data-id-room="<?=$_GET["room"]?>" data-id-user="<?=$_SESSION["user"]["id_user"]?>"
+             data-token="<?=$_GET["token"]?>">Nom de playlist</h1>
             <div class="songs-progress"><span class="current-round">1</span>/<span class = "total-round">10</span></div>
         </header>
         <main class="">
@@ -49,7 +59,7 @@ if(empty($_SESSION['user'])) {
             <section>
                 <ul class="list">
                     <li class="list-itm">
-                        <button data-meta="" class="list-btn js-button-responses">Artiste 1 - Chanson</button>
+                        <button class="list-btn js-button-responses">Artiste 1 - Chanson</button>
                     </li>
                     <li class="list-itm">
                         <button class="list-btn js-button-responses">Artiste 2 - Chanson</button>

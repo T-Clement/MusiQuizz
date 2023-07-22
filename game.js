@@ -34,6 +34,24 @@ function getDATAS(idRoom) {
     return callAPI("POST", data);
 }
 
+function sendGameDataToDatabase(partyScore) {
+    // 2 requêtes ? avoir l'id de la partie ?
+    const data = {
+        action: "newScore",
+        idRoom: document.querySelector(".js-game-data").dataset.idRoom, // 
+        idUser: document.querySelector(".js-game-data").dataset.idUser,
+        token: document.querySelector(".js-game-data").dataset.token, // nécessaire ?
+        score: partyScore
+
+        // Faille XSS 
+        // HTTP REFERER dans api.php ?
+        // mettre l'id user quelque part dans la page en PHP -> input hidden ? data-user-id ? -> pas très sécurisé ?
+
+        // idem pour le token et l'idRoom      +    comparer le token avec celui en session ?   +  
+    };
+    return callAPI("PUT", data);
+}  
+
 async function callAPI(method, data) {
     try {
         const response = await fetch("api.php", {
@@ -101,37 +119,38 @@ function continueExecution() {
             const timerDOM = document.getElementById("timer");
             const buttons = document.querySelectorAll(".js-button-responses");
 
-    const timer = setInterval(() => {
-        roundCountDown--;
-        barWidth = updateProgressBarValue(barWidth);
-        progressBarValue.style.width = `${barWidth}%`;
-        // console.log("Log de la valeur de barwidth : "  + barWidth);
-        timerDOM.innerText = roundCountDown;
-        // console.log(roundCountDown);
+            const timer = setInterval(() => {
+                roundCountDown--;
+                barWidth = updateProgressBarValue(barWidth);
+                progressBarValue.style.width = `${barWidth}%`;
+                // console.log("Log de la valeur de barwidth : "  + barWidth);
+                timerDOM.innerText = roundCountDown;
+                // console.log(roundCountDown);
         
 
-        // if countDown is over, set buttons disable state and display correctResponse   
-        if (roundCountDown === 0) {
-            clearInterval(timer);
-            // set disabled on buttons to avoid clicking it again
-            disableButtons(buttons);
-            showCorrectResponse(buttons, correctResponseInString);
+                // if countDown is over, set buttons disable state and display correctResponse   
+                if (roundCountDown === 0) {
+                    clearInterval(timer);
+                    // set disabled on buttons to avoid clicking it again
+                    disableButtons(buttons);
+                    showCorrectResponse(buttons, correctResponseInString);
 
-            // waiting time before next round
-            setTimeout(() => {
-                resetRound();
-                // console.log("test screen transition");
-                // document.querySelector('body').style.backgroundColor = "black";
-                currentRound++;
-                runRound(); 
-            }, waitBetweenRound * 1000);
+                    // waiting time before next round
+                    setTimeout(() => {
+                        resetRound();
+                        // console.log("test screen transition");
+                        // document.querySelector('body').style.backgroundColor = "black";
+                        currentRound++;
+                        runRound(); 
+                    }, waitBetweenRound * 1000);
+                }
+            }, 1000);
+        } else {
+            alert("Partie Terminée");
+            sendGameDataToDatabase(partyScore);
+
         }
-    }, 1000);
-
-} else {
-        alert("Partie Terminée");
     }
-}
 
 
 function resetRound() {

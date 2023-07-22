@@ -1,10 +1,5 @@
 <?php
 
-if (isset($_SESSION["user"])) {
-    session_destroy();
-}
-
-
 session_start();
 require 'includes/_database.php';
 // Inscription
@@ -73,9 +68,8 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
     }
     // affichage dans le require des messages
     if (isset($success)) var_dump($success);
-    var_dump($errors);
+    // var_dump($errors);
 } else if (!empty($_POST) && $_POST["form-type"] === "log-in") {
-    // $password = "";
     //LOG-IN
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     var_dump($post);
@@ -97,44 +91,29 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
         $req->execute();
 
         $user = $req->fetch();
-        // var_dump($user["password_user"]);
-        // var_dump($password);
-        // var_dump(password_verify($password, $user["password_user"]));
+        
         // on vérifie les identifiants et on connecte le user si c'est bon
         if ($user && password_verify($password, $user["password_user"])) {
             // pouvoir récupérer les infos du user courant
             $_SESSION['user'] = $user;
             header('Location: home.php');
         }
-        // var_dump($user);
-        // var_dump($_SESSION["user"]);
+        
 
         array_push($errors, 'Mauvais identifiants.');
     }
-    var_dump($errors);
+    // var_dump($errors);
 }
 
 
-
-
-
-// si la session ne comporte pas de user, redirection vers login.php
-
-// if(empty($_SESSION['user'])) {
-//     header("Location: login.php");
-// }
+?>
+<?php
+$styleSheetCSS = "login.css";
+require "includes/_head.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musiquiz</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="login.css">
-</head>
+
 
 <body>
     <header class="header">
@@ -152,20 +131,6 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
                 <h2 class="banner__title">Le site parfait pour tester<br>sa <span class="banner__title--gradient">culture musicale</span></h2>
                 <p class="banner__sub">Venez jouer entres amis et comparez vos scores</p>
 
-                <!--switch toggle section-->
-
-                <!-- <div class="container">
-                <div class="columns">
-                    <div class="column is-12">
-                        <div class="up-in-toggle">
-                            <input type="radio" id="switch_left" name="switch_2" value="yes" checked/>
-                            <label for="switch_left">Inscription</label>
-                            <input type="radio" id="switch_right" name="switch_2" value="no"/>
-                            <label for="switch_right">Connexion</label>
-                        </div>
-                    </div>
-                </div>
-                </div> -->
 
                 <div class="form-triggers">
                     <button class="form-btn btn-active" type="button" data-btn="log-in">Connexion</button>
