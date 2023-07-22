@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5, h6, ul, li, a, p {
 
 body {
     background-color: var(--background-color);
-    font-family: "Nunito";
+    font-family: "Lato";
     margin: 0;
     
     /*for elipses not overflowing*/
@@ -105,9 +105,22 @@ body {
 }
 
 .header__brand__title {
+    font-family: "Nunito";
     text-transform: uppercase;
     font-weight: 900;
     font-size: 1.4rem;
+}
+
+.content {
+
+}
+
+@media screen and (min-width: 780px) {
+    .content {
+        /* width: min(80%, 1600px); */
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
 }
 
 .banner {
@@ -120,20 +133,33 @@ body {
     text-align: center;
 }
 
+@media screen and (min-width: 780px) {
+    .banner {
+        flex-direction: row-reverse;
+        outline: 3px solid greenyellow;
+
+    }
+}
+
 .banner__img {
     width: 50%;
 }
+@media screen and (min-width: 780px) {
+    .banner__img {
+        width: 480px;
+    }
+}
 
-.banner__txt {
+.banner__content {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1.75rem;
 }
 
 .banner__title {
     color: #FFF;
     /* text-align: center; */
-    font-family: Lato;
+    
     font-size: 28px;
     font-style: normal;
     font-weight: 400;
@@ -280,7 +306,7 @@ label:hover {
     display: flex;
 }
 
-.btn-clicked {
+.btn-active {
     background-color: #9340FF;
 }
 

@@ -7,18 +7,28 @@ console.log(forms);
 formButtons.forEach(function(button) {
     button.addEventListener("click", function() {
         console.log(this);
-        const form =  document.querySelector("[data-form=" + this.dataset.btn + "]");
-        button.classList.toggle("btn-clicked");
-        form.classList.toggle("form-active");
-        // fonction de détection
-        // contain classList
-        // if contain -> toggle
-        // if(form.classList.contains(".form-active")) {
-        //     // form.classList.toggl
-        // } else {
-            
-        // }
-       
+
+        // target the form linked to button clicked
+        const formToActivate =  document.querySelector("[data-form=" + this.dataset.btn + "]");
+
+        // if wanted form already has active class, do nothing
+        if(formToActivate.classList.contains("active")) return;
+
+        // remove .active / displaying to current active form
+        const activeForm = document.querySelector(".js-form.active");
+        if(activeForm) {
+            activeForm.classList.remove("active");
+        }
+
+        // active the form linked to btn clicked
+        formToActivate.classList.add("active");
+
+        // change btn active of btns
+        formButtons.forEach(function(btn) {
+            // toggle btn-active if btn === button, else remove the class to the others buttons
+            btn.classList.toggle("btn-active", btn === button);
+        })
+
     })
 });
 

@@ -1,9 +1,12 @@
 <?php
+// get user infos in session
 session_start();
 var_dump($_SESSION);
 if(isset($_SESSION['user'])) {
     var_dump($_SESSION['user']);
 } else {
+    // if no user in session, redirection to index.php the page to sign-in / log-in
+    // need to do HTTP REFERRER verif ?
     session_destroy();
     header("Location: index.php");
 }
