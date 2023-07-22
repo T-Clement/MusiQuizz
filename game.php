@@ -8,6 +8,9 @@ if(empty($_SESSION['user'])) {
     exit;
 }
 if($_SESSION["token"] != $_REQUEST["token"]) {
+    var_dump($_SESSION["token"]);
+    var_dump($_REQUEST["token"]);
+    exit;
     header("Location: home.php?csrf-error");
     exit;
 }

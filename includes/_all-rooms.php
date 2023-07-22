@@ -1,6 +1,8 @@
 <?php
 require "includes/_database.php";
 
+
+
 $query = $dbCo->prepare("
 SELECT r.id_room, r.name_room,u.id_user, u.pseudo_user, MAX(g.score_game) as current_bestscore, gp.games_played
 FROM games g
@@ -20,8 +22,8 @@ GROUP BY r.id_room
 ORDER BY games_played DESC");
 $query->execute();
 $rooms = $query->fetchAll();
-
-
+var_dump($token);
+var_dump($_SESSION["token"]);
 
 ?>
 
@@ -44,7 +46,7 @@ $rooms = $query->fetchAll();
                     . "<h4 class='block__section__list__itm__title'>$numberRoom</h4>"
                     . "<div>"
                         . "<div class='tile'>
-                            <a href='index.php?room=" . $room["id_room"] ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
+                            <a href='game.php?room=" . $room["id_room"] ."&token=" . $token ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
                                 <img class='tile__left__img js-img' src='img/player-icon.svg' alt=''>
                             </a>
                             <div class='tile__right'>

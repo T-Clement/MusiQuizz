@@ -1,3 +1,9 @@
+<?php
+
+
+
+?>
+
 <header class="header">
     <div class="header__wrapper">
         <a class="header__brand" href="home.php">
