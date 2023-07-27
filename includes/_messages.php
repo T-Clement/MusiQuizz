@@ -1,5 +1,5 @@
 <?php if(!empty($success)):?>
-    <div class="alert alert-success"><p><?=$success;?></p></div>
+    <div class=""><p><?=$success;?></p></div>
 <?php endif?>
 
 <?php if(!empty($errors)):?>

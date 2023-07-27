@@ -1,12 +1,15 @@
 let playlistDATA; 
 let partyScore = 0;
 const musicPlayer = document.querySelector(".js-musicplayer");
-console.log(musicPlayer);
+
 //get the room id value in url
 url = new URL(window.location.href);
 const roomId = url.searchParams.get("room");
-console.log(roomId);
 
+// get datas of room in JSON and store it in playlistDATA
+// structure : 
+// - result
+// - datas : Object {playlistName, tracks :{[artist, track, preview]}} -> each track is in an array in tracks
 if (url.searchParams.has("room")) {
     getDATAS(roomId).then((apiResponse) => {
         if (!apiResponse.result) {
@@ -16,12 +19,16 @@ if (url.searchParams.has("room")) {
 
         console.log(apiResponse);
         playlistDATA = apiResponse;
-        // localStorage.setItem("playlistDATAJSON", JSON.stringify(apiResponse));
 
         continueExecution();
     });
 }
 
+/**
+ * This fonction pass a JS object to async function callAPI to get data of the room
+ * @param {int} idRoom 
+ * @returns call to api.php to get datas fril
+ */
 function getDATAS(idRoom) {
     const data = {
         action: "select",
@@ -34,11 +41,16 @@ function getDATAS(idRoom) {
     return callAPI("POST", data);
 }
 
-function sendGameDataToDatabase(partyScore) {
-    // 2 requêtes ? avoir l'id de la partie ?
+/**
+ * 
+ * @param {int} partyScore - score of the party
+ * @param {int} roomId - id from the room in database
+ * @returns 
+ */
+function sendGameDataToDatabase(partyScore, roomId) {
     const data = {
-        action: "newScore",
-        idRoom: document.querySelector(".js-game-data").dataset.idRoom, // 
+        action: "insertScore",
+        idRoom: roomId,
         idUser: document.querySelector(".js-game-data").dataset.idUser,
         token: document.querySelector(".js-game-data").dataset.token, // nécessaire ?
         score: partyScore
@@ -52,6 +64,13 @@ function sendGameDataToDatabase(partyScore) {
     return callAPI("PUT", data);
 }  
 
+/**
+ * This async function takes an HTTP method and a JS Object who is transform in JSON to pass and
+ * communicate with api.php page
+ * @param {HTTP method} method - HTTP method to pass in api.php
+ * @param {Object} data - JS object with the datas
+ * @returns - return Promise, need to do a .then() after with response
+ */
 async function callAPI(method, data) {
     try {
         const response = await fetch("api.php", {
@@ -74,17 +93,23 @@ async function callAPI(method, data) {
 // ------------------------------------------------------------------------------------------------
 //---------------------main function ------------------------------------------------
 function continueExecution() {
-
+    // ------------------------------
+    // game parameters
     // to use for the game loop and transitions
-    const rounds = 5; // nombre de rounds d'une partie
-    const roundDuration = 15;   // durée d'un round
-    const waitBetweenRound = 5; // temps d'attente entre les rounds
+    const rounds = 5; // number of rounds of game
+    const roundDuration = 10;   // duration of round
+    const waitBetweenRound = 5; // waiting duration between rounds
+    // ------------------------------
+
     // let arrayOfSongs = [];
     let currentRound = 1;
 
 
     loadPlaylistTitleInPage();
 
+
+    // handle all the logic of the game
+    // exit function when last round is played
     runRound();
 
 
@@ -92,15 +117,13 @@ function continueExecution() {
 
         if(currentRound <= rounds) {
 
-            let roundChoices = pickSongsFromPlaylist(playlistDATA.datas);                        
+            let roundChoices = pickSongsFromJSON(playlistDATA.datas);                        
             console.log(roundChoices);
+
             // choose randomResponse 
             let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
             
-            // put in audio src the preview link
-            musicPlayer.src = correctResponse.preview;
-            musicPlayer.play();
-
+        
             console.log(correctResponse.preview);
             console.log("La réponse correcte est : " + correctResponse.artist + " - " + correctResponse.track);
             // put response in string to compare it
@@ -109,13 +132,22 @@ function continueExecution() {
 
             displayRoundInfo(currentRound, rounds);
             displayRoundChoices(roundChoices);
+
+            // put in audio src the preview link
+            musicPlayer.src = correctResponse.preview;
+            musicPlayer.play();
+
+            //
             let beginingOfRound = Date.now();
-            addUserResponseColor(correctResponseInString, beginingOfRound);
+            handleUserResponse(correctResponseInString, beginingOfRound);
 
             let roundCountDown = roundDuration;
+
+            // style of progressBar
             const progressBarValue = document.querySelector(".js-progress-value");
             let barWidth = 100;
             progressBarValue.style.width = `${barWidth}%`;
+
             const timerDOM = document.getElementById("timer");
             const buttons = document.querySelectorAll(".js-button-responses");
 
@@ -138,8 +170,6 @@ function continueExecution() {
                     // waiting time before next round
                     setTimeout(() => {
                         resetRound();
-                        // console.log("test screen transition");
-                        // document.querySelector('body').style.backgroundColor = "black";
                         currentRound++;
                         runRound(); 
                     }, waitBetweenRound * 1000);
@@ -147,17 +177,18 @@ function continueExecution() {
             }, 1000);
         } else {
             alert("Partie Terminée");
-            sendGameDataToDatabase(partyScore);
-
+            sendGameDataToDatabase(partyScore, roomId);
         }
     }
 
-
-function resetRound() {
-    console.log("entrée dans le reset");
-    roundChoices = [];
-    console.log(roundChoices);
-    // document.querySelector('body').style.backgroundColor = "black";
+    /**
+     * This function reset the choices array and the state of the buttons
+     */
+    function resetRound() {
+        console.log("entrée dans le reset");
+        roundChoices = [];
+        console.log(roundChoices);
+        // document.querySelector('body').style.backgroundColor = "black";
         const buttons = document.querySelectorAll(".js-button-responses");
         buttons.forEach(function (button) {
             button.style.backgroundColor = ""; // Réinitialiser la couleur du bouton
@@ -191,7 +222,7 @@ function resetRound() {
      * @param {object} object - full data of playlist
      * @return {array} - return array with 4 picked songs 
      */
-    function pickSongsFromPlaylist (object) {
+    function pickSongsFromJSON (object) {
         let arrayOfSongs = [];
         for (let i = 0; i < 4; i++) {
             // put random index in variable
@@ -209,19 +240,28 @@ function resetRound() {
         return arrayOfSongs;
     }
 
-
+    /**
+     * This function replace in DOM the playlist name
+     */
     function loadPlaylistTitleInPage () {
         document.querySelector(".js-playlist-name").innerText = playlistDATA.datas.playlistName;
     }
 
-
+    /**
+     * This function replace in DOM the current round number and the number of round of the game
+     * @param {int} currentRound 
+     * @param {int} rounds 
+     */
     function displayRoundInfo(currentRound, rounds) {
         const currentRoundDOM = document.querySelector(".current-round");
         const totalRoundDOM = document.querySelector(".total-round");
         currentRoundDOM.innerText = currentRound;
         totalRoundDOM.innerText = rounds;
     }
-
+    /**
+     * 
+     * @param {array} roundChoices 
+     */
     function displayRoundChoices(roundChoices) {
         const buttons = document.querySelectorAll(".js-button-responses");
         buttons.forEach(function(button, index) {
@@ -229,8 +269,13 @@ function resetRound() {
         });
     }
 
-
-    function addUserResponseColor(correctResponseInString, beginingOfRound) {
+    /**
+     * This function get the user response, call update score if correct response is choosen
+     * If wrong answer, buttons are disabled and correct answer is shown after and of timer
+     * @param {string} correctResponseInString - 
+     * @param {Date} beginingOfRound - Date.now() of the moment where round begin
+     */
+    function handleUserResponse(correctResponseInString, beginingOfRound) {
         const buttons = document.querySelectorAll(".js-button-responses");
         const extractResponses = document.querySelector(".list");
         const userChoice = [];
@@ -242,7 +287,6 @@ function resetRound() {
         // put button innerText in userChoice
         userChoice.push(event.target.innerText);
         console.log("Le choix de l'utilisateur est : " + userChoice);
-        
         
         // trigger color change only if button clicked
         if (event.target.tagName != "BUTTON") return;
@@ -266,12 +310,21 @@ function resetRound() {
         });
     }
 
+    /**
+     * This function disable all the buttons when a response is choosen by the user
+     * @param {*} buttons 
+     */
     function disableButtons(buttons) {
         buttons.forEach(function (button) {
             button.setAttribute("disabled", true);
         })
     }
 
+    /**
+     * This function show the correct response by adding green background to the button with the correct answer
+     * @param {*} buttons 
+     * @param {string} correctResponseInString 
+     */
     function showCorrectResponse(buttons, correctResponseInString) {
         buttons.forEach(function(button) {
             if(button.textContent == correctResponseInString) {

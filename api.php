@@ -2,19 +2,15 @@
 
 require 'includes/_database.php';
 
-
-
 header('Content-Type:application/json');
 
 
 // data send by async js function callAPI
 $data = json_decode(file_get_contents('php://input'), true);
 $isOk = false;
+
 if($data["action"] === "select") {
 
-    // à terme sera remplacé par l'id présent dans l'url qui sera en lien avec la base de donnée
-    // $idRoom = $_GET["room"];
-    
     // get the id send by the async function 
     $id =  $data["idRoom"];
 
@@ -104,6 +100,7 @@ function checkIfTrackHasPreview(array $array) :array{
 
 
 <?php
+// send party data to database
 session_start();
 if(!(array_key_exists('HTTP_REFERER', $_SERVER)) && str_contains($_SERVER['HTTP_REFERER'], $_ENV["URL"])) {
     echo json_encode([
@@ -119,17 +116,7 @@ if(!array_key_exists('token', $_SESSION) || !array_key_exists("token", $data) ||
     ]);
     exit;
 }
-// HTTP REFERER pour être sûr que ça vient de chez moi ?
-// plusieurs vérifications : être sûr que la requête vient bien de la page game.php, être sûr que le token correspond
-// est ce que la correspondance token passé et token en session permet de s'assurer qu'on a bien le bon user ?
-// comment faire passer les infos idUser et idRoom ? -> attributs data ?
-// comment s'assurer que quelqu'un ne triche pas sur le score ?
-// if ($_SERVER["REQUEST_METHOD"] == "POST") -> vérifier que la méthode est bien POST
-if($data["action"] === "newScore") {
-    // echo json_encode([
-    //     "result" => "j'ai bien reçu les infos",
-    //     "datas" => $data
-    // ]);
+if($data["action"] === "insertScore") {
     $query = $dbCo-> prepare("INSERT INTO games (score_game, date_score_game, id_user, id_room) VALUES (:score, NOW(), :idUser, :idRoom)");
     $isOk = $query->execute([
         "score" => $data["score"],
@@ -141,7 +128,6 @@ if($data["action"] === "newScore") {
         "result" => $isOk,
         "msg" => $isOk ? "Votre partie a été enregistrée, merci d'avoir joué" : "Une erreur a été rencontrée, votre partie n'est pas enregistrée"
     ]);
-    
     exit;
 }
 

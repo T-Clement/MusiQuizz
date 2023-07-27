@@ -1,19 +1,27 @@
 <?php
-// get user infos in session
 session_start();
-// var_dump($_SESSION);
-if(isset($_SESSION['user'])) {
-    $token = md5(uniqid(mt_rand(), true));
-    $_SESSION['token'] = $token;
-    
-    var_dump($_SESSION);
-} else {
-    // if no user in session, redirection to index.php the page to sign-in / log-in
-    // need to do HTTP REFERRER verif ?
-    session_destroy();
-    header("Location: index.php");
-}
+// check HTTP REFERER and USER in $_SESSION
+require 'vendor/autoload.php'; #load les dependances de vendor
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
+require 'includes/_functions.php';
+
+if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
+    session_destroy();
+    header("Location: index.php?error_referer");
+    exit; 
+} 
+?>
+
+<?php
+
+// get user infos in session
+// var_dump($_SESSION);
+
+// Create and put token in $_SESSION
+$token = md5(uniqid(mt_rand(), true));
+$_SESSION['token'] = $token;
 ?>
 
 

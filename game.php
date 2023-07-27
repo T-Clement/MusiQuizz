@@ -1,20 +1,13 @@
 <?php
-// require "includes/_functions.php";
 session_start();
-var_dump($_SESSION);
-// exit;
-if(empty($_SESSION['user'])) {
+
+if(empty($_SESSION['user']) || $_SESSION['user'] === "null") {
     header("Location: index.php");
     exit;
 }
-if($_SESSION["token"] != $_REQUEST["token"]) {
-    var_dump($_SESSION["token"]);
-    var_dump($_REQUEST["token"]);
-    exit;
-    header("Location: home.php?csrf-error");
-    exit;
-}
 
+$token = md5(uniqid(mt_rand(), true));
+$_SESSION['token'] = $token;
 ?>
 
 
@@ -22,21 +15,14 @@ if($_SESSION["token"] != $_REQUEST["token"]) {
 $styleSheetCSS = "css/style.css";
 require "includes/_head.php";
 ?>
-<!-- <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu</title>
-    <link rel="stylesheet" href="css/style.css">
-</head> -->
 <body>
     <div class="container">
         <header class="header">
             <a href="home.php"><img class="header-cross" src="img/Cross.svg"></img></a>
             <h1 class="header-playlist-name js-playlist-name js-game-data" data-id-room="<?=$_GET["room"]?>" data-id-user="<?=$_SESSION["user"]["id_user"]?>"
-             data-token="<?=$_GET["token"]?>">Nom de playlist</h1>
+            data-token=<?=$token?>>
+            Nom de playlist
+            </h1>
             <div class="songs-progress"><span class="current-round">1</span>/<span class = "total-round">10</span></div>
         </header>
         <main class="">
@@ -48,16 +34,11 @@ require "includes/_head.php";
                     <p class="player-progress-timer"><span id="timer">10</span>"</p>
                 </div>
                 <audio id="musicplayer" class="js-musicplayer">
-                    <!-- <source src="https://cdns-preview-e.dzcdn.net/stream/c-e77d23e0c8ed7567a507a6d1b6a9ca1b-11.mp3" /> -->
                     <source src="" />
                 </audio>
                   
-
                 <p class="player-score"><span id="score">0</span><span>pt</span></p>
 
-                <!-- <div class="progress-circle">
-                    <div class="progress-mask"></div>
-                </div> -->
             </section>
             <section>
                 <ul class="list">

@@ -59,7 +59,7 @@ require 'includes/_database.php';
                     ."<article class='block__section__list__itm--wrapper'>"
                         ."<div>"
                         ."<div class='tile'>
-                            <a href='index.php?room=" . $room["id_room"] ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
+                            <a href='game.php?room=" . $room["id_room"] ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
                                 <img class='tile__left__img js-img' src='img/player-icon.svg' alt=''>
                             </a>
                             <div class='tile__right'>
