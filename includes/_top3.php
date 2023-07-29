@@ -28,7 +28,7 @@ $popularRooms = $query->fetchAll();
 ?>
 
 <section id="popular-rooms" class="block"> 
-            <h2 class="block__title">Top 3
+            <h2 class="block__title">Populaires
                 <div class="elipse"></div>
             </h2>
             

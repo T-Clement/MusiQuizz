@@ -1,7 +1,8 @@
 let playlistDATA; 
 let partyScore = 0;
 const musicPlayer = document.querySelector(".js-musicplayer");
-
+const userId = document.querySelector(".js-game-data").dataset.idUser;
+const tokenDom = document.querySelector(".js-game-data").dataset.token;
 //get the room id value in url
 url = new URL(window.location.href);
 const roomId = url.searchParams.get("room");
@@ -47,19 +48,13 @@ function getDATAS(idRoom) {
  * @param {int} roomId - id from the room in database
  * @returns 
  */
-function sendGameDataToDatabase(partyScore, roomId) {
+function sendGameDataToDatabase(partyScore, roomId, userId) {
     const data = {
         action: "insertScore",
         idRoom: roomId,
-        idUser: document.querySelector(".js-game-data").dataset.idUser,
-        token: document.querySelector(".js-game-data").dataset.token, // nécessaire ?
+        idUser: userId,
+        token: tokenDom, 
         score: partyScore
-
-        // Faille XSS 
-        // HTTP REFERER dans api.php ?
-        // mettre l'id user quelque part dans la page en PHP -> input hidden ? data-user-id ? -> pas très sécurisé ?
-
-        // idem pour le token et l'idRoom      +    comparer le token avec celui en session ?   +  
     };
     return callAPI("PUT", data);
 }  
@@ -176,10 +171,35 @@ function continueExecution() {
                 }
             }, 1000);
         } else {
+            // return
             alert("Partie Terminée");
-            sendGameDataToDatabase(partyScore, roomId);
+            sendGameDataToDatabase(partyScore, roomId, userId);
+            // encore une promesse qui récupère tous les scores de tout le monde
+            // comparer le meilleur score de l'utilisateur dans cette partie avec celui qu'il a maintenant -> "nouveau meilleur score"
+            // ranking with only the best score of each user in te room
+
+
+            const partyRanking = displayRoomRanking(roomId, userId, partyScore, tokenDom);
+            console.log(partyRanking);
         }
     }
+
+    function displayRoomRanking(roomId, userId, partyScore, tokenDom) {
+        datas = {
+            action: "getPartyScore",
+            idRoom: roomId,
+            idUser: userId,
+            score: partyScore,
+            token: tokenDom
+        }
+        return callAPI("POST", datas)
+    }
+
+
+
+
+
+
 
     /**
      * This function reset the choices array and the state of the buttons
@@ -333,24 +353,16 @@ function continueExecution() {
         });
     }
 
-
-
-
-
-
-
     // --- ProgressBar function
     /**
      * add inline css to display progression of counter
      */
     function updateProgressBarValue (barWidth) {
         barWidth = barWidth - 10;
-        console.log("UpdateProgress bar fonction : " + barWidth);
+        // console.log("UpdateProgress bar fonction : " + barWidth);
         return barWidth
         // progressBarValue.style.width = `${barWidth}%`;
     }
-
-
 
     /**
      * function who update the score of the user if correct response choosen
@@ -360,9 +372,9 @@ function continueExecution() {
     function updateScore (partyScore, beginingOfRound, now) {
         console.log(partyScore + "avant l'addition")
         let responseScore = Math.round(1500 - ((now - beginingOfRound) / roundDuration));
+        console.log(responseScore);
         partyScore += responseScore;
         console.log(partyScore + "après l'addition")
         return partyScore
     }
-
 }

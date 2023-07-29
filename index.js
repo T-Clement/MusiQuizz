@@ -49,7 +49,7 @@ passwordVisibility.addEventListener("click", function() {
         passwordVisibility.textContent = "Cacher";
     } else {
         passwordInput[0].type = "password";
-        passwordVisibility.textContent = "Montrer";
+        passwordVisibility.textContent = "Rendre visible";
     }
 }); 
 

@@ -9,9 +9,9 @@ $themes = $query->fetchAll();
 
 
 <section id="music-style">
-    <h3 class="block__title">Genre Musical
-        <div class="elipse"></div>
-    </h3>
+    <h2 class="block__title">Genre Musical
+        <!-- <div class="elipse"></div> -->
+    </h2>
     <!-- Slider main container -->
         <div class="swiper">
             <!-- Additional required wrapper -->

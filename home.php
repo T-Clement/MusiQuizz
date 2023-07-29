@@ -20,8 +20,8 @@ if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
 // var_dump($_SESSION);
 
 // Create and put token in $_SESSION
-$token = md5(uniqid(mt_rand(), true));
-$_SESSION['token'] = $token;
+// $token = md5(uniqid(mt_rand(), true));
+// $_SESSION['token'] = $token;
 ?>
 
 

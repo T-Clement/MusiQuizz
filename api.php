@@ -5,14 +5,14 @@ require 'includes/_database.php';
 header('Content-Type:application/json');
 
 
-// data send by async js function callAPI
+// data send by async js function "callAPI"
 $data = json_decode(file_get_contents('php://input'), true);
 $isOk = false;
 
 if($data["action"] === "select") {
 
     // get the id send by the async function 
-    $id =  $data["idRoom"];
+    $id =  intval($data["idRoom"]);
 
     $query = $dbCo-> prepare("SELECT * FROM rooms WHERE id_room = :id;");
     $query->execute([
@@ -130,6 +130,37 @@ if($data["action"] === "insertScore") {
     ]);
     exit;
 }
+
+?>
+
+<?php
+// ()
+if($data["action"] === "getPartyScore") {
+    $query = $dbCo-> prepare("
+        SELECT id_room, id_user, pseudo_user, id_game, MAX(score_game) as score_max
+        FROM `games`
+            JOIN users USING (id_user)
+        WHERE id_room = :id_room
+        GROUP BY id_user
+        ORDER BY score_max DESC;
+    ");
+    $isOk = $query->execute([
+        "id_room" => $data["idRoom"]
+    ]);
+
+    $dataRoom = $query->fetchAll();
+
+
+    echo json_encode([
+        "result" => $isOk,
+        "ranking" =>  $dataRoom
+    ]);
+
+
+
+
+}
+
 
 
 

@@ -9,8 +9,8 @@ $_SESSION['token'] = $token;
 require 'includes/_database.php';
 // Inscription
 if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
-    var_dump("Formulaire sign-in");
-    var_dump($_POST);
+    // var_dump("Formulaire sign-in");
+    // var_dump($_POST);
     if(!(isset($_POST["token"]) || $_POST["token"] !== $_SESSION["token"])) {
         die("Jeton CSRF non valide");
     }
@@ -88,6 +88,7 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
 
 } else if (!empty($_POST) && $_POST["form-type"] === "log-in") {
     //LOG-IN
+    
     // $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     // var_dump($post);
     // extract($post);
