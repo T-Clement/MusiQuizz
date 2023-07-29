@@ -122,11 +122,11 @@ function continueExecution() {
             console.warn("Liste des chansons jouées");
             console.warn(songsPlayed);
         
-            console.log(correctResponse.preview);
-            console.log("La réponse correcte est : " + correctResponse.artist + " - " + correctResponse.track);
+            // console.log(correctResponse.preview);
+            // console.log("%cLa réponse correcte est : " + correctResponse.artist + " - " + correctResponse.track, "color:green");
             // put response in string to compare it
             let correctResponseInString = correctResponse.artist + " - " + correctResponse.track;
-            console.log(correctResponseInString);
+            console.log("%c" + correctResponseInString, "background-color:green; color:white; font-weight: 900");
 
             displayRoundInfo(currentRound, rounds);
             displayRoundChoices(roundChoices);
@@ -182,9 +182,18 @@ function continueExecution() {
             // comparer le meilleur score de l'utilisateur dans cette partie avec celui qu'il a maintenant -> "nouveau meilleur score"
             // ranking with only the best score of each user in te room
 
-
-            const partyRanking = displayRoomRanking(roomId, userId, partyScore, tokenDom);
-            console.log(partyRanking);
+            let rankingData = displayRoomRanking(roomId, userId, partyScore, tokenDom).then(apiResponse => {
+                if (!apiResponse.result) {
+                    console.error("Problème rencontré, le json renvoit false");
+                    return;
+                }
+                // console.log(apiResponse);
+                return apiResponse.ranking;
+            });
+            console.log(rankingData);
+            console.log(rankingData.value);
+            // const partyRanking = displayRoomRanking(roomId, userId, partyScore, tokenDom).ranking;
+            // console.log(partyRanking);
         }
     }
 
@@ -198,7 +207,6 @@ function continueExecution() {
         }
         return callAPI("POST", datas)
     }
-
 
 
 
