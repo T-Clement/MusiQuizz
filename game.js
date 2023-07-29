@@ -3,6 +3,7 @@ let partyScore = 0;
 const musicPlayer = document.querySelector(".js-musicplayer");
 const userId = document.querySelector(".js-game-data").dataset.idUser;
 const tokenDom = document.querySelector(".js-game-data").dataset.token;
+const songsPlayed = [];
 //get the room id value in url
 url = new URL(window.location.href);
 const roomId = url.searchParams.get("room");
@@ -117,7 +118,9 @@ function continueExecution() {
 
             // choose randomResponse 
             let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
-            
+            songsPlayed.push(correctResponse);
+            console.warn("Liste des chansons jouées");
+            console.warn(songsPlayed);
         
             console.log(correctResponse.preview);
             console.log("La réponse correcte est : " + correctResponse.artist + " - " + correctResponse.track);
@@ -173,6 +176,7 @@ function continueExecution() {
         } else {
             // return
             alert("Partie Terminée");
+            console.warn(songsPlayed);
             sendGameDataToDatabase(partyScore, roomId, userId);
             // encore une promesse qui récupère tous les scores de tout le monde
             // comparer le meilleur score de l'utilisateur dans cette partie avec celui qu'il a maintenant -> "nouveau meilleur score"
