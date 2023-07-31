@@ -325,42 +325,6 @@ body {
 
 
 
-
-
-/* Songlist */
-
-/* ranking list */
-
-/* .ranking {
-    height: 100%;
-    width: 80%;
-    background-color: #0C111E;
-    display: flex;
-    flex-direction: column;
-    margin: 0rem auto;
-    margin-top: 2rem;
-    border-radius: .75rem;
-
-}
-
-.ranking-list {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: .35rem;
-}
-
-.ranking-list-item {
-    width: 100%;
-    background-color: #404553;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8rem;
-    border-radius: .75rem;
-} */
-
 .party-songs {
     width: 80%;
     margin-top: 2rem;
@@ -404,8 +368,10 @@ body {
 
 
 
-
-/* linked to JS*/
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
+/* linked to JS, needs to be at the bottom of the file*/
 /* display buttons */
 .display-buttons {
     display: flex;

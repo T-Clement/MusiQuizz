@@ -12,7 +12,7 @@ require "includes/_head.php";
             </h1>
             <div class="songs-progress"><span class="current-round">1</span>/<span class = "total-round">10</span></div>
         </header>
-        <main class="end-party">
+        <main>
 
             <section class="scores-section">
                 <div class= "scores-wrapper">
@@ -80,6 +80,48 @@ require "includes/_head.php";
             </section>
             <section class="party-songs tab-display js-tab-display active" data-tab-content="songlist">
                 <ul class="song-list">
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
                     <li class="song-list-item">
                         <div class="song-data">
                             <span class="song-artist">Daft Punk</span>

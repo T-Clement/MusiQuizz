@@ -155,10 +155,29 @@ if($data["action"] === "getPartyScore") {
         "result" => $isOk,
         "ranking" =>  $dataRoom
     ]);
+}
 
 
+if($data["action"] === "getRanking") {
+    $query = $dbCo-> prepare("
+        SELECT id_room, id_user, pseudo_user, id_game, MAX(score_game) as score_max
+        FROM `games`
+            JOIN users USING (id_user)
+        WHERE id_room = :id_room
+        GROUP BY id_user
+        ORDER BY score_max DESC;
+    ");
+    $isOk = $query->execute([
+        "id_room" => $data["idRoom"]
+    ]);
+
+    $dataRoom = $query->fetchAll();
 
 
+    echo json_encode([
+        "result" => $isOk,
+        "ranking" =>  $dataRoom
+    ]);
 }
 
 

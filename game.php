@@ -25,7 +25,7 @@ require "includes/_head.php";
             </h1>
             <div class="songs-progress"><span class="current-round">1</span>/<span class = "total-round">10</span></div>
         </header>
-        <main class="">
+        <main class="main js-main">
             <section id="player" class = "section-player"> 
                 <div class="player-progression">
                     <div class="progress-bar">
@@ -40,7 +40,7 @@ require "includes/_head.php";
                 <p class="player-score"><span id="score">0</span><span>pt</span></p>
 
             </section>
-            <section>
+            <section class="js-list">
                 <ul class="list">
                     <li class="list-itm">
                         <button class="list-btn js-button-responses">Artiste 1 - Chanson</button>
@@ -56,10 +56,68 @@ require "includes/_head.php";
                     </li>
                 </ul>
             </section>
+
+
+
+            <template id="datas-player-game">
+                <section class="scores-section">
+                    <div class= "scores-wrapper">
+                        <p class="party-score">6400</p>
+                        <p class="party-bestscore">Ton meilleur score : 7000</p>
+                    </div>
+                    <div class="scores-buttons">
+                        <button class="score-button btn">Accueil</button>
+                        <button class="score-button btn">Rejouer</button>
+                    </div>
+                </section>
+
+                
+                <div class="display-buttons">
+                    <button class="display-button btn-active js-display-btn" data-btn="songlist">Détails</button>
+                <button class="display-button btn js-display-btn" data-btn="ranking">Classement</button>
+                </div>
+            </template>
+
+            <template id="datas-ranking">
+                <section class="ranking tab-display js-tab-display" data-tab-content="ranking">
+                    <ul class="ranking-list">
+                        <li class="ranking-list-item">
+                            <div class="rank">
+                                <span>1 |</span>
+                                <span>Clement</span>
+                            </div>
+                            <span>6000pts</span>
+                        </li>
+                    </ul>
+                </section>
+            </template>
+
+            <template id="datas-songlist">
+                <section class="party-songs tab-display js-tab-display active" data-tab-content="songlist">
+                    <ul class="song-list">
+                        <li class="song-list-item">
+                            <div class="song-data">
+                                <span class="song-artist">Daft Punk</span>
+                                <span class="song-track">One More Time</span>
+                            </div>
+                            <span class="song-points js-points-earned">350 pts</span>
+                        </li>
+                    </ul>
+                </section>
+            </template>
+            
+            
+            
+
+
+
+
+
         </main>
     </div>
     
     <script src="game.js"></script>
+    <script src="game-end.js"></script>
 
 </body>
 </html>
