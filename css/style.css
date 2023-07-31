@@ -43,7 +43,8 @@
     font-size : 16px;
     --background-color: #101728;
     --blue: rgba(56, 62, 230, 0.58);
-    --dark-blue:rgba(31, 37, 120, 1); 
+    --dark-blue:rgba(31, 37, 120, 1);
+    --pastel-blue: #272E96; 
     --magenta-pink: rgba(207, 62, 166, 1);
     --yellow-amber: rgba(255, 190, 11, 1);
 
@@ -228,4 +229,121 @@ body {
         background-color: rgba(255, 255, 255, 0.2);
         cursor: not-allowed;
     }
+}
+
+
+
+/* End of Game */
+
+
+.scores-section {
+/*     
+    display: flex;
+    flex-direction: column;
+    text-align: center; */
+    text-align: center;
+    margin: 2rem auto;
+    padding: 1.25rem 2rem;
+    background-color: #404553;
+    width: 70%;
+    border-radius: .75rem;
+    font-weight: bold;
+}
+
+.scores-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: .75rem;
+
+}
+
+.party-score {
+    font-size: 4rem;
+}
+
+.party-bestscore {
+    font-size: 1rem;
+}
+
+.scores-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+.score-button {
+    font-family: "Nunito";
+    color: white;
+    background-color: var(--pastel-blue);
+    text-transform: uppercase;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.625rem 1rem;
+}
+
+
+/* ranking list */
+
+.ranking {
+    /* height: 400px; */
+    height: 100%;
+    /* overflow-y: scroll; */
+    width: 80%;
+    background-color: #0C111E;
+    display: flex;
+    flex-direction: column;
+    margin: 0rem auto;
+    margin-top: 2rem;
+    border-radius: .75rem;
+
+}
+
+.ranking-list {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.ranking-list-item {
+    width: 100%;
+    background-color: #404553;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    border-radius: .75rem;
+}
+
+.rank {
+
+}
+
+/* display buttons */
+.display-buttons {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
+
+
+.display-button {
+    font-family: "Nunito";
+    color: white;
+    background-color: #404553;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.625rem 1rem;
+}
+
+.btn {
+    transition: background-color .2s linear;
+}
+
+.btn:hover {
+    background-color: rgba(31, 37, 120, 1);
 }
