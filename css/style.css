@@ -322,6 +322,8 @@ body {
 
 }
 
+
+/* linked to JS*/
 /* display buttons */
 .display-buttons {
     display: flex;
@@ -344,6 +346,27 @@ body {
     transition: background-color .2s linear;
 }
 
+/* .btn */
+
 .btn:hover {
     background-color: rgba(31, 37, 120, 1);
 }
+
+
+.btn-active {
+    background-color: darkblue;
+}
+
+
+.tab-display {
+    display: none;
+}
+
+.tab-display.active {
+    display: flex;
+}
+
+
+
+/* Songlist */
+

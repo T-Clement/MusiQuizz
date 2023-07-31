@@ -27,12 +27,12 @@ require "includes/_head.php";
 
 
             <div class="display-buttons">
-                <button class="display-button btn">Details</button>
-                <button class="display-button btn">Classement</button>
+                <button class="display-button btn-active js-display-btn" data-btn="songlist">Détails</button>
+                <button class="display-button btn js-display-btn" data-btn="ranking">Classement</button>
             </div>
 
 
-            <section class="ranking">
+            <section class="ranking tab-display js-tab-display" data-tab-content="ranking">
                 <ul class="ranking-list">
                     <li class="ranking-list-item">
                         <div class="rank">
@@ -78,12 +78,12 @@ require "includes/_head.php";
                     </li>
                 </ul>
             </section>
-            <section class="party-songs">
+            <section class="party-songs tab-display js-tab-display active" data-tab-content="songlist">
                 <ul class="song-list">
-                    <li class="song-list-item"></li>
-                    <li class="song-list-item"></li>
-                    <li class="song-list-item"></li>
-                    <li class="song-list-item"></li>
+                    <li class="song-list-item">Test</li>
+                    <li class="song-list-item">Test</li>
+                    <li class="song-list-item">Test</li>
+                    <li class="song-list-item">Test</li>
                     <li class="song-list-item"></li>
                     <li class="song-list-item"></li>
                     <li class="song-list-item"></li>
@@ -125,7 +125,7 @@ require "includes/_head.php";
         </main>
     </div>
     
-    <script src="game.js"></script>
+    <script src="game-end.js"></script>
 
 </body>
 </html>
