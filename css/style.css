@@ -323,6 +323,88 @@ body {
 }
 
 
+
+
+
+
+/* Songlist */
+
+/* ranking list */
+
+/* .ranking {
+    height: 100%;
+    width: 80%;
+    background-color: #0C111E;
+    display: flex;
+    flex-direction: column;
+    margin: 0rem auto;
+    margin-top: 2rem;
+    border-radius: .75rem;
+
+}
+
+.ranking-list {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.ranking-list-item {
+    width: 100%;
+    background-color: #404553;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    border-radius: .75rem;
+} */
+
+.party-songs {
+    width: 80%;
+    margin-top: 2rem;
+    background-color: #0C111E;
+    display: flex;
+    flex-direction: column;
+    margin: 0rem auto;
+    margin-top: 2rem;
+    border-radius: .75rem;
+}
+
+.song-list {
+    /* width: 100%; */
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+
+.song-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75rem 1rem;
+    width: 100%;
+    background-color: rgba(64, 69, 83, 1);
+    border-radius: .75rem;
+}
+
+
+.song-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-track {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+
+
+
 /* linked to JS*/
 /* display buttons */
 .display-buttons {
@@ -365,8 +447,3 @@ body {
 .tab-display.active {
     display: flex;
 }
-
-
-
-/* Songlist */
-

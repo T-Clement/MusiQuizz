@@ -80,15 +80,35 @@ require "includes/_head.php";
             </section>
             <section class="party-songs tab-display js-tab-display active" data-tab-content="songlist">
                 <ul class="song-list">
-                    <li class="song-list-item">Test</li>
-                    <li class="song-list-item">Test</li>
-                    <li class="song-list-item">Test</li>
-                    <li class="song-list-item">Test</li>
-                    <li class="song-list-item"></li>
-                    <li class="song-list-item"></li>
-                    <li class="song-list-item"></li>
-                    <li class="song-list-item"></li>
-                    <li class="song-list-item"></li>
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
+                    <li class="song-list-item">
+                        <div class="song-data">
+                            <span class="song-artist">Daft Punk</span>
+                            <span class="song-track">One More Time</span>
+                        </div>
+                        <span class="song-points js-points-earned">350 pts</span>
+                    </li>
+                    
                 </ul>
             </section>
 
