@@ -73,7 +73,7 @@ require "includes/_head.php";
 
                 
                 <div class="display-buttons">
-                    <button class="display-button btn-active js-display-btn" data-btn="songlist">Détails</button>
+                    <button class="display-button btn btn-active js-display-btn" data-btn="songlist">Détails</button>
                 <button class="display-button btn js-display-btn" data-btn="ranking">Classement</button>
                 </div>
             </template>
@@ -81,13 +81,14 @@ require "includes/_head.php";
             <template id="datas-ranking">
                 <section class="ranking tab-display js-tab-display" data-tab-content="ranking">
                     <ul class="ranking-list">
-                        <li class="ranking-list-item">
+                        <!-- model -->
+                        <!-- <li class="ranking-list-item">
                             <div class="rank">
                                 <span>1 |</span>
                                 <span>Clement</span>
                             </div>
                             <span>6000pts</span>
-                        </li>
+                        </li> -->
                     </ul>
                 </section>
             </template>
@@ -95,13 +96,13 @@ require "includes/_head.php";
             <template id="datas-songlist">
                 <section class="party-songs tab-display js-tab-display active" data-tab-content="songlist">
                     <ul class="song-list">
-                        <li class="song-list-item">
+                        <!-- <li class="song-list-item">
                             <div class="song-data">
                                 <span class="song-artist">Daft Punk</span>
                                 <span class="song-track">One More Time</span>
                             </div>
                             <span class="song-points js-points-earned">350 pts</span>
-                        </li>
+                        </li> -->
                     </ul>
                 </section>
             </template>
@@ -117,7 +118,7 @@ require "includes/_head.php";
     </div>
     
     <script src="game.js"></script>
-    <script src="game-end.js"></script>
+    <!-- <script src="game-end.js"></script> -->
 
 </body>
 </html>

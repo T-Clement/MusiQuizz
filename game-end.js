@@ -66,12 +66,6 @@ async function displayRanking() {
   }
 }
 
-// console.warn("getRanking");
-// const rankingFromDatabase = getRoomRanking(roomIdForRanking, tokenDom).then(apiResponse => {
-//     console.warn(apiResponse);
-// });
-// console.warn(rankingFromDatabase);
-
 function getRoomRanking(roomIdForRanking, tokenDom) {
   datas = {
     action: "getRanking",
