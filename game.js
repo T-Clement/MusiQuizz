@@ -3,6 +3,8 @@ let partyScore = 0;
 const musicPlayer = document.querySelector(".js-musicplayer");
 const userId = document.querySelector(".js-game-data").dataset.idUser;
 const tokenDom = document.querySelector(".js-game-data").dataset.token;
+// const partyData = [{artist: "Truc", track: "bidule", points: 900}];
+const partyData = [];
 const songsPlayed = [];
 //get the room id value in url
 url = new URL(window.location.href);
@@ -89,8 +91,8 @@ function continueExecution() {
   // ------------------------------
   // game parameters
   // to use for the game loop and transitions
-  const rounds = 1; // number of rounds of game
-  const roundDuration = 10; // duration of round
+  const rounds = 10; // number of rounds of game
+  const roundDuration = 5; // duration of round
   const waitBetweenRound = 5; // waiting duration between rounds
   // ------------------------------
 
@@ -109,17 +111,12 @@ function continueExecution() {
     //   console.log(roundChoices);
 
       // choose randomResponse
-      let correctResponse =
-        roundChoices[getRandomIndex(0, roundChoices.length)];
+      let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
       songsPlayed.push(correctResponse);
-      console.warn("Liste des chansons jouées");
-      console.warn(songsPlayed);
 
-      // console.log(correctResponse.preview);
-      // console.log("%cLa réponse correcte est : " + correctResponse.artist + " - " + correctResponse.track, "color:green");
+
       // put response in string to compare it
-      let correctResponseInString =
-        correctResponse.artist + " - " + correctResponse.track;
+      let correctResponseInString = correctResponse.artist + " - " + correctResponse.track;
       console.log("%c" + correctResponseInString, "background-color:green; color:white; font-weight: 900");
 
       displayRoundInfo(currentRound, rounds);
@@ -168,8 +165,8 @@ function continueExecution() {
       }, 1000);
     } else {
       // return
-      alert("Partie Terminée");
-      console.warn(songsPlayed);
+    //   alert("Partie Terminée");
+    //   console.warn(songsPlayed);
       sendGameDataToDatabase(partyScore, roomId, userId);
       // encore une promesse qui récupère tous les scores de tout le monde
       // comparer le meilleur score de l'utilisateur dans cette partie avec celui qu'il a maintenant -> "nouveau meilleur score"
@@ -180,7 +177,7 @@ function continueExecution() {
 
       const elementsToRemove = document.querySelectorAll(".section-player, .js-list");
       elementsToRemove.forEach((element) => {
-        console.log(element + "supprimé");
+        // console.log(element + "supprimé");
         element.remove();
       });
       //---------------------------------------
@@ -193,7 +190,7 @@ function continueExecution() {
       const containerDataPlayer = document.querySelector(".container");
 
       const bestScore = clone.querySelector(".party-bestscore");
-      console.log(bestScore);
+    //   console.log(bestScore);
       bestScore.textContent = "Ton meilleur score: " + "Faire l'appel en BDD";
 
       containerDataPlayer.appendChild(clone);
@@ -208,7 +205,7 @@ function continueExecution() {
       const rankingList = cloneRanking.querySelector(".ranking-list");
 
       async function displayRanking() {
-        console.warn("getRanking");
+        // console.warn("getRanking");
         try {
           const rankingFromDatabase = await getRoomRanking(roomId, tokenDom);
 
@@ -245,7 +242,6 @@ function continueExecution() {
       const cloneSongList = songListTemplate.content.cloneNode(true);
       const songList = cloneSongList.querySelector('.song-list');
       function displayListOfSongs(songsPlayed) {
-        console.log(songsPlayed);
         songsPlayed.forEach(song => {
             const li = document.createElement("li");
             li.classList.add("song-list-item")
@@ -268,20 +264,20 @@ function continueExecution() {
       // Fonction pour gérer le toggle des onglets
       function setupTabButtons() {
         const tabButtons = document.querySelectorAll(".js-display-btn");
-        console.log(tabButtons);
+        // console.log(tabButtons);
 
         const tabs = document.querySelectorAll(".js-tab-display");
-        console.log(tabs);
+        // console.log(tabs);
 
         tabButtons.forEach(function (tabButton) {
           tabButton.addEventListener("click", function () {
-            console.log(this);
+            // console.log(this);
 
             // target the form linked to button clicked
             const tabToActivate = document.querySelector(
               "[data-tab-content=" + this.dataset.btn + "]"
             );
-            console.log(tabToActivate);
+            // console.log(tabToActivate);
             // if (!tabToActivate) return; // Sortir de la fonction si l'élément n'existe pas
 
             // if wanted form already has active class, do nothing
@@ -427,7 +423,7 @@ function continueExecution() {
         event.target.style.backgroundColor = "green";
         let now = Date.now();
         // scorePath.textContent = updateScore(partyScore, beginingOfRound, now);
-        partyScore = updateScore(partyScore, beginingOfRound, now);
+        partyScore = updateScore(partyScore, beginingOfRound, now, roundDuration);
         scorePath.textContent = partyScore;
         // console.log("TEST vrai: " + document.querySelectorAll(".js-button-responses"));
       }
@@ -476,14 +472,28 @@ function continueExecution() {
    * @param {int} partyScore current score of the player
    * @returns score updated with the points earned in the round
    */
-  function updateScore(partyScore, beginingOfRound, now) {
-    // console.log(partyScore + "avant l'addition");
-    let responseScore = Math.round(
-      1500 - (now - beginingOfRound) / roundDuration
-    );
-    // console.log(responseScore);
+  function updateScore(partyScore, beginingOfRound, now, roundDuration) {
+    const maxResponseScore = 1500;
+    const timeTaken = now - beginingOfRound;
+    console.warn("Temps de réponse: " + timeTaken);
+    let responseScore = Math.floor(maxResponseScore - (timeTaken / roundDuration));
+    console.error(responseScore);
+    console.log("Temps de réponse : " + timeTaken/1000);
+    responseScore = Math.max(responseScore, 0);
     partyScore += responseScore;
+
+    //-----------------------------------------------
+    //-----------------------------------------------
+    //-----------------------------------------------
+    // let responseScore = Math.round(1500 - ((now - beginingOfRound) / roundDuration));
+    // console.log(partyScore);
+    // console.log(responseScore);
+    // partyScore += responseScore;
+    // console.log(partyScore);
     // console.log(partyScore + "après l'addition");
+
+
+
     return partyScore;
   }
 }

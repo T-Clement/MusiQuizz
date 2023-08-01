@@ -54,9 +54,11 @@ if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
             require 'includes/_top3.php';
             require 'includes/_themes-swiper.php';
         } else if (isset($_GET["search"]) && $_GET['search'] === 'all') {
+            echo '<a href="'. $_SERVER["HTTP_REFERER"] .'">revenir en arrière</a>';
             require 'includes/_all-rooms.php';
         } else if (isset($_GET['theme'])) {
             $searchTheme = $_GET['theme'];
+            echo '<a href="'. $_SERVER["HTTP_REFERER"] .'">revenir en arrière</a>';
             require 'includes/_selectedTheme.php';
 
         }

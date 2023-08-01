@@ -2,24 +2,27 @@
 
 require 'includes/_database.php';
 // EN FAIRE UNE VUE
-$query = $dbCo->prepare("
-SELECT r.id_room, r.name_room,u.id_user, u.pseudo_user, MAX(g.score_game) as current_bestscore, gp.games_played
-FROM games g
-JOIN users u ON g.id_user = u.id_user
-JOIN rooms r ON g.id_room = r.id_room
-JOIN (
-    SELECT id_room, COUNT(id_game) as games_played
-    FROM games
-    GROUP BY id_room
-) gp ON r.id_room = gp.id_room
-WHERE g.score_game = (
-    SELECT MAX(score_game)
-    FROM games
-    WHERE id_room = r.id_room
-)
-GROUP BY r.id_room
-ORDER BY games_played DESC
-LIMIT 3;");
+// $query = $dbCo->prepare("
+// SELECT r.id_room, r.name_room,u.id_user, u.pseudo_user, MAX(g.score_game) as current_bestscore, gp.games_played
+// FROM games g
+// JOIN users u ON g.id_user = u.id_user
+// JOIN rooms r ON g.id_room = r.id_room
+// JOIN (
+//     SELECT id_room, COUNT(id_game) as games_played
+//     FROM games
+//     GROUP BY id_room
+// ) gp ON r.id_room = gp.id_room
+// WHERE g.score_game = (
+//     SELECT MAX(score_game)
+//     FROM games
+//     WHERE id_room = r.id_room
+// )
+// GROUP BY r.id_room
+// ORDER BY games_played DESC
+// LIMIT 3;");
+
+$query = $dbCo->prepare("SELECT * FROM view_room_scores ORDER BY games_played DESC LIMIT 3");
+
 $query->execute();
 $popularRooms = $query->fetchAll();
 
