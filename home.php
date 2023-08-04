@@ -63,10 +63,13 @@ if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
 
         }
         ?>
+
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odio a expedita consequuntur quo temporibus recusandae omnis accusamus minus, laborum, neque voluptates eveniet reprehenderit id architecto repellat vero in! Fuga.</p>
         
     </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="swiper.js"></script>
-    <!-- <script src="home.js"></script> -->
+    <script src="home.js"></script>
 </body>
 </html>

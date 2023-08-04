@@ -18,10 +18,19 @@
         <li class="header__nav__itm"><a href="#">Mon Compte</a></li>
     </ul> -->
         <nav class="header__nav">
-            <ul class="header__nav__list">
-                <li class="header__nav__itm"><a href ="home.php?search=all">Toutes les rooms</a></li>
-                <li class="header__nav__itm"><a href="dashboard.php">Mon Compte</a></li>
-                <li class="header__nav__itm"><a href="actions/logout.php">Se déconnecter</a></li>
+            <ul class="header__nav__list js-nav">
+                <li class="header__nav__itm">
+                    <a href ="home.php"><img class="nav__itm__icon" src="img/home.svg"><span class="nav__itm__text">Home</span></a>
+                </li>
+                <li class="header__nav__itm">
+                    <a href ="home.php?search=all"><img class="nav__itm__icon" src="img/list.svg"><span class="nav__itm__text">Toutes les rooms</span></a>
+                </li>
+                <li class="header__nav__itm">
+                    <a href="dashboard.php"><img class="nav__itm__icon" src="img/account.svg"><span class="nav__itm__text">Mon Compte</span></a>
+                </li>
+                <li class="header__nav__itm">
+                    <a href="actions/logout.php"><img class="nav__itm__icon" src="img/logout.svg"><span class="nav__itm__text">Se déconnecter</span></a>
+                </li>
             </ul>
         </nav>
     </div>

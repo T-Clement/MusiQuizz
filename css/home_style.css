@@ -79,6 +79,7 @@ body {
     max-width: min(80%,300px);  
     /* outline: 1px solid red; */
     margin: 0 auto;
+    margin-bottom: 3rem;
     z-index: 10;
 }
 
@@ -141,19 +142,111 @@ body {
     font-size: 1.4rem;
 }
 
+
+/* navbar*/
+
+.header__nav {
+    /* position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%; */
+    /* position: relative; */
+}
+
+
+
+
 .header__nav__list {
-    display: flex;
-    gap: 1rem;
     font-size: 1rem;
+    display: flex;
+    
+    
 }
 
 .header__nav__itm {
+    display: flex;
+    align-items: center;
+}
+
+.nav__itm__text {
     display: none;
 }
 
-@media only screen and (min-width: 769px) {
+
+.nav__itm__icon {
+    font-size: 1rem;
+}
+
+@media screen and (min-width: 769px) {
+
+    .header__nav__list {
+        display: flex;
+        gap: 1rem;
+        font-size: 1rem;
+    
+    }
+
+
     .header__nav__itm {
         display: inherit; 
+    }
+
+
+    .nav__itm__text {
+        display: inherit;
+    }
+
+    .nav__itm__icon {
+        display: none;
+    }
+}
+
+
+/*  reverted media query for navbar  */
+@media screen and (max-width: 769px) {
+    
+    .header_wrapper {
+        position: relative;
+    }
+
+
+    .header__nav {
+        /* position: fixed;
+        bottom: 0; */
+        /* background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.12) 100%);
+        backdrop-filter: blur(10px); */
+        /* position: absolute;
+        bottom: 0; */
+        /* font-size: 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        z-index: 1001;
+        ; */
+        /* position: fixed; */
+        /* bottom: 0; */
+    }
+
+    .header__nav__list {
+        font-size: 1rem;
+        position: fixed;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        z-index: 1001;
+        /*83px = height of header*/
+        /* bottom: calc(-100vh + 83px); */
+        /* transition: bottom 0.3s ease-in-out; */
+
+        background: var(--background-color);
+        backdrop-filter: blur(10px);
+        padding: 1rem;
+        display: none;
+        
     }
 }
 
