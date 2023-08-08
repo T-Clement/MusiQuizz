@@ -67,8 +67,8 @@ require "includes/_head.php";
                         <p class="party-bestscore">Ton meilleur score : 7000</p>
                     </div>
                     <div class="scores-buttons">
-                        <button class="score-button btn">Accueil</button>
-                        <button class="score-button btn">Rejouer</button>
+                        <button class="score-button btn" onclick="window.location.href='home.php'">Accueil</button>
+                        <button class="score-button btn" onclick="window.location.href='<?=$_SERVER['REQUEST_URI']?>'">Rejouer</button>
                     </div>
                 </section>
 
