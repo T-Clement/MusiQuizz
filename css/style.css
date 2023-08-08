@@ -413,3 +413,50 @@ body {
 .tab-display.active {
     display: flex;
 }
+
+
+
+.main {
+    position: relative;
+}
+
+
+.modal-container {
+
+
+
+}
+
+
+.modal {
+    position: fixed;
+    top: 300px;
+    z-index: 1000;
+    /* font-size: 3rem; */
+    /* color: greenyellow; */
+    width: 100%;
+    background-color: #404553;
+    color: white;
+    /* transition: opacity 2s linear;
+    opacity: 0; */
+    animation: fadeOut 3s linear;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 2rem;
+    margin: 0 auto;
+    width: auto;
+    border-radius: .75rem;
+
+
+
+
+}
+
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+    }
+    0% {
+        opacity: 1;
+    }
+}

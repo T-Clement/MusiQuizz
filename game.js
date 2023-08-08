@@ -91,7 +91,7 @@ function continueExecution() {
   // ------------------------------
   // game parameters
   // to use for the game loop and transitions
-  const rounds = 10; // number of rounds of game
+  const rounds = 2; // number of rounds of game
   const roundDuration = 5; // duration of round
   const waitBetweenRound = 5; // waiting duration between rounds
   // ------------------------------
@@ -167,19 +167,47 @@ function continueExecution() {
       // return
     //   alert("Partie Terminée");
     //   console.warn(songsPlayed);
+    musicPlayer.pause();
       sendGameDataToDatabase(partyScore, roomId, userId);
       // encore une promesse qui récupère tous les scores de tout le monde
       // comparer le meilleur score de l'utilisateur dans cette partie avec celui qu'il a maintenant -> "nouveau meilleur score"
       // ranking with only the best score of each user in te room
-
-      
-      // Remove the current elements of the page to display the templates
-
       const elementsToRemove = document.querySelectorAll(".section-player, .js-list");
-      elementsToRemove.forEach((element) => {
+        elementsToRemove.forEach((element) => {
         // console.log(element + "supprimé");
         element.remove();
       });
+      const modal = document.querySelector(".js-modal");
+      const p = document.createElement("p");
+      p.classList.add("modal");
+      p.innerHTML = "Partie terminée, merci d'avoir joué !";
+      modal.appendChild(p);
+      
+      setTimeout(() => {
+        
+        modal.remove();
+        displayListOfSongs(songsPlayed);
+        displayRanking();
+        setupTabButtons();
+        
+      }, 3000);
+      
+      // *********************************************************************************
+      // ***************************** FONCTION PRINCIPALE *******************************
+      // *********************************************************************************
+
+
+
+
+
+      // Remove the current elements of the page to display the templates
+
+
+      // const elementsToRemove = document.querySelectorAll(".section-player, .js-list");
+      // elementsToRemove.forEach((element) => {
+      //   // console.log(element + "supprimé");
+      //   element.remove();
+      // });
       //---------------------------------------
 
       const templateGameDataPlayer = document.getElementById("datas-player-game");
@@ -257,11 +285,11 @@ function continueExecution() {
 
         })
       }
-      displayListOfSongs(songsPlayed);
-      displayRanking();
+      // displayListOfSongs(songsPlayed);
+      // displayRanking();
+      // setupTabButtons();
 
-
-      // Fonction pour gérer le toggle des onglets
+      // function to setup toggle of tabs
       function setupTabButtons() {
         const tabButtons = document.querySelectorAll(".js-display-btn");
         // console.log(tabButtons);
@@ -274,9 +302,7 @@ function continueExecution() {
             // console.log(this);
 
             // target the form linked to button clicked
-            const tabToActivate = document.querySelector(
-              "[data-tab-content=" + this.dataset.btn + "]"
-            );
+            const tabToActivate = document.querySelector("[data-tab-content=" + this.dataset.btn + "]");
             // console.log(tabToActivate);
             // if (!tabToActivate) return; // Sortir de la fonction si l'élément n'existe pas
 
@@ -301,7 +327,7 @@ function continueExecution() {
         });
       }
 
-      // Appeler la fonction pour initialiser les écouteurs d'événements après le clonage des templates
+      // call the function to initialize event listeners after template add
       setupTabButtons();
     }
   }
@@ -400,6 +426,30 @@ function continueExecution() {
    * @param {Date} beginingOfRound - Date.now() of the moment where round begin
    */
   function handleUserResponse(correctResponseInString, beginingOfRound) {
+
+
+    //---------------------------
+    //---------------------------
+    // document.addEventListener("keydown", handleKeyPress);
+
+    // /**
+    //  * 
+    //  * @param {*} event 
+    //  */
+    // function handleKeyPress(event) {
+    //   const key = event.key;
+    //   const button = document.querySelector(`[data-key="${key}]`);
+
+    //   // if key correspond to 1, 2, 3 or 4 and button exist, fire click on button
+    //   if(["1", "2", "3", "4"].includes(key) && button) {
+    //     // button.click();
+    //     handleResponse(button);
+    //   }
+    // }
+
+    //----------------------------
+    //----------------------------
+    
     const buttons = document.querySelectorAll(".js-button-responses");
     const extractResponses = document.querySelector(".list");
     const userChoice = [];
@@ -407,27 +457,25 @@ function continueExecution() {
 
     extractResponses.addEventListener("click", function (event) {
     //   console.log(event, event.target);
+    
+    // trigger color change only if button clicked
+    if (event.target.tagName != "BUTTON") return;
+
+
 
       // put button innerText in userChoice
       userChoice.push(event.target.innerText);
-    //   console.log("Le choix de l'utilisateur est : " + userChoice);
 
-      // trigger color change only if button clicked
-      if (event.target.tagName != "BUTTON") return;
 
       // change color of button
       if (event.target.innerText != correctResponseInString) {
         event.target.style.backgroundColor = "red";
-        // console.log("TEST faux: " + document.querySelectorAll(".js-button-responses"));
       } else {
         event.target.style.backgroundColor = "green";
         let now = Date.now();
-        // scorePath.textContent = updateScore(partyScore, beginingOfRound, now);
         partyScore = updateScore(partyScore, beginingOfRound, now, roundDuration);
         scorePath.textContent = partyScore;
-        // console.log("TEST vrai: " + document.querySelectorAll(".js-button-responses"));
       }
-    //   console.log(event.target.innerText);
       // disable buttons after click
       disableButtons(buttons);
     });
@@ -481,19 +529,6 @@ function continueExecution() {
     console.log("Temps de réponse : " + timeTaken/1000);
     responseScore = Math.max(responseScore, 0);
     partyScore += responseScore;
-
-    //-----------------------------------------------
-    //-----------------------------------------------
-    //-----------------------------------------------
-    // let responseScore = Math.round(1500 - ((now - beginingOfRound) / roundDuration));
-    // console.log(partyScore);
-    // console.log(responseScore);
-    // partyScore += responseScore;
-    // console.log(partyScore);
-    // console.log(partyScore + "après l'addition");
-
-
-
     return partyScore;
   }
 }

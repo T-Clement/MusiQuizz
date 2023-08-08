@@ -15,17 +15,18 @@ $_SESSION['token'] = $token;
 $styleSheetCSS = "css/style.css";
 require "includes/_head.php";
 ?>
-<body>
+
     <div class="container">
         <header class="header">
-            <a href="home.php"><img class="header-cross" src="img/Cross.svg"></img></a>
+            <a href="home.php"><img class="header-cross" src="img/Cross.svg"></a>
             <h1 class="header-playlist-name js-playlist-name js-game-data" data-id-room="<?=$_GET["room"]?>" data-id-user="<?=$_SESSION["user"]["id_user"]?>"
             data-token=<?=$token?>>
             Nom de playlist
-            </h1>
-            <div class="songs-progress"><span class="current-round">1</span>/<span class = "total-round">10</span></div>
-        </header>
-        <main class="main js-main">
+        </h1>
+        <div class="songs-progress"><span class="current-round">1</span>/<span class = "total-round">10</span></div>
+    </header>
+    <main class="main js-main">
+            <div id="modal" class="js-modal modal-container"></div>
             <section id="player" class = "section-player"> 
                 <div class="player-progression">
                     <div class="progress-bar">
@@ -43,16 +44,16 @@ require "includes/_head.php";
             <section class="js-list">
                 <ul class="list">
                     <li class="list-itm">
-                        <button class="list-btn js-button-responses">Artiste 1 - Chanson</button>
+                        <button class="list-btn js-button-responses" data-key="1">Artiste 1 - Chanson</button>
                     </li>
                     <li class="list-itm">
-                        <button class="list-btn js-button-responses">Artiste 2 - Chanson</button>
+                        <button class="list-btn js-button-responses" data-key="2">Artiste 2 - Chanson</button>
                     </li>
                     <li class="list-itm">
-                        <button class="list-btn js-button-responses">Artiste 3 - Chanson</button>
+                        <button class="list-btn js-button-responses" data-key="3">Artiste 3 - Chanson</button>
                     </li>
                     <li class="list-itm">
-                        <button class="list-btn js-button-responses">Artiste 4 - Chanson</button>
+                        <button class="list-btn js-button-responses" data-key="4">Artiste 4 - Chanson</button>
                     </li>
                 </ul>
             </section>
