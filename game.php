@@ -64,7 +64,7 @@ require "includes/_head.php";
                 <section class="scores-section">
                     <div class= "scores-wrapper">
                         <p class="party-score">6400</p>
-                        <p class="party-bestscore">Ton meilleur score : 7000</p>
+                        <p class="party-bestscore">Ton meilleur score : <span class="js-user-bestscore">7000</span></p>
                     </div>
                     <div class="scores-buttons">
                         <button class="score-button btn" onclick="window.location.href='home.php'">Accueil</button>

@@ -1,5 +1,6 @@
 let playlistDATA;
 let partyScore = 0;
+let userBestScore = 0;
 const musicPlayer = document.querySelector(".js-musicplayer");
 const userId = document.querySelector(".js-game-data").dataset.idUser;
 const tokenDom = document.querySelector(".js-game-data").dataset.token;
@@ -15,7 +16,7 @@ const roomId = url.searchParams.get("room");
 // - result
 // - datas : Object {playlistName, tracks :{[artist, track, preview]}} -> each track is in an array in tracks
 if (url.searchParams.has("room")) {
-  getDATAS(roomId).then((apiResponse) => {
+  getDATAS(roomId, userId).then((apiResponse) => {
     if (!apiResponse.result) {
       console.error("Problème rencontré, le json renvoit false");
       return;
@@ -23,20 +24,30 @@ if (url.searchParams.has("room")) {
 
     // console.log(apiResponse);
     playlistDATA = apiResponse;
+    userBestScore = apiResponse["bestscore"]["bestscore"];
 
     continueExecution();
   });
 }
 
+
+//getUserBestScore(roomId, userId).then((apiResponseScore) => {
+//   if(!apiResponseScore.result) {
+//     console.error("Problème rencontré, le json renvoit false");
+//     return;
+//   }
+// }); 
+
 /**
  * This fonction pass a JS object to async function callAPI to get data of the room
- * @param {int} idRoom
+ * @param {int} roomId
  * @returns call to api.php to get datas fril
  */
-function getDATAS(idRoom) {
+function getDATAS(roomId, userId) {
   const data = {
     action: "select",
-    idRoom: idRoom,
+    idRoom: roomId,
+    idUser: userId
   };
   // why GET is not working ?
   // alternative -> the infos in the api.php url such as for example :
@@ -59,8 +70,10 @@ function sendGameDataToDatabase(partyScore, roomId, userId) {
     token: tokenDom,
     score: partyScore,
   };
-  return callAPI("PUT", data);
+  return callAPI("POST", data);
 }
+
+
 
 /**
  * This async function takes an HTTP method and a JS Object who is transform in JSON to pass and
@@ -219,7 +232,7 @@ function continueExecution() {
 
       const bestScore = clone.querySelector(".party-bestscore");
     //   console.log(bestScore);
-      bestScore.textContent = "Ton meilleur score: " + "Faire l'appel en BDD";
+      bestScore.textContent = "Ton meilleur score: " + userBestScore;
 
       containerDataPlayer.appendChild(clone);
 

@@ -79,9 +79,20 @@ if($data["action"] === "select") {
 
     $JSON ["tracks"] = $tracks;
 
+    $query = $dbCo->prepare("SELECT MAX(score_game) as bestscore FROM games WHERE id_user=:id_user AND id_room=:id_room");
+    $isOk = $query->execute([
+        "id_user" => $data["idUser"],
+        "id_room" => $data["idRoom"]
+    ]);
+    $currentBestScore = $query->fetch();
+
+    $JSON["bestscore"] = $currentBestScore;
+
+
     echo json_encode([
         "result" => $isOk,
-        "datas" => $JSON
+        "datas" => $JSON,
+        "bestscore" => $currentBestScore
     ]);
     exit;
 }
@@ -100,6 +111,7 @@ function checkIfTrackHasPreview(array $array) :array{
 
 
 <?php
+
 // send party data to database
 session_start();
 if(!(array_key_exists('HTTP_REFERER', $_SERVER)) && str_contains($_SERVER['HTTP_REFERER'], $_ENV["URL"])) {
