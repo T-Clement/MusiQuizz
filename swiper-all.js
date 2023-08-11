@@ -1,12 +1,12 @@
 const swiper = new Swiper('.swiper', {
     // Optional parameters
     direction: 'horizontal',
-    loop: true,
+    loop: false,
   
     // Navigation arrows
     navigation: {
       nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      prevEl: '.swiper-button-prev'
     },
   
     breakpoints: {
@@ -27,4 +27,4 @@ const swiper = new Swiper('.swiper', {
   });
 
 
-  swiper.navigation.update();
+//   swiper.navigation.update();

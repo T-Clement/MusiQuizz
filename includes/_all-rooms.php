@@ -1,68 +1,94 @@
 <?php
 require "includes/_database.php";
 
-
-
-$query = $dbCo->prepare("
-SELECT r.id_room, r.name_room,u.id_user, u.pseudo_user, MAX(g.score_game) as current_bestscore, gp.games_played
-FROM games g
-JOIN users u ON g.id_user = u.id_user
-JOIN rooms r ON g.id_room = r.id_room
-JOIN (
-    SELECT id_room, COUNT(id_game) as games_played
-    FROM games
-    GROUP BY id_room
-) gp ON r.id_room = gp.id_room
-WHERE g.score_game = (
-    SELECT MAX(score_game)
-    FROM games
-    WHERE id_room = r.id_room
-)
-GROUP BY r.id_room
-ORDER BY games_played DESC");
+// get list of themes in database
+$query = $dbCo->prepare("SELECT id_theme, name_theme FROM theme");
 $query->execute();
-$rooms = $query->fetchAll();
+$themes = $query->fetchAll();
+// var_dump($themes);
+
+
+
+$arrayOfData = [];
+// get in array all the rooms linked to a theme
+foreach($themes as $theme) {
+    // var_dump($theme);
+    $arrayOfData[$theme["name_theme"]] = getRoomsDataPerThemes($dbCo, $theme["id_theme"]);
+}
+
+
+/**
+ * Get the rooms datas associated to a specific id_theme passed in parameter
+ */
+function getRoomsDataPerThemes(PDO $dbCo, int $idTheme) :array{
+
+    $query = $dbCo->prepare("
+    SELECT id_theme, name_theme, r.id_room, r.name_room,u.id_user, u.pseudo_user, MAX(g.score_game) as current_bestscore, description_room
+    FROM games g
+    JOIN users u ON g.id_user = u.id_user
+    JOIN rooms r ON g.id_room = r.id_room
+    JOIN theme USING (id_theme)
+    
+    WHERE g.score_game = (
+        SELECT MAX(score_game)
+        FROM games
+        WHERE id_room = r.id_room
+    )
+    GROUP BY r.id_room
+    HAVING id_theme = :id_theme");
+    $query->execute([
+        "id_theme" => $idTheme
+    ]);
+    return $query->fetchAll();
+    
+}
+
 // var_dump($token);
 // var_dump($_SESSION["token"]);
-
+// var_dump($rooms);
 ?>
 
 <section id="all-rooms" class="block__section">
-    <h2 class="block__section__title">Les rooms
+    <h2 class="block__section__title">Toutes les rooms
         <div class="elipse"></div>
     </h2>
 
-    <ul class="block__section__list">
 
-        <!--add list items for each room in popularRooms-->
-        <!--retirer le section, mettre un truc qui a du sens en fonction de ce que c'est-->
+        <!-- Loop to display swiper-slide's -->
+        <?php foreach ($arrayOfData as $theme => $rooms) : ?>
+            <!-- name of theme -->
+            <article class="themes-container">
 
-        <?php
-        foreach ($rooms as $index => $room) {
-            $numberRoom = $index + 1;
-            echo
-            "<li class='block__section__list__itm'>"
-                . "<article class='block__section__list__itm--wrapper'>"
-                    . "<h4 class='block__section__list__itm__title'>$numberRoom</h4>"
-                    . "<div>"
-                        . "<div class='tile'>
-                            <a href='game.php?room=" . $room["id_room"] ."' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
-                                <img class='tile__left__img js-img' src='img/player-icon.svg' alt=''>
-                            </a>
-                            <div class='tile__right'>
-                                <img class='tile__right__img' src='img/cup.svg' alt=''>"
-                                . "<div class='tile__right__content'>"
-                                    . "<p>" . $room["pseudo_user"] . "</p>"
-                                    . "<p>" . $room["current_bestscore"] . " pts" . "</p>"
-                                . "</div>
+                <h3 class="theme-title"><?=$theme?></h2>
+                
+                <!-- Swiper -->
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <?php foreach ($rooms as $room) :?>
+                        <div class="swiper-slide">
+                            <div class="tile-all-container">
+                                <div class="tile">
+                                    <a href='game.php?room=<?=$room["id_room"]?>' class='tile__left js-anchor' data-id='" . $room["id_room"] . "'>
+                                        <img class="tile__img" src="img/player-icon.svg" alt="">
+                                    </a>
+                                    <div class="tile__right">
+                                        <img src="img/cup.svg" alt="">
+                                        <div class="tile__right__content">
+                                            <p><?= $room["pseudo_user"]?></p>
+                                            <p><?= $room["current_bestscore"]?> pts</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="room-title"><?= $room["name_room"]?></p>
+                                <p class="room-description"><?= $room["description_room"]?></p>
+                            </div>
                         </div>
-                    </div>"
-                    . "<p class='tile__label'>" . $room['name_room'] . "</p>"
-                    . "</div>"
-                . "</article>"
-            . "</li>";
-        }
-        ?>
-
-    </ul>
+                        <?php endforeach ?>
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </article>
+        <?php endforeach?>
+        <!-- </ul> -->
 </section>

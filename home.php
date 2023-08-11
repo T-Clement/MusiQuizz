@@ -75,7 +75,13 @@ if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
         </footer>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="swiper.js"></script>
+    <?php
+    if(empty($_GET) || isset($_GET["theme"])) {
+        echo '<script src="swiper.js"></script>';
+    } else if ($_GET["search"] === "all") {
+        echo '<script src="swiper-all.js"></script>';
+    } 
+    ?>
     <script src="home.js"></script>
 </body>
 </html>

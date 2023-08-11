@@ -491,6 +491,40 @@ body {
 
 
 
+/* Swiper all page*/
+.themes-container {
+    margin: 1rem 0rem;
+}
+
+.theme-title {
+    margin-top: 1.75rem;
+    text-align: center;
+}
+
+.tile-all-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+    padding : 1rem 0;
+    /* text-align: center; */
+}
+
+
+.room-title {
+    font-weight: bold;
+}
+
+.room-description {
+    font-size: .8rem;
+}
+
+
+
+
+
+
 .elipse {
     position: absolute;
     width: 298px;
