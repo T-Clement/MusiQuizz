@@ -251,6 +251,16 @@ body {
 }
 
 
+/* main */
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+
+
+
 /*  block section */
 
 .block {
@@ -418,27 +428,34 @@ body {
     /* overflow-x: hidden; */
 }
 
+@media screen and (min-width: 729px) {
+    .swiper {
+        width: 100%;
+    }
+}
+
 .swiper-wrapper {
     /* overflow-y: visible; */
     /* overflow-x: hidden; */
 }
 
 .swiper-slide {
-    height: 100px;
+    height: 180px;
     text-align: center;
-    display: flex;
+    /* display: flex; */
     /* gap:  */
     /*justify-content: center;
     align-items: center; */
     background-color: var(--blue);
     border-radius: .75rem;
-    padding: 5rem;
+    /* padding: 5rem; */
     /* padding-top: 3rem; */
 }
 
 
 
 .swiper-theme-link {
+    /* height: 100% !important; */
     height: 100%;
     width: 100%;
     /* padding: 2rem; */
@@ -447,16 +464,15 @@ body {
     justify-content: center;
 }
 
-/*for dev puposes*/
-.swiper-theme-link:hover {
-    color: yellow;
-}
 
 @media screen and (min-width: 729px) {
     /* .swiper {
-
+        
     } */
-
+    
+    .swiper-theme-link:hover {
+        font-weight: bold;
+    }
 
     .swiper-slide:hover {
         /* transition: transform 0.3s ease-in; */
@@ -521,3 +537,14 @@ body {
     filter: blur(41.5px);
 
 } */
+
+.footer {
+    margin-top: 4rem;
+}
+
+.deezer-logo {
+    font-size: 3rem;
+    height: 1rem;
+    /* aspect-ratio: 1/1; */
+
+}

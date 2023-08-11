@@ -67,6 +67,12 @@ if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
 
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odio a expedita consequuntur quo temporibus recusandae omnis accusamus minus, laborum, neque voluptates eveniet reprehenderit id architecto repellat vero in! Fuga.</p>
         
+        <footer class="footer">
+            <p>Ce site un projet est réalisé dans le cadre d'un projet de formation.<br>Les données musicales proviennent de <a href="https://www.deezer.com">
+                <img class="deezer-logo" src="img/Deezer_Logo_RVB_Black.svg">
+            </a>
+            .</p>
+        </footer>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="swiper.js"></script>
