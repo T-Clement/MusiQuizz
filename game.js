@@ -232,9 +232,15 @@ function continueExecution() {
 
       const bestScore = clone.querySelector(".party-bestscore");
     //   console.log(bestScore);
-      if(userBestScore === null || userBestScore < partyScore) {
-        bestScore.textContent = "Nouveau meilleur score :" + userBestScore;
+      if(userBestScore === "null" || userBestScore < partyScore) {
+        // console.log("dans le if");
+        // console.log(userBestScore);
+        // console.log(partyScore);
+        bestScore.textContent = "Nouveau meilleur score : " + partyScore;
       } else {
+        // console.log("dans le else");
+        // console.log(userBestScore);
+        // console.log(partyScore);
         bestScore.textContent = "Ton meilleur score: " + userBestScore;
       }
 
