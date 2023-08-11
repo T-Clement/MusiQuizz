@@ -232,7 +232,11 @@ function continueExecution() {
 
       const bestScore = clone.querySelector(".party-bestscore");
     //   console.log(bestScore);
-      bestScore.textContent = "Ton meilleur score: " + userBestScore;
+      if(userBestScore === null || userBestScore < partyScore) {
+        bestScore.textContent = "Nouveau meilleur score :" + userBestScore;
+      } else {
+        bestScore.textContent = "Ton meilleur score: " + userBestScore;
+      }
 
       containerDataPlayer.appendChild(clone);
 

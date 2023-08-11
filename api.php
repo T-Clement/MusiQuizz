@@ -56,7 +56,8 @@ if($data["action"] === "select") {
     $JSON ["playlistName"] = $playlistTitle;
     $listOfTracks = $playlistJSON["tracks"]["data"];
     // check if playlist is > 40
-    $listOfTracksWithPreview = checkIfTrackHasPreview($listOfTracks);
+    $listOfTracksWithPreview = checkIfTrackIsReadable($listOfTracks);
+    // $listOfTracksWithPreview = checkIfTrackHasPreview($listOfTracks);
 
     if(!count($listOfTracksWithPreview) >= 40) {
         echo json_encode([
@@ -98,10 +99,19 @@ if($data["action"] === "select") {
 }
 
 
-function checkIfTrackHasPreview(array $array) :array{
+// function checkIfTrackHasPreview(array $array) :array{
+//     $newArray = [];
+//     foreach($array as $index => $track) {
+//         if(!empty($track["preview"])) {
+//             $newArray[$index] = $track;
+//         }
+//     }
+//     return $newArray;
+// };
+function checkIfTrackIsReadable(array $array) :array{
     $newArray = [];
     foreach($array as $index => $track) {
-        if(!empty($track["preview"])) {
+        if($track["readable"]) {
             $newArray[$index] = $track;
         }
     }
