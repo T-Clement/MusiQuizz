@@ -525,6 +525,18 @@ body {
 
 
 
+/*icons*/
+
+.back-icon {
+    color: white;
+    font-size: 12rem;
+}
+
+
+
+
+
+
 .elipse {
     position: absolute;
     width: 298px;

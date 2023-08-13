@@ -133,6 +133,7 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
             // pouvoir récupérer les infos du user courant
             $_SESSION['user'] = $user;
             header('Location: home.php');
+            exit;
         }
         
 
@@ -169,13 +170,13 @@ require "includes/_head.php";
 
 
                 <div class="form-triggers">
-                    <button class="form-btn btn-active" type="button" data-btn="log-in">Connexion</button>
-                    <button class="form-btn" type="button" data-btn="sign-in">Inscription</button>
+                    <button class="form-btn <?= empty($_POST["form-type"]) ? "btn-active" : ""?>" type="button" data-btn="log-in">Connexion</button>
+                    <button class="form-btn <?= (isset($_POST["form-type"]) && $_POST["form-type"] == "sign-in") ? "btn-active" : ""?>" type="button" data-btn="sign-in">Inscription</button>
                 </div>
                 <?php require 'includes/_messages.php'; ?>
                 <div class="forms">
                     <!-- log in form -->
-                    <form class="form js-form active" action="" method="post" data-form="log-in">
+                    <form class="form js-form <?= empty($_POST["form-type"]) ? "active" : ""?>" action="" method="post" data-form="log-in">
                         <h3>Connexion</h3>
                         <input type="hidden" name="form-type" value="log-in">
                         <input type="hidden" name="token" value=<?=$token?>>
@@ -190,7 +191,7 @@ require "includes/_head.php";
 
 
                     <!-- sign in form -->
-                    <form class="form js-form" action="" method="post" data-form="sign-in">
+                    <form class="form js-form <?= (isset($_POST["form-type"]) && $_POST["form-type"] == "sign-in") ? "active" : ""?>" action="" method="post" data-form="sign-in">
                         <h3>S'inscrire</h3>
                         <input type="hidden" name="form-type" value="sign-in">
                         <input type="hidden" name="token" value=<?=$token?>>
