@@ -16,40 +16,13 @@ foreach($themes as $theme) {
     $arrayOfData[$theme["name_theme"]] = getRoomsDataPerThemes($dbCo, $theme["id_theme"]);
 }
 
-
-/**
- * Get the rooms datas associated to a specific id_theme passed in parameter
- */
-function getRoomsDataPerThemes(PDO $dbCo, int $idTheme) :array{
-
-    $query = $dbCo->prepare("
-    SELECT id_theme, name_theme, r.id_room, r.name_room,u.id_user, u.pseudo_user, MAX(g.score_game) as current_bestscore, description_room
-    FROM ". $_ENV["GAMES"] ." g
-    JOIN ". $_ENV["USERS"] ." u ON g.id_user = u.id_user
-    JOIN ". $_ENV["ROOMS"] ." r ON g.id_room = r.id_room
-    JOIN ". $_ENV["THEMES"] ." USING (id_theme)
-    
-    WHERE g.score_game = (
-        SELECT MAX(score_game)
-        FROM ". $_ENV["GAMES"] ."
-        WHERE id_room = r.id_room
-    )
-    GROUP BY r.id_room
-    HAVING id_theme = :id_theme");
-    $query->execute([
-        "id_theme" => $idTheme
-    ]);
-    return $query->fetchAll();
-    
-}
-
 // var_dump($token);
 // var_dump($_SESSION["token"]);
 // var_dump($rooms);
 ?>
 
 <section id="all-rooms" class="block__section">
-    <h2 class="block__section__title">Toutes les rooms
+    <h2 class="block__title">Toutes les rooms
         <div class="elipse"></div>
     </h2>
 

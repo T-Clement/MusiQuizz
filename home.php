@@ -58,18 +58,17 @@ if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
             require 'includes/_all-rooms.php';
         } else if (isset($_GET['theme'])) {
             $searchTheme = $_GET['theme'];
-            echo '<a href="'. $_SERVER["HTTP_REFERER"] .'">revenir en arrière</a>';
+            echo '<a class="back-icon-link" href="'. $_SERVER["HTTP_REFERER"] .'"><img class="back-icon" src="img/back-icon.svg"/></a>';
             require 'includes/_selectedTheme.php';
 
         }
         ?>
 
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odio a expedita consequuntur quo temporibus recusandae omnis accusamus minus, laborum, neque voluptates eveniet reprehenderit id architecto repellat vero in! Fuga.</p>
         
         <footer class="footer">
             <p>Ce site un projet est réalisé dans le cadre d'un projet de formation.<br>Les données musicales proviennent de <a href="https://www.deezer.com">
-                <img class="deezer-logo" src="img/Deezer_Logo_RVB_Black.svg">
+                <img class="deezer-logo" src="img/Deezer_Logo_RVB_MonoWhite.svg">
             </a>
             .</p>
         </footer>
