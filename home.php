@@ -67,7 +67,7 @@ if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
 
         
         <footer class="footer">
-            <p>Ce site un projet est réalisé dans le cadre d'un projet de formation.<br>Les données musicales proviennent de <a href="https://www.deezer.com">
+            <p>Ce site est réalisé dans le cadre d'un projet de formation.<br>Les données musicales proviennent de <a href="https://www.deezer.com">
                 <img class="deezer-logo" src="img/Deezer_Logo_RVB_MonoWhite.svg">
             </a>
             .</p>

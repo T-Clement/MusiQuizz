@@ -110,7 +110,7 @@ function continueExecution() {
     partyData.push({});
   }
   // console.log(partyData);
-  const roundDuration = 5; // duration of round
+  const roundDuration = 10; // duration of round
   const waitBetweenRound = 5; // waiting duration between rounds
   // ------------------------------
 
