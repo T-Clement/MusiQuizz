@@ -2,7 +2,7 @@
 require "includes/_database.php";
 
 // get list of themes in database
-$query = $dbCo->prepare("SELECT id_theme, name_theme FROM theme");
+$query = $dbCo->prepare("SELECT id_theme, name_theme FROM ". $_ENV["THEMES"] ."");
 $query->execute();
 $themes = $query->fetchAll();
 // var_dump($themes);

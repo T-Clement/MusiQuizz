@@ -80,7 +80,7 @@ if($data["action"] === "select") {
 
     $JSON ["tracks"] = $tracks;
 
-    $query = $dbCo->prepare("SELECT MAX(score_game) as bestscore FROM games WHERE id_user=:id_user AND id_room=:id_room");
+    $query = $dbCo->prepare("SELECT MAX(score_game) as bestscore FROM ". $_ENV["GAMES"] ." WHERE id_user=:id_user AND id_room=:id_room");
     $isOk = $query->execute([
         "id_user" => $data["idUser"],
         "id_room" => $data["idRoom"]
