@@ -1,6 +1,6 @@
 <?php
 require 'includes/_database.php';
-$query = $dbCo->prepare("SELECT id_theme, name_theme FROM theme;");
+$query = $dbCo->prepare("SELECT id_theme, name_theme FROM ". $_ENV["THEMES"] .";");
 $query->execute();
 $themes = $query->fetchAll();
 

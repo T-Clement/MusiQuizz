@@ -14,7 +14,7 @@ if($data["action"] === "select") {
     // get the id send by the async function 
     $id =  intval($data["idRoom"]);
 
-    $query = $dbCo-> prepare("SELECT * FROM rooms WHERE id_room = :id;");
+    $query = $dbCo-> prepare("SELECT * FROM ". $_ENV["ROOMS"] ." WHERE id_room = :id;");
     $query->execute([
         "id" => $id
     ]);
@@ -139,7 +139,7 @@ if(!array_key_exists('token', $_SESSION) || !array_key_exists("token", $data) ||
     exit;
 }
 if($data["action"] === "insertScore") {
-    $query = $dbCo-> prepare("INSERT INTO games (score_game, date_score_game, id_user, id_room) VALUES (:score, NOW(), :idUser, :idRoom)");
+    $query = $dbCo-> prepare("INSERT INTO ". $_ENV["GAMES"] ." (score_game, date_score_game, id_user, id_room) VALUES (:score, NOW(), :idUser, :idRoom)");
     $isOk = $query->execute([
         "score" => $data["score"],
         "idUser" => $data["idUser"],
@@ -160,8 +160,8 @@ if($data["action"] === "insertScore") {
 if($data["action"] === "getPartyScore") {
     $query = $dbCo-> prepare("
         SELECT id_room, id_user, pseudo_user, id_game, MAX(score_game) as score_max
-        FROM `games`
-            JOIN users USING (id_user)
+        FROM ". $_ENV["GAMES"] ."
+            JOIN ". $_ENV["USERS"] ." USING (id_user)
         WHERE id_room = :id_room
         GROUP BY id_user
         ORDER BY score_max DESC;
@@ -183,8 +183,8 @@ if($data["action"] === "getPartyScore") {
 if($data["action"] === "getRanking") {
     $query = $dbCo-> prepare("
         SELECT id_room, id_user, pseudo_user, id_game, MAX(score_game) as score_max
-        FROM `games`
-            JOIN users USING (id_user)
+        FROM ". $_ENV["GAMES"] ."
+            JOIN ". $_ENV["USERS"] ." USING (id_user)
         WHERE id_room = :id_room
         GROUP BY id_user
         ORDER BY score_max DESC;

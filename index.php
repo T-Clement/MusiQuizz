@@ -48,7 +48,7 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
     // check in database if a user is already register with this pseudo an this mail
     if (empty($errors)) {
         // vérification name
-        $req = $dbCo->prepare('SELECT * FROM users WHERE pseudo_user = :pseudo');
+        $req = $dbCo->prepare('SELECT * FROM '. $_ENV["USERS"] .' WHERE pseudo_user = :pseudo');
         $req->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $req->execute();
 
@@ -58,7 +58,7 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
         }
 
         // mail verification
-        $req = $dbCo->prepare('SELECT * FROM users WHERE mail_user = :email');
+        $req = $dbCo->prepare('SELECT * FROM '. $_ENV["USERS"] .' WHERE mail_user = :email');
         $req->bindValue(':email', $email, PDO::PARAM_STR);
         $req->execute();
 
@@ -71,7 +71,7 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
         // if no errors, insertion of new user in database
         if (empty($errors)) {
 
-            $req = $dbCo->prepare("INSERT INTO users (pseudo_user, mail_user, password_user) VALUES (:pseudo, :email, :password)");
+            $req = $dbCo->prepare("INSERT INTO ". $_ENV["USERS"] ." (pseudo_user, mail_user, password_user) VALUES (:pseudo, :email, :password)");
             $req->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
             $req->bindValue(':email', $email, PDO::PARAM_STR);
             $req->bindValue(':password', password_hash($password, PASSWORD_ARGON2ID), PDO::PARAM_STR);
@@ -121,7 +121,7 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
 
     // get all infos of user with pseudo put in POST
     if (empty($errors)) {
-        $req = $dbCo->prepare("SELECT * FROM users WHERE pseudo_user = :pseudo");
+        $req = $dbCo->prepare("SELECT * FROM ". $_ENV["USERS"] ." WHERE pseudo_user = :pseudo");
         $req->bindValue(":pseudo", $pseudo, PDO::PARAM_STR);
         $req->execute();
 

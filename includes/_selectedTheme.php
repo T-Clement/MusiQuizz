@@ -4,7 +4,7 @@ require 'includes/_database.php';
             
             // $query = $dbCo->prepare("
             // SELECT * 
-            // FROM rooms 
+            // FROM ". $_ENV["ROOMS"] ." 
             //     JOIN theme USING (id_theme) 
             // WHERE id_theme = :id_theme");
             // $query->execute([
@@ -13,21 +13,21 @@ require 'includes/_database.php';
             // $selectedTheme = $query->fetchAll();
             // var_dump($selectedTheme);
 
-
+            
             $query = $dbCo->prepare("
             SELECT t.id_theme, t.name_theme, r.id_room, r.name_room,u.id_user, u.pseudo_user, MAX(g.score_game) as current_bestscore, gp.games_played
-            FROM games g
-                JOIN users u ON g.id_user = u.id_user
-                JOIN rooms r ON g.id_room = r.id_room
-                JOIN theme t ON  r.id_theme = t.id_theme
+            FROM ". $_ENV["GAMES"] ." g
+                JOIN ". $_ENV["USERS"] ." u ON g.id_user = u.id_user
+                JOIN ". $_ENV["ROOMS"] ." r ON g.id_room = r.id_room
+                JOIN ". $_ENV["THEMES"] ." t ON  r.id_theme = t.id_theme
                 JOIN (
                 SELECT id_room, COUNT(id_game) as games_played
-                FROM games
+                FROM ". $_ENV["GAMES"] ."
                 GROUP BY id_room
                 ) gp ON r.id_room = gp.id_room
             WHERE g.score_game = (
                 SELECT MAX(score_game)
-                FROM games
+                FROM ". $_ENV["GAMES"] ."
                 WHERE id_room = r.id_room
                 ) 
             GROUP BY r.id_room
