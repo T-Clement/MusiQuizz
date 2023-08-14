@@ -105,7 +105,7 @@ function continueExecution() {
   // ------------------------------
   // game parameters
   // to use for the game loop and transitions
-  const rounds = 2; // number of rounds of game
+  const rounds = 10; // number of rounds of game
   for(let i = 0; i < rounds; i++) {
     partyData.push({});
   }
@@ -126,12 +126,17 @@ function continueExecution() {
   function runRound() {
     if (currentRound <= rounds) {
       let roundChoices = pickSongsFromJSON(playlistDATA.datas);
+      
     //   console.log(roundChoices);
-
-      // choose randomResponse
-      let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
-      songsPlayed.push(correctResponse);
-      partyData[currentRound - 1]["song"] = correctResponse;
+    
+    
+    
+    // choose randomResponse
+    let correctResponse = roundChoices[getRandomIndex(0, roundChoices.length)];
+    // if(songsPlayed.includes(correctResponse)) runRound();
+    songsPlayed.push(correctResponse);
+    partyData[currentRound - 1]["song"] = correctResponse;
+    removePlayedSongFromPlaylist(correctResponse);
 
 
       // put response in string to compare it
@@ -421,6 +426,27 @@ function continueExecution() {
     }
     return arrayOfSongs;
   }
+
+
+  function removePlayedSongFromPlaylist(songToRemove) {
+    // console.log(songToRemove);
+    const index = playlistDATA.datas.tracks.findIndex(
+      (song) => song.artist === songToRemove.artist && song.track === songToRemove.track
+    );
+    // -----------------------------
+    // compare with original playlistDATA in network response
+    // -----------------------------
+      // console.log(index);
+      // console.log(playlistDATA);
+      // dont understand why splice re-index the array but it works
+      // it may do an auto re-indexation but don't find it in MDN
+      playlistDATA.datas.tracks.splice(index, 1);
+      // console.log(playlistDATA);
+    // if (index !== -1) {
+    // }
+  }
+
+
 
   /**
    * This function replace in DOM the playlist name
