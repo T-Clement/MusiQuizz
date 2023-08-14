@@ -24,14 +24,14 @@ function getRoomsDataPerThemes(PDO $dbCo, int $idTheme) :array{
 
     $query = $dbCo->prepare("
     SELECT id_theme, name_theme, r.id_room, r.name_room,u.id_user, u.pseudo_user, MAX(g.score_game) as current_bestscore, description_room
-    FROM games g
-    JOIN users u ON g.id_user = u.id_user
-    JOIN rooms r ON g.id_room = r.id_room
-    JOIN theme USING (id_theme)
+    FROM ". $_ENV["GAMES"] ." g
+    JOIN ". $_ENV["USERS"] ." u ON g.id_user = u.id_user
+    JOIN ". $_ENV["ROOMS"] ." r ON g.id_room = r.id_room
+    JOIN ". $_ENV["THEMES"] ." USING (id_theme)
     
     WHERE g.score_game = (
         SELECT MAX(score_game)
-        FROM games
+        FROM ". $_ENV["GAMES"] ."
         WHERE id_room = r.id_room
     )
     GROUP BY r.id_room
