@@ -129,6 +129,13 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
         
         // compare password hash of database and password in POST an connect user if OK
         // on vérifie les identifiants et on connecte le user si c'est bon
+
+        if ($user["pseudo_user"] == "adminmusiquiz" && password_verify($password, $user["password_user"])) {
+            $_SESSION["user"] = $user;
+            header('Location: admin.php');
+            exit;
+        }
+
         if ($user && password_verify($password, $user["password_user"])) {
             // pouvoir récupérer les infos du user courant
             $_SESSION['user'] = $user;
