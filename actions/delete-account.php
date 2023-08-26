@@ -38,6 +38,11 @@ header('Content-Type:application/json');
 
 $isOk = true;
 
+// DELETE ALL GAMES from GAMES TABLE
+$query = $dbCo-> prepare("DELETE FROM games WHERE id_user = (
+    SELECT MAX(id_user) FROM users
+);");
+
 
 echo json_encode([
     'result' => $isOk,

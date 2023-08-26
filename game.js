@@ -141,7 +141,7 @@ function continueExecution() {
 
       // put response in string to compare it
       let correctResponseInString = correctResponse.artist + " - " + correctResponse.track;
-      console.log("%c" + correctResponseInString, "background-color:green; color:white; font-weight: 900");
+      // console.log("%c" + correctResponseInString, "background-color:green; color:white; font-weight: 900");
 
       displayRoundInfo(currentRound, rounds);
       displayRoundChoices(roundChoices);

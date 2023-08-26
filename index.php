@@ -136,7 +136,7 @@ if (!empty($_POST) && $_POST['form-type'] === "sign-in") {
         //     exit;
         // }
 
-        if ($user && password_verify($password, $user["password_user"])) {
+        if ($user && $user["pseudo_user"] != "adminmusiquiz" && password_verify($password, $user["password_user"])) {
             // pouvoir récupérer les infos du user courant
             $_SESSION['user'] = $user;
             header('Location: home.php');
