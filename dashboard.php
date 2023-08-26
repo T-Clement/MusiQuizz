@@ -150,7 +150,7 @@ if(isset($_POST["form-action"])) {
             Vous souhaitez supprimer vos données ?
         </p>
         <form action="post" action="dashboard.php">
-    <input type="hidden" name="id-user" value=<?=$_SESSION["user"]["id_user"]?>>
+    <input class="js-delete-id-user" type="hidden" name="id-user" value=<?=$_SESSION["user"]["id_user"]?>>
             <button class="form-submit-btn js-delete-account">Supprimer mon compte</button>
         </form>
     </section>
@@ -170,6 +170,6 @@ if(isset($_POST["form-action"])) {
 ?>
 
 
-
+<script src="dashboard.js"></script>
 </body>
 </html>
