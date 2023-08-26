@@ -15,7 +15,13 @@ if (!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__) && $_SESSION['us
 <?php
 require 'includes/_database.php';
 
-$query = $dbCo->prepare("SELECT id_game, id_user, pseudo_user, id_room, name_room, score_game, date_score_game  FROM " . $_ENV["GAMES"] . " JOIN " . $_ENV["USERS"] . " USING (id_user) JOIN " . $_ENV["ROOMS"] . " USING (id_room) ORDER BY id_game DESC LIMIT 10");
+$query = $dbCo->prepare("
+SELECT id_game, id_user, pseudo_user, id_room, name_room, score_game, date_score_game  
+FROM " . $_ENV["GAMES"] . " 
+  JOIN " . $_ENV["USERS"] . " USING (id_user) 
+  JOIN " . $_ENV["ROOMS"] . " USING (id_room) 
+ORDER BY id_game DESC 
+LIMIT 10");
 $query->execute();
 $lastGames = $query->fetchAll();
 // var_dump($lastGames);
@@ -28,7 +34,7 @@ $lastGamesKeys = array_keys($lastGames[0]);
 $query = $dbCo->prepare("SELECT id_user, pseudo_user, mail_user FROM " . $_ENV["USERS"] . " ORDER BY id_user DESC LIMIT 5");
 $query->execute();
 $lastRegisters = $query->fetchAll();
-var_dump($lastRegisters);
+// var_dump($lastRegisters);
 
 $lastRegistersKeys = array_keys($lastRegisters[0]);
 
@@ -108,39 +114,39 @@ $lastRegistersKeys = array_keys($lastRegisters[0]);
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Général</h1>
+          <h1 class="h1">Général</h1>
           
         </div>
 
         <!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
 
-        <h2>Dernières parties</h2>
-        <div class="table-responsive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th>#</th>
-                <?php foreach($lastGamesKeys as $key) :?>
-                
-                <th><?=$key?></th>
-                <?php endforeach ?>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($lastGames as $index => $gameData) :?>
-              <tr>
-                <td>#</td>
-                  <?php
-                  foreach ($gameData as $data) {
-                    echo '<td>' . $data .  '</td>';
-                  }
-                  ?>
-              </tr>
-              <?php endforeach?>
+<h2>Dernières parties</h2>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <?php foreach($lastGamesKeys as $key) :?>
+        
+        <th><?=$key?></th>
+        <?php endforeach ?>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($lastGames as $index => $gameData) :?>
+      <tr>
+        <td>#</td>
+          <?php
+          foreach ($gameData as $data) {
+            echo '<td>' . $data .  '</td>';
+          }
+          ?>
+      </tr>
+      <?php endforeach?>
 
-            </tbody>
-          </table>
-        </div>
+    </tbody>
+  </table>
+</div>
 
 
         <h2>Derniers inscrits</h2>
