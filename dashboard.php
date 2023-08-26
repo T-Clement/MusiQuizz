@@ -12,7 +12,7 @@ if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
 
 
 // var_dump($_SESSION);
-extract($_SESSION["user"]);
+// extract($_SESSION["user"]);
 
 // $query = $dbCo->prepare("");
 // $query->execute([]);
@@ -23,17 +23,15 @@ require 'includes/_header.php';
 // if(!(empty($_POST))) var_dump($_POST);
 
 // delete user password from $_SESSION
-var_dump($_SESSION);
 
 
 
 if(isset($_POST["form-action"])) {
     $errors = [];
-    var_dump($_POST);
     if($_POST["form-action"] == "update") {
     
         // if values are the same as in $_SESSION, add to feedback in errors array
-        if($_POST["pseudo"] == $pseudo_user && $_POST["mail"] == $mail_user) {
+        if($_POST["pseudo"] == $_SESSION["user"]["pseudo_user"] && $_POST["mail"] == $_SESSION["user"]["mail_user"]) {
             array_push($errors, "Les informations que vous avez rentrés sont identiques à celles présentes précédemment.");
         }
     
@@ -63,28 +61,33 @@ if(isset($_POST["form-action"])) {
             array_push($errors, "Un utilisateur est déjà enregistré avec cet email");
         }
 
-
-        if(empty($errors)) {
+        // if(!(empty($_POST))) var_dump($_POST);
+        if(empty($errors) && isset($_POST) && $_POST["form-action"] == "update") {
             // update user infos in database
-            $query = $dbCo->prepare("UPDATE users SET pseudo_user = :pseudo, mail_user= :mail_user WHERE id_user = :id_user");
+            $query = $dbCo->prepare("UPDATE ". $_ENV["USERS"] ." SET pseudo_user = :pseudo, mail_user= :mail_user WHERE id_user = :id_user");
             $isOk = $query->execute([
                 "pseudo" => trim(htmlspecialchars($_POST["pseudo"])),
                 "mail_user"=> trim(htmlspecialchars($_POST["mail"])),
                 "id_user" => intval($_POST["id-user"])
             ]);
-            $upatedUser = $query->fetch();
+            
+            
             if ($isOk) {
+
+                // $req = $dbCo->prepare("SELECT * FROM ". $_ENV["USERS"] ." WHERE pseudo_user = :pseudo");
+                // $req->bindValue(":pseudo", $_POST["pseudo"], PDO::PARAM_STR);
+                $req = $dbCo->prepare("SELECT * FROM ". $_ENV["USERS"] ." WHERE id_user = :id");
+                $req->bindValue(":id", $_POST["id-user"], PDO::PARAM_INT);
+                $req->execute();
+        
+                $updatedUser = $req->fetch();
+                // var_dump($updatedUser);
                 $success = "Votre compte a bien été mis à jour.";
+                unset($_SESSION["user"]);
+                $_SESSION["user"] = $updatedUser;
+                
 
-
-                // need to update values in $_SESSION for user
-                // need to update values in $_SESSION for user
-                // need to update values in $_SESSION for user
-                // need to update values in $_SESSION for user
-                // need to update values in $_SESSION for user
-                // need to update values in $_SESSION for user
-                // need to update values in $_SESSION for user
-                // need to update values in $_SESSION for user
+                // need to fix the issue in index.php
                 
                 
             }
@@ -98,7 +101,8 @@ if(isset($_POST["form-action"])) {
 
 
 <main>
-    <h2>Compte du joueur : <?=$pseudo_user?></h2>
+    
+    <h2>Compte du joueur : <?=$_SESSION["user"]["pseudo_user"]?></h2>
 
     <!-- display feedback when same from infos are send in form -->
     <!--  -->
@@ -108,14 +112,14 @@ if(isset($_POST["form-action"])) {
     <section>
         <form class="form" action="dashboard.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="form-action" value="update">
-            <input type="hidden" name="id-user" value=<?=$id_user?>>
+            <input type="hidden" name="id-user" value=<?=$_SESSION["user"]["id_user"]?>>
             <div class="form-field">
                 <label class="form-label" for="pseudo">Pseudo de l'utilisateur</label>
-                <input class="form-input" type="text" name="pseudo" placeholder="Pseudo" value="<?=$pseudo_user ?? $_POST["pseudo"]?>">
+                <input class="form-input" type="text" name="pseudo" placeholder="Pseudo" value="<?=$_SESSION["user"]["pseudo_user"] ?? $_POST["pseudo"]?>">
             </div>
             <div class="form-field">
                 <label for="email">Email de l'utilisateur</label>
-                <input type="text" name="mail" placeholder="Email" value="<?=$mail_user ?? $_POST["mail"]?>">
+                <input type="text" name="mail" placeholder="Email" value="<?=$_SESSION["user"]["mail_user"] ?? $_POST["mail"]?>">
             </div>
             
             <button class="form-submit-btn" type="submit">Mettre à jour</button>
@@ -146,7 +150,7 @@ if(isset($_POST["form-action"])) {
             Vous souhaitez supprimer vos données ?
         </p>
         <form action="post" action="dashboard.php">
-    <input type="hidden" name="id-user" value=<?=$id_user?>>
+    <input type="hidden" name="id-user" value=<?=$_SESSION["user"]["id_user"]?>>
             <button class="form-submit-btn js-delete-account">Supprimer mon compte</button>
         </form>
     </section>
