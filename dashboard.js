@@ -6,17 +6,21 @@ deleteUserBtn.addEventListener("click", function (event) {
     event.preventDefault();
     console.log(deleteUserBtn);
     console.log(idUser);
+    if(!(confirm('Cette suppression est définitive et sans retour en arrière possible. Cliquez sur OK pour continuer'))) return;
 
     deleteUserData(idUser).then((apiResponse) => {
         if (!apiResponse.result) {
             console.error("Problème rencontré, le json renvoit false");
             return;
         }
+        // console.log(apiResponse.result);
+        // console.log(apiResponse.msg);
+        alert(apiResponse.msg);
 
-        console.log(apiResponse.result);
-        console.log(apiResponse.msg);
+        // use of replace to not allow going back to history, it's not possible 
+        //when clicking on navigator back button to going back to that page
+        window.location.replace("./index.php");
     });
-
 });
 
 function deleteUserData(userId) {
@@ -28,7 +32,6 @@ function deleteUserData(userId) {
     };
     return callAPI("POST", data);
   }
-
 
 
 async function callAPI(method, data) {

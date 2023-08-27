@@ -36,17 +36,43 @@ if(!(isset($_SESSION['user'])) && !isValidHTTPReferer(__DIR__)) {
 
 header('Content-Type:application/json');
 
+$data = json_decode(file_get_contents('php://input'), true);
 $isOk = true;
 
-// DELETE ALL GAMES from GAMES TABLE
-$query = $dbCo-> prepare("DELETE FROM games WHERE id_user = (
-    SELECT MAX(id_user) FROM users
-);");
 
+
+if(isset($data) && $data["action"] != "deleteUserDatas") return;
+
+// DELETE ALL GAMES from GAMES TABLE
+$query = $dbCo->prepare("DELETE FROM " . $_ENV['GAMES'] . " WHERE id_user = :id_user;");
+
+$isOk = $query->execute([
+    "id_user" => intval($data["idUser"])
+]);
+
+if($isOk) {
+    $isOk = false;
+    
+    // DELETE user datas from table users
+    $query = $dbCo->prepare("DELETE FROM " . $_ENV['USERS'] . " WHERE id_user = :id_user");
+    $isOk = $query ->execute([
+        "id_user" => intval($data["idUser"])
+    ]);
+
+}
+
+
+$success = "Votre compte et toutes vos parties ont été supprimées. Merci de m'avoir aidé à developper ce site !";
+$error = "La suppression a rencontrée une erreur";
+
+if($isOk) {
+    unset($_SESSION['user']);
+    session_destroy();
+}
 
 echo json_encode([
     'result' => $isOk,
-    'msg' => "Votre compte et toutes vos parties ont été supprimées. Merci de m'avoir aidé à developper ce site !"
+    'msg' => $isOk ? $success : $error
 ]);
 exit;
 
