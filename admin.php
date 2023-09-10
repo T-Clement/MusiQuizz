@@ -79,19 +79,19 @@ $lastRegistersKeys = array_keys($lastRegisters[0]);
         <div class="sidebar-sticky">
           <ul class="nav d-flex flex-column custom-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="#">
+              <a class="nav-link active" href="admin.php">
                 <i class="bi bi-house"></i>
                 Général <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="games-list.php">
                 <i class="bi bi-controller"></i>
                 Parties
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="users.php">
                 <i class="bi bi-person"></i>
                 Utilisateurs
               </a>
